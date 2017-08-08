@@ -1,0 +1,14 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd" >
+<struts>
+	<package name="harPrint" extends="kcbl-web-xtgl" namespace="/harPrint">
+		<!-- 打印人身检查记录 -->
+		<action name="printBlxx" class="printAction" method="printBlxx">
+		<result name="success" type="stream">
+            <param name="contentType">${docType}</param>
+            <param name="contentDisposition">attachment;filename="${docName}"</param>
+            <param name="inputName">docFile</param>
+            <param name="contentLength">${contLength}</param>
+          </result>
+		</action>
+	</package>
+</struts>
