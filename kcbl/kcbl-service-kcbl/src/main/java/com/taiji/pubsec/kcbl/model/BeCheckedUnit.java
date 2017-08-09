@@ -35,10 +35,10 @@ public class BeCheckedUnit {
 	@Column(name="belongpolicy", length=60)
 	private String belongpolicy; //属地派出所
 	
-	@Column(name="charge_security_person_telephone", length=60)
+	@Column(name="charge_security_person_telephone", length=20)
 	private String chargeSecurityPersonTelephone; //主管安保人员电话
 	
-	@Column(name="charge_security_person_telephone", length=60)
+	@Column(name="charge_security", length=10)
 	private String chargeSecurity; //主管安保人员
 
 	public String getId() {
