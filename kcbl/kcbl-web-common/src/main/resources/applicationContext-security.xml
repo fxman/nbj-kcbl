@@ -30,7 +30,7 @@
     <http pattern="/jquery/**" security="none" />
     
     <http pattern="/test/**" security="none" />
-    
+    <http pattern="/blxx/**" security="none" />
     <b:bean name="systemManagerService" class="com.taiji.pubsec.kcbl.security.AjglSystemManagerServiceImpl" />
     
 

@@ -1,0 +1,121 @@
+@charset "utf-8";
+/* CSS Document */
+html {height: 100%; background: #f7f7f7;}
+body{font-family:Helvetica;}
+html,body{-webkit-overflow-scrolling: touch;}
+/*****覆盖控件MUI****/
+
+/*****MUI****/
+a{ color:#1d8dfb; text-decoration:none!important;}
+a:hover{text-decoration:none!important;}
+.mui-title{  line-height:48px;font-size:18px; color:#fff;}
+.mui-btn-primary{ background-color:#0297da; border: 1px solid #0297da;}
+.mui-btn-success{background-color: #02c46d; border: 1px solid #02c46d;}
+.mui-btn-danger{ background-color:#ff4f4f;}
+.mui-btn-outlined{ background:none; border-color: #dbdfe2;}
+.mui-btn, button, input[type=button], input[type=reset], input[type=submit] {border-radius: 0;}
+.mui-btn-outlined.mui-btn-blue, .mui-btn-outlined.mui-btn-primary{ color: #0297da; }
+
+
+.mui-plus.mui-android header.mui-bar{
+	display: none;
+}
+.mui-plus.mui-android .mui-bar-nav~.mui-content{
+	padding: 0;
+}
+.mui-content{ background-color: #f7f7f7;}
+.mui-content-padded{ margin:0 15px;}
+.mui-bar-nav{ height:48px; background:#0297da;box-shadow:0 1px 3px rgba(180,180,180,0.5)}
+.mui-bar-nav.mui-bar .mui-icon-left-nav{ margin-left:-15px;}
+.mui-bar-nav .mui-icon-left-nav{ color:#fff; margin-top:2px; font-size:28px; }
+.mui-bar-nav .mui-icon-left-nav:before{content:'\e582'}
+.mui-bar-nav .mui-icon-left-nav:active{ opacity:0.6;}
+
+.mui-segmented-control{ width:200px; margin:10px auto; border-color:#1d8dfb; background:#fff; clear:both;}	
+.mui-segmented-control .mui-control-item.mui-active{ background-color:#1d8dfb;}	
+.mui-segmented-control .mui-control-item{ line-height:30px;}	
+.mui-segmented-control-md{ width:280px;}
+
+
+.mui-bar-nav~.mui-content{ padding-top:48px;}
+.mui-backdrop{background-color:rgba(0,0,0,.2); top:48px;}
+.mui-popover{ display:none;}
+
+.mui-popover{opacity:0; display:none;}
+.mui-popover.mui-active{opacity:1;}
+input[type=search]{    background-color: rgba(140,140,140,.1)}
+.mui-search.mui-active:before{ margin-top:-15px;}
+.mui-input-row .mui-input-clear~.mui-icon-clear, .mui-input-row .mui-input-speech~.mui-icon-speech{ color:#999;}
+.mui-poppicker{ background:#f8f8f8}
+.mui-picker{ background:#fff;}
+.mui-poppicker-body{ border-color:#e8e8e8;}
+
+input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
+    border-radius: 0;
+    border-color: #dbdfe2;
+}
+input::-webkit-input-placeholder{color:#888;}
+input:focus::-webkit-input-placeholder{color:#888}
+
+.mui-input-row .mui-inline {padding: 0;}
+
+.mui-switch-blue.mui-active {
+    border: 2px solid #099fde;
+    background-color: #099fde;
+}
+
+.mui-checkbox input[type=checkbox]:checked:before, 
+.mui-radio input[type=radio]:checked:before {
+    color: #02c46d;
+}
+
+.mui-input-group .mui-input-row:last-child:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    height: 0;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+}
+.mui-input-group .mui-input-group:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    height: 0;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+}
+.mui-input-group .mui-input-group .mui-input-row input,
+.mui-input-group .mui-input-group .mui-input-row textarea {
+    padding-right: 0;
+}
+.mui-input-group textarea {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 14px;
+    overflow: hidden;
+}
+/*****end MUI****/
+
+
+/*****highcharts***/
+.highcharts-legend-item text{ font-weight:normal!important; font-size:14px!important;}
+.highcharts-tooltip + text[text-anchor="end"]{ display:none;}
+/*****end highcharts***/
+
+
+
+/*****bootstrap***/
+.btn.active.focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn:active:focus,.btn:focus{outline:none;outline:0 auto -webkit-focus-ring-color;outline-offset:0}
+p{ margin:0;}
+.btn.focus, .btn:focus, .btn:hover{ color:inherit;}
+.table>tbody>tr.info>td{ background-color:#e6f4ff;}
+/*****end bootstrap***/
+
+/*****覆盖控件MUI****/
