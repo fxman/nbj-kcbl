@@ -50,5 +50,10 @@ public class BlglServiceImplTest {
 		List<BlxxModel> list=BlglServiceImpl.findAllBlxxList();
 		System.out.println(list.get(0).getPartyname());
 	}
+	@Test
+	public void test2(){
+		BlxxModel blxx=BlglServiceImpl.findBlxxById("1");
+		System.out.println(blxx.getCheckcontents());
+	}
 
 }

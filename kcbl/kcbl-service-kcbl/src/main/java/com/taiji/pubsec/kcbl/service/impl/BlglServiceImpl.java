@@ -65,4 +65,11 @@ public class BlglServiceImpl implements BlglService {
 		return this.dao.findAll(BlxxModel.class);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public BlxxModel findBlxxById(String id) {
+		String sql="from BlxxModel blxx where blxx.id=?";
+		return (BlxxModel) this.dao.findByParams(BlxxModel.class, sql,new Object[]{id});
+	}
+
 }

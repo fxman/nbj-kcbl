@@ -46,54 +46,54 @@
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon time-icon"></span>开始时间</label>
-                    <p>2017-06-20 09:00</p>
+                    <p id="starttime"></p>
                 </div>
                 <div class="mui-input-row">
                     <label><span class="list-icon time-icon"></span>结束时间</label>
-                    <p>2017-06-25 09:00</p>
+                    <p id="endtime"></p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon location-icon"></span>地点</label>
-                    <p>北京市海淀区某某街道100号</p>
+                    <p id="detailAddress"></p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon unit-icon1"></span>检查人单位</label>
-                    <p>西城分局</p>
+                    <p id="checkUnit"></p>
                 </div>
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon1"></span>检查人</label>
-                    <p>范鑫</p>
+                    <p id="checkMan">范鑫</p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon unit-icon2"></span>当事单位</label>
-                    <p>重点基础设施</p>
+                    <p id="beCheckedUnit"></p>
                 </div>
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon2"></span>当事人</label>
-                    <p>王某某</p>
+                    <p id="partyName"></p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon3"></span>见证人</label>
-                    <p>陈敏</p>
+                    <p id="witness">陈敏</p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon form-icon1"></span>事由和目的</label>
-                    <p>单位内部保卫条例</p>
+                    <p id="reasonsAndPurpose"></p>
                 </div>
             </div>
 
@@ -103,21 +103,21 @@
                 </div>
 
                 <div class="mui-input-group app-padded2">
-                    <p class="fc-333">依据《企业事业单位内部治安保卫条例》第16条第（二）项、《公安机关监督检查企业事业单位内部治安保卫工作规定》第一条第二款第五项，赖仁俊在检查当事人范鑫的陪同下，通过询问、查阅、调取、实地查看的方法对中国人民银行执行定期检查。检查内容包含了公安机关监督检查企业事业单位内部治安保卫规定》第四条、第五条。</p>
+                    <p class="fc-333" id="pocessAndResult"></p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon3"></span>检查人</label>
-                    <p>赖仁俊(2017/07/09)</p>
+                    <p id="checkMan1"></p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon3"></span>当事人</label>
-                    <p>范鑫(2017/07/09)</p>
+                    <p id="partyName1"></p>
                 </div>
             </div>
 
@@ -125,8 +125,8 @@
                 <div class="mui-input-row" style="height: 45px;">
                     <label><span class="list-icon man-icon3"></span>纸质正面照</label>
                     <p>
-                        <img src="../../images/img/small-01.png" alt="">
-                        <img src="../../images/img/small-03.png" alt="">
+                        <img src="<%=context%>/images/img/small-01.png" alt="">
+                        <img src="<%=context%>/images/img/small-03.png" alt="">
                     </p>
                 </div>
             </div>
@@ -150,7 +150,7 @@
 
 
 <script src="<%=context%>/common/library/MUI/js/mui.min.js"></script>
-
+<script src="<%=context%>/scripts/common/cookiecommon.js"></script>
 <!--弹出菜单-->
 <script>
 			mui.init({
@@ -214,4 +214,5 @@
 <!---年份选择器---->
 
 </body>
+<script src="<%=context%>/scripts/kcbl/kcblDetail.js"></script>
 </html>
