@@ -28,7 +28,7 @@ var constantInit = '<%=constant_unitInit%>'
 					<label class="control-label">名称：<span class="red-star">*</span></label>
 				</div>
 				<div class="col-xs-7">
-					<input type="text" id="itemName" class="form-control input-sm valiform-keyup form-val" nullmsg="数据字典项名称不能为空" vf-position="4" datatype="*1-20">
+					<input type="text" id="itemName" class="form-control input-sm valiform-keyup form-val" nullmsg="数据字典项名称不能为空" vf-position="4" datatype="*1-60">
 				</div>
 			</div>
 			<div class="row row-mar mar-top">

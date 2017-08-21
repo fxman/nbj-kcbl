@@ -39,20 +39,20 @@ $(document).ready(function() {
 <div class="row">
 <ul>
 <li><a href="<%=context%>/blxx/toblList.action">查询列表页</a></li>
-<li><a href="html/bilu/check-bilu-detail.html" target="_blank">查询详情页</a></li>
+<li><a href="<%=context%>/blxx/toblDetail.action">查询详情页</a></li>
 <li class="line"></li>
-<li><a href="html/bilu/check-bilu-before.html" target="_blank">检查笔录</a></li>
-<li><a href="html/bilu/check-bilu.html" target="_blank">检查笔录-填写后</a></li>
+<li><a href="<%=context%>/blxx/toblCheck.action">检查笔录</a></li>
+<li><a href="<%=context%>/blxx/blCheck.action">检查笔录-填写后</a></li>
 <li class="line"></li>
-<li><a href="html/bilu/dangshi-unit.html" target="_blank">当事单位</a></li>
-<li><a href="html/bilu/checkman.html" target="_blank">检查人</a></li>
-<li><a href="html/bilu/check-man-unit.html" target="_blank">检查人单位</a></li>
+<li><a href="<%=context%>/blxx/dangshiUnit.action">当事单位</a></li>
+<li><a href="<%=context%>/blxx/toCheckMan.action">检查人</a></li>
+<li><a href="<%=context%>/blxx/toCheckManUnit.action">检查人单位</a></li>
 
-<li><a href="html/bilu/add-result-before.html" target="_blank">添加笔录</a></li>
-<li><a href="html/bilu/add-result.html" target="_blank">添加结果-填写后</a></li>
+<li><a href="<%=context%>/blxx/toAddBl.action">添加笔录</a></li>
+<li><a href="<%=context%>/blxx/AddResult.action">添加结果-填写后</a></li>
 
-<li><a href="html/bilu/content-miaoshu.html" target="_blank">添加结果---内容描述</a></li>
-<li><a href="html/bilu/check-content.html" target="_blank">添加结果---检查内容</a></li>
+<li><a href="<%=context%>/blxx/AddResultDescr.action">添加结果---内容描述</a></li>
+<li><a href="<%=context%>/blxx/toCheckContents.action">添加结果---检查内容</a></li>
 <li class="line"></li>
 <li><a href="html/bilu/check-fangshi.html" target="_blank">添加结果---检查方式</a></li>
 <li><a href="html/bilu/check-fangfa.html" target="_blank">添加结果---检查方法</a></li>

@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!doctype html>
 <html>
-<%@include file="/WEB-INF/base/javaPart.jsp"%> 
+<%@include file="/WEB-INF/base/javaPart.jsp"%>
 <head>
 <%@include file="/WEB-INF/base/basePart.jsp"%>
 <%@include file="/WEB-INF/base/skin/utilPart.jsp"%>
@@ -22,128 +22,134 @@
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-</head>
-
+</head> 
 <body>
-
-<header class="mui-bar mui-bar-nav app-bar-search">
-    <div class="mui-row">
-        <h1 class="mui-title">内保局笔录系统</h1>
-        <a href="<%=context%>/blxx/toblCheck.action" class="mui-pull-right new-bilu">创建笔录</a>
-    </div>
-    <div class="bar-search">
-         <input type="search" id="bdcdwmc" placeholder="请输入名称...">
-         <button type="button"></button>
-    </div>
+<header class="mui-bar mui-bar-nav">
+			<a href="javascript:history.back();" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">检查笔录</h1>
 </header>
 
 <div class="mui-bar app-bottom-caozuo">
-    <div class="mui-pull-left">
-        <a href="#">取消</a>
-    </div>
-    <div class="mui-pull-right">
-        <a href="#">确定</a>
-    </div>
+    <a href="#">保存笔录</a>
 </div>
-
 
 
 <div class="mui-content">
 
 
-    <section class="">
+    <section class="app-padded">
         <form action="">
-            <div class="mui-input-group">
-                <div class="mui-input-row app-navigate-right">
-                    <label><span class="list-icon hangye"></span>行业类型</label>
-                    <a href="#">
-                        <input type="text" value=""  id="hangyeType" readonly>
-                        <span class="mui-icon mui-icon-forward arr-right"></span>
-                    </a>
-                </div>
+            <div class="mui-input-group marb-12">
                 <div class="mui-input-row calendar">
                     <label><span class="list-icon time-icon"></span>开始时间</label>
                     <a href="#" class="dtpicker" id="startDtpicker">
-                        <input type="text" value="" id="startTime" readonly>
+                        <input id="startTime" type="text" value="" readonly>
                         <div class="right-icon"><span class="mui-time-form-icon"></span></div>
                     </a>
                 </div>
                 <div class="mui-input-row calendar">
                     <label><span class="list-icon time-icon"></span>结束时间</label>
                     <a href="#" class="dtpicker" id="endDtpicker">
-                        <input type="text" value="" id="endTime" readonly>
+                        <input id="endTime" type="text" value="" readonly>
                         <div class="right-icon"><span class="mui-time-form-icon"></span></div>
                     </a>
                 </div>
+            </div>
+
+            <div class="mui-input-group marb-12">
+                <div class="mui-input-row">
+                    <label><span class="list-icon location-icon"></span>地点</label>
+                    <input type="text" value="" id="address">
+                </div>
+            </div>
+
+            <div class="mui-input-group marb-12">
                 <div class="mui-input-row app-navigate-right">
-                    <label>是否核心单位</label>
-                    <div id="coreunit" class="mui-switch mui-switch-blue mui-switch-mini mui-active" style="margin-top: 5px; margin-right: 15px;">
-                      <div class="mui-switch-handle"></div>
+                    <label><span class="list-icon unit-icon1"></span>检查人单位</label>
+                    <a href="<%=context%>/blxx/toCheckManUnit.action">
+                        <input type="text" value="" id="unitName" readonly>
+                        <span class="mui-icon mui-icon-forward arr-right"></span>
+                    </a>
+                </div>
+                <div class="mui-input-row app-navigate-right">
+                    <label><span class="list-icon man-icon1"></span>检查人姓名</label>
+                    <a href="<%=context%>/blxx/toCheckMan.action">
+                        <input type="text" value="" id="checkManName" readonly>
+                        <span class="mui-icon mui-icon-forward arr-right"></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mui-input-group marb-12">
+                <div class="mui-input-row app-navigate-right">
+                    <label><span class="list-icon unit-icon2"></span>当事单位</label>
+                    <a href="<%=context%>/blxx/toPartyUnit.action">
+                        <input type="text" value="重点基础设施" readonly>
+                        <span class="mui-icon mui-icon-forward arr-right"></span>
+                    </a>
+                </div>
+                <div class="mui-input-row">
+                    <label><span class="list-icon man-icon2"></span>当事人</label>
+                    <input type="text" class="mui-input-clear" id="partyName" value="">
+                </div>
+            </div>
+
+            <div class="mui-input-group marb-12">
+                <div class="mui-input-row">
+                    <label><span class="list-icon man-icon3"></span>见证人</label>
+                    <input type="text" class="mui-input-clear" id ="witness" value="">
+                </div>
+            </div>
+
+            <div class="mui-input-group marb-12">
+                <div class="mui-input-row">
+                    <label><span class="list-icon form-icon1"></span>事由和目的</label>
+                    <input type="text" class="mui-input-clear" id="reasonAndPurpose" value="">
+                </div>
+            </div>
+
+            <div class="mui-input-group marb-12 app-padded1">
+                <div class="mui-input-top">
+                    <div class="left"><span class="list-icon res-icon"></span>过程和结果</div>
+                    <div class="right-icon">
+                        <a href="<%=context%>/blxx/toAddResult.action" class="add-result"></a>
+                        <a class="edit-bilu" style="margin-left: 10px"></a>
                     </div>
                 </div>
             </div>
+
+            <div class="mui-input-row marb-12 app-padded1 btn-row">
+                <button type="button" class="mui-btn mui-btn-success"><span class="printer-icon"></span>打印</button>
+                <button type="button" class="mui-btn mui-btn-success"><span class="save-icon"></span>暂存</button>
+            </div>
+
+            <div class="mui-input-group marb-12 app-padded1">
+                <div class="mui-input-top">
+                    <div class="left"><span class="list-icon fujian-icon"></span>附件</div>
+                    <div class="right-icon">
+                        <button type="button" class="upload-fujian"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mui-input-group marb-12 app-padded1">
+                <div class="mui-input-top">
+                    <div class="left"><span class="list-icon sign-icon"></span>签名</div>
+                    <div class="right-icon">
+                        <button type="button" class="upload-sign"></button>
+                    </div>
+                </div>
+            </div>
+
+
         </form>
-
-
-        <p class="mui-row app-padded2">
-                         搜索到 <span class="fc-333" id="listLength"></span> 条笔录信息
-        </p>
-
-        
-        <div class="mui-row app-list" id="blxxList">
-            
-        </div>
-
     </section>
 
-    <!-- 行业类型弹出内容 -->
-    <!-- <div id="hangyeType" class="mui-popover mui-popover-action mui-popover-bottom">
-        <div class="mui-row mui-popover-caozuo">
-            <div class="pull-left">
-                <a href="#">取消</a>
-            </div>
-            <div class="pull-right">
-                <a href="#">确定</a>
-            </div>
-        </div>
-        <ul class="mui-table-view">
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    大型工矿企业
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    国防企业
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    国家机关
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    城建商贸
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    重点基础设施
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    金融单位
-                </div>
-            </li>
-        </ul>
-      
-    </div>
- -->
-<!-- 时间控件元素 -->
-    <div id='result' class="ui-alert"></div>
-            
+
+
+
+    <!-- 时间控件元素 -->
+    <div id='result' class="ui-alert"></div>              
 </div>
 
 
@@ -172,6 +178,7 @@
 
 <!---年份选择器---->
 <script src="<%=context%>/common/library/MUI/js/mui.picker.min.js"></script>
+
     <script>
       (function($) {
         $.init();
@@ -258,48 +265,6 @@
     </script>
 <!---年份选择器---->
 
-
-
-<!-- 选择器 -->
-<script src="<%=context%>/common/library/MUI/js/mui.picker.js"></script>
-<script src="<%=context%>/common/library/MUI/js/mui.poppicker.js"></script>
-<script>
-    (function($, doc) {
-        $.init();
-        $.ready(function() {
-            //普通示例
-            var userPicker = new $.PopPicker();
-            userPicker.setData([{
-                value: '',
-                text: '大型工矿企业'
-            }, {
-                value: '',
-                text: '国防企业'
-            }, {
-                value: '',
-                text: '国家机关'
-            }, {
-                value: '',
-                text: '城建商贸'
-            }, {
-                value: '',
-                text: '重点基础设施'
-            }, {
-                value: '',
-                text: '金融单位'
-            }]);
-            var showUserPickerButton = doc.getElementById('hangyeType');
-            showUserPickerButton.addEventListener('tap', function(event) {
-                userPicker.show(function(items) {
-                    //返回 false 可以阻止选择框的关闭
-                    //return false;
-                });
-            }, false);
-        });
-    })(mui, document);
-</script>
-<!-- 选择器 -->
-
 </body>
-<script src="<%=context%>/scripts/kcbl/kcbllist.js"></script>
+<script src="<%=context%>/scripts/kcbl/checkbilubefore.js"></script>
 </html>

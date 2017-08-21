@@ -217,12 +217,12 @@ public class DictionaryTypeAction extends PageCommonSysManageAction {
 	 * @return "success" 返回flag,msg 成功时flag为"true" 失败时为"false"；msg为失败时的提示信息
 	 */
 	public String saveItem() {
-		if (!dictionaryItemService.isDistinctDicItemName(dicItemBean.getName(),
+		/*if (!dictionaryItemService.isDistinctDicItemName(dicItemBean.getName(),
 				dicItemBean.getDicTypeId(), null)) {
 			this.setFlag(Boolean.FALSE.toString());
 			this.setMsg("名称重复");
 			return SUCCESS;
-		}
+		}*/
 		if (!dictionaryItemService.isDistinctDicItemCode(dicItemBean.getCode(), dicItemBean.getDicTypeId(), null)) {
 			this.setFlag(Boolean.FALSE.toString());
 			this.setMsg("编码重复");
@@ -267,12 +267,12 @@ public class DictionaryTypeAction extends PageCommonSysManageAction {
 	 * @return "success" 返回flag、msg 成功时flag为"true"，失败时flag为"false"；msg为失败时的提示信息
 	 */
 	public String updateItem() {
-		if (!dictionaryItemService.isDistinctDicItemName(dicItemBean.getName(),
+		/*if (!dictionaryItemService.isDistinctDicItemName(dicItemBean.getName(),
 				dicItemBean.getDicTypeId(), dicItemBean.getId())) {
 			this.setFlag(Boolean.FALSE.toString());
 			this.setMsg("名称重复");
 			return SUCCESS;
-		}
+		}*/
 		if (!dictionaryItemService.isDistinctDicItemCode(dicItemBean.getCode(), dicItemBean.getDicTypeId(), dicItemBean.getId())){
 			this.setFlag(Boolean.FALSE.toString());
 			this.setMsg("编码重复");

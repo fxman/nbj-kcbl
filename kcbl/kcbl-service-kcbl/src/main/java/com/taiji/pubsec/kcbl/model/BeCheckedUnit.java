@@ -1,24 +1,37 @@
 package com.taiji.pubsec.kcbl.model;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "bdcdw")
-public class BeCheckedUnit {
-  
+public class BeCheckedUnit implements Serializable{
+    
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 	
 	@Column(name="becheckedunit", length=100)
-	private String beCheckedUnit; //被调查单位名称
+	private String bdcdwmc; //被调查单位名称
+	
+	@OneToMany(mappedBy = "becheckedunit")
+	private Set<BlxxModel> blxxSet = new HashSet<BlxxModel>();
 	
 	@Column(name="iscoreunit", length=2)
 	private String isCoreUnit; //是否核心单位【1:是 0:否】
@@ -49,12 +62,12 @@ public class BeCheckedUnit {
 		this.id = id;
 	}
 
-	public String getBeCheckedUnit() {
-		return beCheckedUnit;
+	public String getBdcdwmc() {
+		return bdcdwmc;
 	}
 
-	public void setBeCheckedUnit(String beCheckedUnit) {
-		this.beCheckedUnit = beCheckedUnit;
+	public void setBdcdwmc(String bdcdwmc) {
+		this.bdcdwmc = bdcdwmc;
 	}
 
 	public String getIsCoreUnit() {

@@ -2,10 +2,14 @@ package com.taiji.pubsec.kcbl.service.impl;
 
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,10 +21,8 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
-import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryItem;
-import com.taiji.pubsec.businesscomponent.dictionary.service.IDictionaryItemService;
-import com.taiji.pubsec.kcbl.model.BeCheckedUnit;
-import com.taiji.pubsec.kcbl.service.BeCheckUnitService;
+import com.taiji.pubsec.kcbl.model.BlxxModel;
+import com.taiji.pubsec.kcbl.service.BlglService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,35 +31,24 @@ import com.taiji.pubsec.kcbl.service.BeCheckUnitService;
 @TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
 	DirtiesContextTestExecutionListener.class,TransactionDbUnitTestExecutionListener.class })
-public class BeCheckUnitServiceImplTest {
+public class BlglServiceImplTest {
 	
     @Resource
-	private BeCheckUnitService beCheckUnitServiceImpl;
-    @Resource
-	private IDictionaryItemService dictionaryItemService;
+	private BlglService BlglServiceImpl;
 	
-	
-	/*public void testFindBeCheckedUnitServiceById() {
-		
-		BeCheckedUnit tmpUnit = beCheckUnitServiceImpl.findBeCheckedUnitServiceById("1");
-		
-		//System.out.println(tmpUnit.getDetailAddress());
-	}*/
-    
 	@Test
-	public void testFindBeCheckedUnitServiceBySshy() {
-		List<BeCheckedUnit> list = beCheckUnitServiceImpl.findBecheckedUnitServiceBySshy("大型工矿企业");
-	    System.out.println(list.get(0).getBelongpolicy());
+	public void testfindBlxxList() throws ParseException {
+		SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+		String ksTime = "";
+		String jsTime = "";
+		List<BlxxModel>  list = BlglServiceImpl.findBlxxList("","","", ksTime, jsTime);
+			BlxxModel blxx = (BlxxModel)list.get(0);
+			System.out.println(blxx.getPartyname());
 	}
 	@Test
-	public void test2(){
-		List<DictionaryItem> list=dictionaryItemService.findDicItemsByTypeCode("gzgd", "1");
-		System.out.println(list.get(1).getName());
-	}
-	@Test
-	public void test3(){
-		List<DictionaryItem> list=dictionaryItemService.findDicItemsByParentCode("gzgd4", "1");
-		System.out.println(list.get(0).getName());
+	public void test1(){
+		List<BlxxModel> list=BlglServiceImpl.findAllBlxxList();
+		System.out.println(list.get(0).getPartyname());
 	}
 
 }

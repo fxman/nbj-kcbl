@@ -41,6 +41,7 @@
               <value>com.taiji.pubsec.businesscomponent.authority.model</value>
               <value>com.taiji.pubsec.businesscomponent.dictionary.model</value>
 			  <value>com.taiji.pubsec.businesscomponent.attachment</value>
+			  <value>com.taiji.pubsec.kcbl.model</value>
 			  <value>com.taiji.pubsec.kcbl.attach.model</value>
               <value>com.taiji.pubsec.kcbl.generatenum.model</value>
               <value>com.taiji.pubsec.springsecurity.acls.hibernate.model</value>

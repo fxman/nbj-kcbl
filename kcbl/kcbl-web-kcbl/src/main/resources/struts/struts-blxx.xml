@@ -1,8 +1,96 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd" >
 <struts>
 	<package name="blxx" extends="kcbl-web-kcbl" namespace="/blxx">
-		<action name="toblList">
+	    <!-- 访问笔录信息列表页 -->
+		<action name="toblList" class="blxxAction" method="toBlList">
 			<result name="success">/WEB-INF/view/kcbl/kcbllist.jsp</result>
 		</action>
+		<!-- 查询所有笔录 -->
+		<action name="queryAllBlxx" class="blxxAction" method="findAllBlxxList">
+			<result name="success" type="json">
+			<param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">blxxList.*</param> 
+			</result>
+		</action>
+		<!-- 通过条件查询笔录 -->
+		<action name="queryBlxxbyCondition" class="blxxAction" method="generateBlListByCondition">
+			<result name="success" type="json">
+			<param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">blxxList.*</param> 
+			</result>
+		</action>
+		<!-- 初始化加载检查人单位 -->
+		<action name="initUnit" class="blxxAction" method="initUnit">
+			<result name="success" type="json">
+			<param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">unitList.*</param> 
+			</result>
+		</action>
+		<!-- 初始化加载检查内容 -->
+		<action name="initCheckContent" class="blxxAction" method="initCheckContent">
+			<result name="success" type="json">
+			<param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">checkContentList.*</param> 
+			</result>
+		</action>
+		<!-- 初始化加载检查内容子项 -->
+		<action name="initSubContent" class="blxxAction" method="getSubContent">
+			<result name="success" type="json">
+			<param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">subContentList.*</param> 
+			</result>
+		</action>
+		<!-- 初始化加载检查人 -->
+		<action name="initCheckMan" class="blxxAction" method="initCheckMan">
+			<result name="success" type="json">
+			 <param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">checkManList.*</param> 
+			</result>
+		</action>
+		<!-- 初始化加载当事单位 -->
+		<action name="initPartyUnit" class="blxxAction" method="initPartyUnit">
+			<result name="success" type="json">
+			 <param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">bjdwList.*</param> 
+			</result>
+		</action>
+		<!-- 访问笔录信息详情页 -->
+		<action name="toblDetail" class="blxxAction" method="toblDetail">
+			<result name="success">/WEB-INF/view/kcbl/kcbldetail.jsp</result>
+		</action>
+		<!-- <action name="blCheck">
+			<result name="success">/WEB-INF/view/kcbl/check-bilu.jsp</result>
+		</action> -->
+		<!-- 访问检查笔录页 -->
+		<action name="toblCheck" class="blxxAction" method="toblCheck">
+			<result name="success">/WEB-INF/view/kcbl/check-bilu-before.jsp</result>
+		</action>
+		<!-- 访问当事单位页 -->
+		<action name="toPartyUnit" class="blxxAction" method="toPartyUnit">
+			<result name="success">/WEB-INF/view/kcbl/partyunit.jsp</result>
+		</action>
+		<!-- 访问检查人页 -->
+		<action name="toCheckMan" class="blxxAction" method="toCheckMan">
+			<result name="success">/WEB-INF/view/kcbl/check-man.jsp</result>
+		</action>
+		<!-- 访问检查人单位页 -->
+		<action name="toCheckManUnit" class="blxxAction" method="toCheckManUnit">
+			<result name="success">/WEB-INF/view/kcbl/check-man-unit.jsp</result>
+		</action>
+		<!-- <action name="toAddBl">
+			<result name="success">/WEB-INF/view/kcbl/add-bilu-before.jsp</result>
+		</action> -->
+		<!-- 访问添加过程结果页面 -->
+		<action name="toAddResult" class="blxxAction" method="toAddResult">
+			<result name="success">/WEB-INF/view/kcbl/addResult.jsp</result>
+		</action>
+		<action name="AddResultDescr">
+			<result name="success">/WEB-INF/view/kcbl/add-result-descr.jsp</result>
+		</action>
+		<!-- 访问检查内容页面 -->
+		<action name="toCheckContent" class="blxxAction" method="toCheckContent">
+			<result name="success">/WEB-INF/view/kcbl/checkContent.jsp</result>
+		</action>
+		
 	</package>
 </struts>

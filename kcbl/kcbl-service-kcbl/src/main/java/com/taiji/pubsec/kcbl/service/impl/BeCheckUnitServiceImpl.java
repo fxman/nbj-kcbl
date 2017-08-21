@@ -1,5 +1,7 @@
 package com.taiji.pubsec.kcbl.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -14,10 +16,19 @@ public class BeCheckUnitServiceImpl implements BeCheckUnitService{
 	@Resource
 	private Dao dao;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public BeCheckedUnit findBeCheckedUnitServiceById(String id) {
 		
 	    return (BeCheckedUnit) this.dao.findById(BeCheckedUnit.class, id);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BeCheckedUnit> findBecheckedUnitServiceBySshy(String sshy) {
+		String str="from BeCheckedUnit bjdw where  bjdw.belongIndustry=?";
+		return  this.dao.findAllByParams(BeCheckedUnit.class, str, new Object[]{sshy});
+	}
+
    
 }
