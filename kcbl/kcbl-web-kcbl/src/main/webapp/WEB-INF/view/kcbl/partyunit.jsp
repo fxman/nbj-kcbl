@@ -38,7 +38,7 @@
             <a href="#">取消</a>
         </div>
         <div class="mui-pull-right">
-            <a href="#">确定</a>
+            <a href="#" onclick="sureSelectCheckMan()">确定</a>
         </div>
 </div>
 
@@ -48,15 +48,7 @@
 
     <p class="app-padded2">单位类型</p>
 
-    <ul class="mui-table-view mui-table-view-chevron app-table-view">
-        <li class="mui-table-view-cell mui-collapse" id="sshy1" ><a class="mui-navigate-right" href="#">大型工矿企业</a>
-        </li>
-        <li class="mui-table-view-cell mui-collapse" id="sshy2" ><a class="mui-navigate-right" href="#">城建商贸</a>
-        </li>
-        <li class="mui-table-view-cell mui-collapse" id="sshy3"><a class="mui-navigate-right" href="#">国防工业</a>
-        </li>
-        <li class="mui-table-view-cell mui-collapse" id="sshy4"><a class="mui-navigate-right" href="#">重点基础设施</a>
-        </li>
+    <ul class="mui-table-view mui-table-view-chevron app-table-view" id="ulUnitList">
     </ul>
 
 

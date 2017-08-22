@@ -77,7 +77,7 @@
 				<pom.kcbl.database.driverClassName>com.mysql.jdbc.Driver</pom.kcbl.database.driverClassName>
 				<pom.kcbl.database.url>jdbc:mysql://localhost/nbj-kcbl?useUnicode=true&amp;characterEncoding=utf8</pom.kcbl.database.url>
 				<pom.kcbl.database.username>root</pom.kcbl.database.username>
-				<pom.kcbl.database.password>1234</pom.kcbl.database.password>
+				<pom.kcbl.database.password>root</pom.kcbl.database.password>
 				<pom.kcbl.hibernate.show_sql>false</pom.kcbl.hibernate.show_sql>
 				<pom.kcbl.hibernate.format_sql>true</pom.kcbl.hibernate.format_sql>
 				<pom.kcbl.hibernate.hbm2ddl.auto>update</pom.kcbl.hibernate.hbm2ddl.auto>

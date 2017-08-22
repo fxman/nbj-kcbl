@@ -26,6 +26,12 @@
 			 <param name = "includeProperties">unitList.*</param> 
 			</result>
 		</action>
+		<action name="finsubPartyUnit" class="blxxAction" method="finsubPartyUnit">
+			<result name="success" type="json">
+			<param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">bjdwList.*</param> 
+			</result>
+		</action>
 		<!-- 初始化加载检查内容 -->
 		<action name="initCheckContent" class="blxxAction" method="initCheckContent">
 			<result name="success" type="json">

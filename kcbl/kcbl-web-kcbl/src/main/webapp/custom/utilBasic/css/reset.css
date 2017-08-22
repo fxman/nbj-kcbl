@@ -3,7 +3,7 @@
 
 body {
 	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	background-color: #fff;
+	background-color: #f7f7f7;
 	margin: 0;
 	padding: 0;
 	color: #000;
@@ -46,3 +46,4 @@ a:active{text-decoration: none;}
 header, section, footer, aside, article, figure {
 	display: block;
 }
+

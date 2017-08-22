@@ -55,7 +55,7 @@ public class BlxxAction extends ReturnMessageAction{
 	private List<Unit> unitList;
 	private String unitId;
 	private List<Person> checkManList;
-	private List<BeCheckedUnit> bjdwList;
+	private List<DictionaryItem> bjdwList;
 	private String sshy;
 	private String dicTypeCode;
 	private String state;
@@ -63,17 +63,6 @@ public class BlxxAction extends ReturnMessageAction{
 	private List<DictionaryItem> subContentList;
 	private String parentItemCode; 
 	private List<BlxxModel> blxxModelList;
-	
-
-
-
-	
-	
-	
-	
-	
-	
-	
 	
 	public String findAllBlxxList(){
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY年MM月DD日 HH时mm分");
@@ -110,8 +99,12 @@ public class BlxxAction extends ReturnMessageAction{
 		
 		return SUCCESS;
 	}
+	public String finsubPartyUnit(){
+		bjdwList = dictionaryItemService.findDicItemsByParent(sshy, null);
+		return SUCCESS;
+	}
 	public String initPartyUnit(){
-		bjdwList=bjcwService.findBecheckedUnitServiceBySshy(sshy);
+		bjdwList = dictionaryItemService.findAllSubDictionaryItemsByTypeCode(sshy);
 		return SUCCESS;
 	}
 	public String initUnit(){
@@ -198,10 +191,10 @@ public class BlxxAction extends ReturnMessageAction{
 	public void setSshy(String sshy) {
 		this.sshy = sshy;
 	}
-	public List<BeCheckedUnit> getBjdwList() {
+	public List<DictionaryItem> getBjdwList() {
 		return bjdwList;
 	}
-	public void setBjdwList(List<BeCheckedUnit> bjdwList) {
+	public void setBjdwList(List<DictionaryItem> bjdwList) {
 		this.bjdwList = bjdwList;
 	}
 	public List<Person> getCheckManList() {

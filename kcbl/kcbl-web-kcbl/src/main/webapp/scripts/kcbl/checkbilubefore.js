@@ -12,8 +12,8 @@ function initData(){
 	$("#unitName").val(getCookie("unitName"));
 	$("#checkManName").val(getCookie("checkManName"));
 	$("#partyName").val(getCookie("partyName"));
-	$("#witness").val(getCookie("witness"));
 	$("#reasonAndPurpose").val(getCookie("reasonAndPurpose"));
+	$("#currentUnitname").val(getCookie("currentUnitname"));
 	
 }
 function putDataCookie(){
@@ -22,9 +22,6 @@ function putDataCookie(){
 	});
 	$("#partyName").blur(function(){
 		setCookie("partyName",$(this).val());
-	});
-	$("#witness").blur(function(){
-		setCookie("witness",$(this).val());
 	});
 	$("#reasonAndPurpose").blur(function(){
 		setCookie("reasonAndPurpose",$(this).val());

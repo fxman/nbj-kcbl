@@ -84,7 +84,7 @@
                 <div class="mui-input-row app-navigate-right">
                     <label><span class="list-icon unit-icon2"></span>当事单位</label>
                     <a href="<%=context%>/blxx/toPartyUnit.action">
-                        <input type="text" value="重点基础设施" readonly>
+                        <input type="text" value="重点基础设施" id="currentUnitname" readonly>
                         <span class="mui-icon mui-icon-forward arr-right"></span>
                     </a>
                 </div>
@@ -97,7 +97,7 @@
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon3"></span>见证人</label>
-                    <input type="text" class="mui-input-clear" id ="witness" value="">
+                    <input type="text" class="mui-input-clear" id ="witness" value="无" readonly>
                 </div>
             </div>
 
