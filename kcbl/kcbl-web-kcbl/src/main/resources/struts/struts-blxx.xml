@@ -64,6 +64,13 @@
 		<action name="toblDetail" class="blxxAction" method="toblDetail">
 			<result name="success">/WEB-INF/view/kcbl/kcbldetail.jsp</result>
 		</action>
+		<!-- 初始化加载笔录信息详情页 -->
+		<action name="initBlxxDetail" class="blxxAction" method="findBlxxDetail">
+			<result name="success" type="json">
+			 <param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">blBean.*</param> 
+			</result>
+		</action>
 		<!-- <action name="blCheck">
 			<result name="success">/WEB-INF/view/kcbl/check-bilu.jsp</result>
 		</action> -->

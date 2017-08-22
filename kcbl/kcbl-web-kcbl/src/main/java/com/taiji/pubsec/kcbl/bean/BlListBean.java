@@ -6,11 +6,19 @@ import java.io.Serializable;
 
 
 public class BlListBean implements Serializable {
+	private String blxxId;
 	private String checkMan;
 	private String partyMan;
 	private String beCheckedUnit;
 	private String startTime;
 	private String endTime;
+	
+	public String getBlxxId() {
+		return blxxId;
+	}
+	public void setBlxxId(String blxxId) {
+		this.blxxId = blxxId;
+	}
 	public String getCheckMan() {
 		return checkMan;
 	}

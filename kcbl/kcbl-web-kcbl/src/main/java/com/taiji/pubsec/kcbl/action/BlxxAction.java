@@ -21,6 +21,7 @@ import com.taiji.pubsec.businesscomponent.organization.model.Unit;
 import com.taiji.pubsec.businesscomponent.organization.service.IPersonService;
 import com.taiji.pubsec.businesscomponent.organization.service.IUnitService;
 import com.taiji.pubsec.kcbl.bean.BlListBean;
+import com.taiji.pubsec.kcbl.bean.BlxxDetailBean;
 import com.taiji.pubsec.kcbl.model.BeCheckedUnit;
 import com.taiji.pubsec.kcbl.model.BlxxModel;
 import com.taiji.pubsec.kcbl.service.BeCheckUnitService;
@@ -63,6 +64,12 @@ public class BlxxAction extends ReturnMessageAction{
 	private List<DictionaryItem> subContentList;
 	private String parentItemCode; 
 	private List<BlxxModel> blxxModelList;
+	private String blxxId;
+	private BlxxModel blxx;
+	private BlxxDetailBean blBean;
+	
+	
+	
 	
 	public String findAllBlxxList(){
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY年MM月DD日 HH时mm分");
@@ -70,6 +77,7 @@ public class BlxxAction extends ReturnMessageAction{
          blxxList=new ArrayList<BlListBean>();
 		for(BlxxModel blxx:blxxModelList){
 			blxxBean=new BlListBean();
+			blxxBean.setBlxxId(blxx.getId());
 			blxxBean.setBeCheckedUnit(blxx.getBecheckedunit().getBdcdwmc());
 			blxxBean.setCheckMan(blxx.getCheckpersoncode());
 			blxxBean.setPartyMan(blxx.getPartyname());
@@ -82,6 +90,23 @@ public class BlxxAction extends ReturnMessageAction{
 			blxxList.add(blxxBean);
 		}
 		
+		return SUCCESS;
+	}
+	public String findBlxxDetail(){
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY年MM月DD日 HH时mm分");
+		blxx=blglServiceImpl.findBlxxById(blxxId);
+		blBean=new BlxxDetailBean();
+        blBean.setStartTime(sdf.format(blxx.getStarttime()));
+        blBean.setEndTime(sdf.format(blxx.getEndtime()));
+        blBean.setDetailAddress(blxx.getDetailaddress());
+        blBean.setCheckUnit(blxx.getCheckunitcode());
+        blBean.setCheckMan(blxx.getCheckpersoncode());
+        blBean.setBeCheckedUnit(blxx.getBecheckedunit().getBdcdwmc());
+        blBean.setPartyMan(blxx.getPartyname());
+        blBean.setWitness(blxx.getWitness());
+        blBean.setReasonsAndPurpose(blxx.getReasonsandpurpose());
+        blBean.setPocessAndResult(blxx.getCheckprocess());
+        
 		return SUCCESS;
 	}
 	public String generateBlListByCondition(){
@@ -145,9 +170,29 @@ public class BlxxAction extends ReturnMessageAction{
 	public String toCheckContent(){
 		return SUCCESS;
 	}
-	
+	public String toblDetail(){
+		return SUCCESS;
+	}
 	
 	/*get&set方法*/
+	public BlxxDetailBean getBlBean() {
+		return blBean;
+	}
+	public void setBlBean(BlxxDetailBean blBean) {
+		this.blBean = blBean;
+	}
+	public BlxxModel getBlxx() {
+		return blxx;
+	}
+	public void setBlxx(BlxxModel blxx) {
+		this.blxx = blxx;
+	}
+	public String getBlxxId() {
+		return blxxId;
+	}
+	public void setBlxxId(String blxxId) {
+		this.blxxId = blxxId;
+	}
 	public List<BlxxModel> getBlxxModelList() {
 		return blxxModelList;
 	}

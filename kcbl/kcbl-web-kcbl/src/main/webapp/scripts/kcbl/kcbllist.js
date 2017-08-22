@@ -26,7 +26,7 @@
 				for(var i=0;i<dataList.length;i++){
 					
 					
-					str+='<a href="check-bilu-detail.html">'
+					str+='<a href="'+context+'/blxx/toblDetail.action" id="'+dataList[i].blxxId+'" onclick="setId(this.id)">'
 						+'<div class="mui-input-group marb-12 list">'
 						+'<div class="mui-row list-row">'
 						+'<div class="mui-col-xs-12">'
@@ -85,4 +85,7 @@ function selectUnit(){
 	//alert(unitId);
 	setCookie("unitId",unitId);
 	setCookie("unitName",unitName);
+}
+function setId(id){
+	setCookie("blxxId",id);
 }
