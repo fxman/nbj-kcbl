@@ -34,7 +34,7 @@
             <a href="#">取消</a>
         </div>
         <div class="mui-pull-right">
-            <a href="#">确定</a>
+            <a href="#" id="sure">确定</a>
         </div>
 </div>
 
@@ -43,25 +43,8 @@
 <div class="mui-content">
     <div class="mui-content-padded app-padded">
 
-        <ul class="mui-table-view app-check">
-            <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio mui-left">
-                    <label>依据《企业事业单位内部治安保卫条例》第16条第（二）项、《公安机关监督检查企业事业单位内部治安保卫工作规定》第一条第二款第五项，赖仁俊在检查当事人范鑫的陪同下，通过询问、查阅、调取、实地查看的方法对中国人民银行执行定期检查。</label>
-                    <input name="miaoshu" type="checkbox" checked>
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio mui-left">
-                    <label>依据《企业事业单位内部治安保卫条例》第16条第（二）项、《公安机关监督检查企业事业单位内部治安保卫工作规定》第一条第二款第五项，赖仁俊在检查当事人范鑫的陪同下，通过询问、查阅、调取、实地查看的方法对中国人民银行执行定期检查。</label>
-                    <input name="miaoshu" type="checkbox" >
-                </div>           
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio mui-left">
-                    <label>依据《企业事业单位内部治安保卫条例》第16条第（二）项、《公安机关监督检查企业事业单位内部治安保卫工作规定》第一条第二款第五项，赖仁俊在检查当事人范鑫的陪同下，通过询问、查阅、调取、实地查看的方法对中国人民银行执行定期检查。</label>
-                    <input name="miaoshu" type="checkbox" >
-                </div>           
-            </li>
+        <ul class="mui-table-view app-check" id="checkDescrUl">
+            
         </ul>
         
     </div>           
@@ -75,7 +58,7 @@
 
 
 <script src="<%=context%>/common/library/MUI/js/mui.min.js"></script>
-
+<script src="<%=context%>/scripts/common/cookiecommon.js"></script>
 <!--弹出菜单-->
 <script>
 	mui.init({
@@ -92,4 +75,5 @@
 
 </script>
 </body>
+<script src="<%=context%>/scripts/kcbl/add-result-descr.js"></script>
 </html>

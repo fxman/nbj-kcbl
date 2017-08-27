@@ -24,6 +24,7 @@ import com.taiji.pubsec.kcbl.bean.BlListBean;
 import com.taiji.pubsec.kcbl.bean.BlxxDetailBean;
 import com.taiji.pubsec.kcbl.model.BeCheckedUnit;
 import com.taiji.pubsec.kcbl.model.BlxxModel;
+import com.taiji.pubsec.kcbl.model.CheckDetailResult;
 import com.taiji.pubsec.kcbl.service.BeCheckUnitService;
 import com.taiji.pubsec.kcbl.service.BlglService;
 import com.taiji.pubsec.kcbl.util.ReturnMessageAction;
@@ -67,6 +68,8 @@ public class BlxxAction extends ReturnMessageAction{
 	private String blxxId;
 	private BlxxModel blxx;
 	private BlxxDetailBean blBean;
+	private List<CheckDetailResult> checkContentDescrList;
+	
 	
 	
 	
@@ -149,6 +152,10 @@ public class BlxxAction extends ReturnMessageAction{
 		subContentList = dictionaryItemService.findDicItemsByParentCode(parentItemCode, state);
 		return SUCCESS;
 	}
+	public String initCheckDescr(){
+		checkContentDescrList=blglServiceImpl.findBlxxContentDescr();
+		return SUCCESS;
+	}
 	public String toPartyUnit(){
 		return SUCCESS;
 	}
@@ -173,8 +180,18 @@ public class BlxxAction extends ReturnMessageAction{
 	public String toblDetail(){
 		return SUCCESS;
 	}
+	public String toContentDescr(){
+		return SUCCESS;
+	}
 	
 	/*get&set方法*/
+	public List<CheckDetailResult> getCheckContentDescrList() {
+		return checkContentDescrList;
+	}
+	public void setCheckContentDescrList(
+			List<CheckDetailResult> checkContentDescrList) {
+		this.checkContentDescrList = checkContentDescrList;
+	}
 	public BlxxDetailBean getBlBean() {
 		return blBean;
 	}

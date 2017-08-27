@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.taiji.persistence.dao.Dao;
 import com.taiji.pubsec.kcbl.model.BlxxModel;
+import com.taiji.pubsec.kcbl.model.CheckDetailResult;
 import com.taiji.pubsec.kcbl.service.BlglService;
 
 
@@ -70,6 +71,12 @@ public class BlglServiceImpl implements BlglService {
 	public BlxxModel findBlxxById(String id) {
 		String sql="from BlxxModel blxx where blxx.id=?";
 		return (BlxxModel) this.dao.findByParams(BlxxModel.class, sql,new Object[]{id});
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CheckDetailResult> findBlxxContentDescr() {
+		return this.dao.findAll(CheckDetailResult.class);
 	}
 
 }

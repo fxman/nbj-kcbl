@@ -3,7 +3,9 @@ var flagcode=true;
 (function($){
 	"use strict";
 	$(document).ready(function(){
-        
+		$(".mui-table-view-cell").each(function(){
+		      $(this).removeClass("app-active");
+		  });
 		$.ajax({
 			url:context+"/blxx/initCheckContent.action",
 			data:{'dicTypeCode':"gzgd",'state':"1"},
@@ -46,23 +48,26 @@ function getSubItem(id){
 		  });
 }
 function changeActive(id){
-
-	$(".mui-table-view-cell").each(function(){
-	      $(this).removeClass("app-active");
-	  });
 	
 	$("#"+id).addClass("app-active");
 
 }
 function sureSelectContent(){
 	$("#sure").click(function(){
-		selectContent();
+		var selectArray=$(".app-active");
+		var str = "";
+		for(var i=0;i<selectArray.length;i++){
+			var contentName=$(selectArray[i]).children("a").text();
+			var parentName=$(selectArray[i]).parents("li").children("a").text();
+			var content=parentName+"第"+contentName+"项";
+			if(i!=0){
+				str+=","+content;
+			}else{
+			    str+=content;
+			}
+		}
+		setCookie("content",str);
 		window.location.href="/kcbl-web-kcbl/blxx/toAddResult.action";
 	});
 }
-function selectContent(){
-	var contentName=$(".app-active").children("a").text();
-	var parentName=$(".app-active").parents("li").children("a").text();
-	var content=parentName+contentName;
-	setCookie("content",content);
-}
+

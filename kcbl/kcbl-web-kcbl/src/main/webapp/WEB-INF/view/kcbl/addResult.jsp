@@ -96,8 +96,8 @@
                 <div class="mui-input-top app-padded1 psr" style="line-height: 40px;">
                     <div class="left">内容描述</div>
                     <div class="app-navigate-right">
-                        <a href="content-miaoshu.html" class="mui-pull-right" style="padding-right: 20px; color: #ccc;">从现有描述中选择
-                            <span class="mui-icon mui-icon-forward arr-right"></span>
+                        <a href="<%=context%>/blxx/toContentDescr.action" id="contentDescr" class="mui-pull-right" style="padding-right: 20px; color: #ccc;">从现有描述中选择
+                            <span  class="mui-icon mui-icon-forward arr-right"></span>
                         </a>
                     </div>
                 </div>
@@ -118,32 +118,32 @@
             <button class="mui-btn mui-btn-blue mui-poppicker-btn-ok" id="sureCheckWay">确定</button>           
             <div class="mui-poppicker-clear"></div>     
         </div>
-        <ul class="mui-table-view mui-input-group-checkWay">
-            <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio">
-                    <label>定期检查</label>
-                    <input name="radio1" type="radio">
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio">
-                    <label>临时检查</label>
-                    <input name="radio1" type="radio">
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio">
-                    <label>专项检查</label>
-                    <input name="radio1" type="radio">
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio">
-                    <label>随机检查</label>
-                    <input name="radio1" type="radio">
-                </div>
-            </li>
-        </ul>
+        <ul class="mui-table-view" id="checkWayUl">
+        <li class="mui-table-view-cell">
+            <div class="mui-input-row mui-checkbox">
+                <label>定期检查</label>
+                <input name="checkbox" value="" type="checkbox" checked>
+            </div>
+        </li>
+        <li class="mui-table-view-cell">
+            <div class="mui-input-row mui-checkbox">
+                <label>临时检查</label>
+                <input name="checkbox" value="" type="checkbox">
+            </div>
+        </li>
+        <li class="mui-table-view-cell">
+            <div class="mui-input-row mui-checkbox">
+                <label>专项检查</label>
+                <input name="checkbox" value="" type="checkbox">
+            </div>
+        </li>
+        <li class="mui-table-view-cell">
+            <div class="mui-input-row mui-checkbox">
+                <label>随机检查</label>
+                <input name="checkbox" value="" type="checkbox">
+            </div>
+        </li>
+      </ul>
       
     </div>
 
@@ -154,35 +154,35 @@
             <button class="mui-btn mui-btn-blue mui-poppicker-btn-ok" id="sureCheckMethod">确定</button>           
             <div class="mui-poppicker-clear"></div>     
         </div>
-        <ul class="mui-table-view mui-input-group-checkMethod">
+        <ul class="mui-table-view" id="checkMethodUl">
             <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio">
+                <div class="mui-input-row mui-checkbox">
                     <label>询问</label>
-                    <input name="radio2" type="radio" checked>
+                    <input name="checkbox" value="" type="checkbox" checked>
                 </div>
             </li>
             <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio">
+                <div class="mui-input-row mui-checkbox">
                     <label>查阅</label>
-                    <input name="radio2" type="radio">
+                    <input name="checkbox" value="" type="checkbox">
                 </div>
             </li>
             <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio">
+                <div class="mui-input-row mui-checkbox">
                     <label>调取</label>
-                    <input name="radio2" type="radio">
+                    <input name="checkbox" value="" type="checkbox">
                 </div>
             </li>
             <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio">
+                <div class="mui-input-row mui-checkbox">
                     <label>实地查看</label>
-                    <input name="radio2" type="radio">
+                    <input name="checkbox" value="" type="checkbox">
                 </div>
             </li>
             <li class="mui-table-view-cell">
-                <div class="mui-input-row mui-radio">
+                <div class="mui-input-row mui-checkbox">
                     <label>利用监控设备</label>
-                    <input name="radio2" type="radio">
+                    <input name="checkbox" value="" type="checkbox">
                 </div>
             </li>
         </ul>

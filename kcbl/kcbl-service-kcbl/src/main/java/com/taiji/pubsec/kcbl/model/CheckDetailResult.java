@@ -32,4 +32,37 @@ public class CheckDetailResult implements Serializable {
 	@Column(name="content")
 	private String content;//内容
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Date getUpdatetime() {
+		return updatetime;
+	}
+
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
+	}
+
+	public String getUsecount() {
+		return usecount;
+	}
+
+	public void setUsecount(String usecount) {
+		this.usecount = usecount;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+
 }

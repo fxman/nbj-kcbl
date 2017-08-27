@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.taiji.pubsec.kcbl.model.BlxxModel;
+import com.taiji.pubsec.kcbl.model.CheckDetailResult;
 import com.taiji.pubsec.kcbl.service.BlglService;
 
 
@@ -54,6 +55,11 @@ public class BlglServiceImplTest {
 	public void test2(){
 		BlxxModel blxx=BlglServiceImpl.findBlxxById("1");
 		System.out.println(blxx.getCheckcontents());
+	}
+	@Test
+	public void test3(){
+		List<CheckDetailResult> list = BlglServiceImpl.findBlxxContentDescr();
+		System.out.println(list.get(0).getContent());
 	}
 
 }

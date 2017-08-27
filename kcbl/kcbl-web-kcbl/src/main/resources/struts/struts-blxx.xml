@@ -71,6 +71,13 @@
 			 <param name = "includeProperties">blBean.*</param> 
 			</result>
 		</action>
+		<!-- 初始化加载笔录信息详情页 -->
+		<action name="initCheckDescr" class="blxxAction" method="initCheckDescr">
+			<result name="success" type="json">
+			 <param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">checkContentDescrList.*</param> 
+			</result>
+		</action>
 		<!-- <action name="blCheck">
 			<result name="success">/WEB-INF/view/kcbl/check-bilu.jsp</result>
 		</action> -->
@@ -97,13 +104,13 @@
 		<action name="toAddResult" class="blxxAction" method="toAddResult">
 			<result name="success">/WEB-INF/view/kcbl/addResult.jsp</result>
 		</action>
-		<action name="AddResultDescr">
-			<result name="success">/WEB-INF/view/kcbl/add-result-descr.jsp</result>
-		</action>
 		<!-- 访问检查内容页面 -->
 		<action name="toCheckContent" class="blxxAction" method="toCheckContent">
 			<result name="success">/WEB-INF/view/kcbl/checkContent.jsp</result>
 		</action>
-		
+		<!-- 访问添加结果内容描述页面 -->
+		<action name="toContentDescr" class="blxxAction" method="toContentDescr">
+			<result name="success">/WEB-INF/view/kcbl/add-result-descr.jsp</result>
+		</action>
 	</package>
 </struts>
