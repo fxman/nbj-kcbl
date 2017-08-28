@@ -14,6 +14,13 @@ function initData(){
 	$("#partyName").val(getCookie("partyName"));
 	$("#reasonAndPurpose").val(getCookie("reasonAndPurpose"));
 	$("#currentUnitname").val(getCookie("currentUnitname"));
+	var checkProcessAndResult = getCookie("checkProcessAndResult");
+	$("#checkProcessAndResult").text(getCookie("checkProcessAndResult"));
+    if($("#checkProcessAndResult").text()==null){
+    	$("#checkProcessAndResult").hide();
+    }else{
+    	$("#checkProcessAndResult").show();
+    }
 	
 }
 function putDataCookie(){
@@ -26,4 +33,5 @@ function putDataCookie(){
 	$("#reasonAndPurpose").blur(function(){
 		setCookie("reasonAndPurpose",$(this).val());
 	});
+	
 }

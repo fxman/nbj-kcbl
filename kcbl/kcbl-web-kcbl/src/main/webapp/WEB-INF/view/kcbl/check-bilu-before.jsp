@@ -111,12 +111,13 @@
             <div class="mui-input-group marb-12 app-padded1">
                 <div class="mui-input-top">
                     <div class="left"><span class="list-icon res-icon"></span>过程和结果</div>
-                    <div class="right-icon">
+                    <div class="right-icon" >
                         <a href="<%=context%>/blxx/toAddResult.action" class="add-result"></a>
                         <a class="edit-bilu" style="margin-left: 10px"></a>
                     </div>
                 </div>
             </div>
+	              <textarea cols="50" rows="10" id="checkProcessAndResult"></textarea>
 
             <div class="mui-input-row marb-12 app-padded1 btn-row">
                 <button type="button" class="mui-btn mui-btn-success"><span class="printer-icon"></span>打印</button>

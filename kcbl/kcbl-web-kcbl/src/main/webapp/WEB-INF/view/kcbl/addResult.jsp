@@ -31,7 +31,7 @@
 </header>
 
 <div class="mui-bar app-bottom-caozuo">
-    <a href="#">确定</a>
+    <a href="<%=context%>/blxx/toblCheck.action" id="sure">确定</a>
 </div>
 
 
