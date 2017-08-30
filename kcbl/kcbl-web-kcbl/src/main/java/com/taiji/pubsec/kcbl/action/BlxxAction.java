@@ -53,6 +53,7 @@ public class BlxxAction extends ReturnMessageAction{
 	private String iscoreunit;
 	private String startTime;
 	private String endTime;
+	private String checkManName;
 	private List<BlListBean> blxxList;
 	private List<Unit> unitList;
 	private String unitId;
@@ -112,7 +113,7 @@ public class BlxxAction extends ReturnMessageAction{
         
 		return SUCCESS;
 	}
-	public String generateBlListByCondition(){
+	public String queryBlxxbyCondition(){
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY年MM月DD日 HH时mm分");
 		List<BlxxModel> blxxlist = blglServiceImpl.findBlxxList(checkUnit, iscoreunit, belongIndustry, startTime, endTime);
 		for(BlxxModel blxx:blxxlist){
@@ -142,6 +143,10 @@ public class BlxxAction extends ReturnMessageAction{
 	}
 	public String initCheckMan(){
 		checkManList=personService.findPersonsByUnitAndPersonName(unitId, "");
+		return SUCCESS;
+	}
+	public String findCheckManByName(){
+		checkManList=personService.findPersonsByUnitAndPersonName(unitId, checkManName);
 		return SUCCESS;
 	}
 	public String initCheckContent(){
@@ -185,6 +190,12 @@ public class BlxxAction extends ReturnMessageAction{
 	}
 	
 	/*get&set方法*/
+	public String getCheckManName() {
+		return checkManName;
+	}
+	public void setCheckManName(String checkManName) {
+		this.checkManName = checkManName;
+	}
 	public List<CheckDetailResult> getCheckContentDescrList() {
 		return checkContentDescrList;
 	}

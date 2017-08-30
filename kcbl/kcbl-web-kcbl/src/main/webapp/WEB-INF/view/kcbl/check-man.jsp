@@ -28,8 +28,8 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
             <h1 class="mui-title">检查人</h1>
             <div class="bar-search">
-                 <input type="search" placeholder="请输入名称...">
-                 <button type="button"></button>
+                 <input type="search" placeholder="请输入名称..." value="">
+                 <button type="button" id="search_checkMan"></button>
             </div>
 </header>
 

@@ -33,7 +33,7 @@
     </div>
     <div class="bar-search">
          <input type="search" id="bdcdwmc" placeholder="请输入名称...">
-         <button type="button"></button>
+         <button type="button" id="searchblxx"></button>
     </div>
 </header>
 
@@ -270,22 +270,22 @@
             //普通示例
             var userPicker = new $.PopPicker();
             userPicker.setData([{
-                value: '',
+                value: 'dxgkqy',
                 text: '大型工矿企业'
             }, {
-                value: '',
+                value: 'gfqy',
                 text: '国防企业'
             }, {
-                value: '',
+                value: 'gjjg',
                 text: '国家机关'
             }, {
-                value: '',
+                value: 'cjsm',
                 text: '城建商贸'
             }, {
-                value: '',
+                value: 'zdjcss',
                 text: '重点基础设施'
             }, {
-                value: '',
+                value: 'jrdw',
                 text: '金融单位'
             }]);
             var showUserPickerButton = doc.getElementById('hangyeType');
@@ -293,6 +293,8 @@
                 userPicker.show(function(items) {
                     //返回 false 可以阻止选择框的关闭
                     //return false;
+                    document.getElementById("hangyeType").value=items[0].text;
+                    setCookie('hangyeType',items.text);
                 });
             }, false);
         });

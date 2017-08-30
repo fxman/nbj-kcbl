@@ -13,7 +13,7 @@
 			</result>
 		</action>
 		<!-- 通过条件查询笔录 -->
-		<action name="queryBlxxbyCondition" class="blxxAction" method="generateBlListByCondition">
+		<action name="queryBlxxbyCondition" class="blxxAction" method="queryBlxxbyCondition">
 			<result name="success" type="json">
 			<param name="ignoreHierarchy" >false</param>
 			 <param name = "includeProperties">blxxList.*</param> 
@@ -48,6 +48,13 @@
 		</action>
 		<!-- 初始化加载检查人 -->
 		<action name="initCheckMan" class="blxxAction" method="initCheckMan">
+			<result name="success" type="json">
+			 <param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">checkManList.*</param> 
+			</result>
+		</action>
+		<!-- 通过姓名查找检查人 -->
+		<action name="findCheckManByName" class="blxxAction" method="findCheckManByName">
 			<result name="success" type="json">
 			 <param name="ignoreHierarchy" >false</param>
 			 <param name = "includeProperties">checkManList.*</param> 

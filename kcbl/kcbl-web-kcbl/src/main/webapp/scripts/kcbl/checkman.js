@@ -24,6 +24,29 @@ var flagcode=true;
 				alert('查询检查人失败');
 			}
 		});
+		$("#search_checkMan").click(function(){
+		    var unitId=getCookie("unitId");
+		    var checkManName=$(this).siblings("input").val();
+		    $.ajax({
+		    	url:context+"/blxx/findCheckManByName.action",
+		    	data:{'unitId':unitId,'checkManName':checkManName},
+		    	type:'POST',
+		    	dataType:'json',
+		    	success:function(data){
+		    		var dataList=data.checkManList;
+					var str='';
+					for(var i=0;i<dataList.length;i++){
+						var org_name=dataList[i].organization.name;
+						str +='<li class="mui-table-view-cell mui-media" id="selectCheckManId'+i+'" onclick="changeActive(this.id);" ><a class=""><img class="mui-media-object mui-pull-left" src="/kcbl-web-kcbl/images/img/people.png"><div class="mui-media-body"><p>'+dataList[i].name+'</p><p class="mui-ellipsis">'+org_name+'</p></div></a></li>';
+					}
+					
+				    $("#checkManUl").html(str);
+		    	},
+		    	error:function(){
+		    		
+		    	}
+		    });
+		});
 		sureSelectCheckMan();
 	});
 })(jQuery);
