@@ -70,6 +70,9 @@ public class BlxxAction extends ReturnMessageAction{
 	private BlxxModel blxx;
 	private BlxxDetailBean blBean;
 	private List<CheckDetailResult> checkContentDescrList;
+	private DictionaryItem unit;
+	
+	
 	
 	
 	
@@ -126,6 +129,11 @@ public class BlxxAction extends ReturnMessageAction{
 			blxxList.add(blxxBean);
 		}
 		
+		return SUCCESS;
+	}
+	public String findPartyUnitByName(){
+		unit=dictionaryItemService.findById(checkUnit);
+		sshy=unit.getParentItem().getName();
 		return SUCCESS;
 	}
 	public String finsubPartyUnit(){
@@ -190,6 +198,12 @@ public class BlxxAction extends ReturnMessageAction{
 	}
 	
 	/*get&set方法*/
+	public DictionaryItem getUnit() {
+		return unit;
+	}
+	public void setUnit(DictionaryItem unit) {
+		this.unit = unit;
+	}
 	public String getCheckManName() {
 		return checkManName;
 	}

@@ -82,9 +82,9 @@
                 <div class="mui-input-top">
                     <div class="left">检查结果</div>
                     <div class="right" style="line-height: 40px;">
-                        <div class="mui-inline fc-888" id="checkResult">是否发现安全隐患 </div>
+                        <div class="mui-inline fc-888" >是否发现安全隐患 </div>
                         <div class="mui-inline">
-                            <div class="mui-switch mui-switch-blue mui-switch-mini mui-active" style="margin-top: 5px;">
+                            <div id="checkResult" class="mui-switch mui-switch-blue mui-switch-mini mui-active" style="margin-top: 5px;">
                               <div class="mui-switch-handle"></div>
                             </div>
                         </div>

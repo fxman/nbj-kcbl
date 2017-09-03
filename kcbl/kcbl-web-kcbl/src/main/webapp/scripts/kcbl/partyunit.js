@@ -4,6 +4,25 @@ var flagcode = true;
 	"use strict";
 	$(document).ready(function() {
 		initSshy();
+		$("#search").click(function(){
+			var unitName=$(this).siblings("input").val();
+			$.ajax({
+				url:context + "/blxx/findPartyUnitByName.action",
+				data:{'unit':unitName},
+				type:'POST',
+				dataType:'json',
+				success:function(data){
+					var unit=data.unit;
+					var sshy=data.sshy;
+					var str='<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#">'+data.sshy+'</a><ul class="mui-table-view mui-table-view-chevron"><li class="mui-table-view-cell id='+unit.code+' onclick="changeActive(this.id)"><a class="mui-navigate-right" href="#">'+data.unit+'</a></li></ul></li>';
+					$("#ulUnitList").html(str);
+					
+				},
+				error:function(){
+					
+				}
+			});
+		});
 	});
 })(jQuery);
 function changeActive(id) {
@@ -21,8 +40,7 @@ function selectCheckMan() {
 	setCookie("currentUnitname", currentUnitname);
 }
 function initSshy() {
-	$
-			.ajax({
+	$.ajax({
 				url : context + "/blxx/initPartyUnit.action",
 				data : {
 					'sshy' : "sshy"

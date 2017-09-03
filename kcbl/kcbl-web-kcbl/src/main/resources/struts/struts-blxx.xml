@@ -60,6 +60,13 @@
 			 <param name = "includeProperties">checkManList.*</param> 
 			</result>
 		</action>
+		<!-- 通过单位名称查找单位 -->
+		<action name="findPartyUnitByName" class="blxxAction" method="findPartyUnitByName">
+			<result name="success" type="json">
+			 <param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">unit.*,sshy.*</param> 
+			</result>
+		</action>
 		<!-- 初始化加载当事单位 -->
 		<action name="initPartyUnit" class="blxxAction" method="initPartyUnit">
 			<result name="success" type="json">
