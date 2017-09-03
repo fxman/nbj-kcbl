@@ -1,13 +1,22 @@
 package com.taiji.pubsec.kcbl.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.annotations.Source;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -25,8 +34,10 @@ import com.taiji.pubsec.kcbl.bean.BlxxDetailBean;
 import com.taiji.pubsec.kcbl.model.BeCheckedUnit;
 import com.taiji.pubsec.kcbl.model.BlxxModel;
 import com.taiji.pubsec.kcbl.model.CheckDetailResult;
+import com.taiji.pubsec.kcbl.model.FileInfo;
 import com.taiji.pubsec.kcbl.service.BeCheckUnitService;
 import com.taiji.pubsec.kcbl.service.BlglService;
+import com.taiji.pubsec.kcbl.service.FileService;
 import com.taiji.pubsec.kcbl.util.ReturnMessageAction;
 import com.taiji.pubsec.kcbl.util.bean.PersonBean;
 
@@ -46,6 +57,9 @@ public class BlxxAction extends ReturnMessageAction{
 	private IDictionaryTypeService dictionaryTypeService;
 	@Resource
 	private IDictionaryItemService dictionaryItemService;
+	
+	@Resource 
+    private FileService fileSeriveimpl;
 	
 	private BlListBean blxxBean;
 	private String checkUnit;
@@ -70,6 +84,11 @@ public class BlxxAction extends ReturnMessageAction{
 	private BlxxDetailBean blBean;
 	private List<CheckDetailResult> checkContentDescrList;
 	
+	 private File file;
+	    
+	 private FileInfo attaceMent;
+	    //提交过来的file的名字
+	 private String fileFileName;
 	
 	
 	
@@ -126,6 +145,67 @@ public class BlxxAction extends ReturnMessageAction{
 		}
 		
 		return SUCCESS;
+	}
+	public String saveblxx() throws IOException{
+		 String root = ServletActionContext.getServletContext().getRealPath("/upload");
+	        InputStream is;
+	        OutputStream os;
+	        String filePath = "D:/upload";
+			try {
+				//检查目录
+		    	File uploadDir = new File(filePath);
+		    	if(!uploadDir.isDirectory()){
+		    		uploadDir.mkdir();
+
+		    	}
+		    	attaceMent = new FileInfo();
+		    	is = new FileInputStream(file);
+				 os = new FileOutputStream(new File(filePath, fileFileName));
+				attaceMent.setSaveName(fileFileName);
+		    	//检查目录写权限
+				attaceMent.setFilePath(filePath);
+				attaceMent.setId(null);
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = new Date();
+				String fDate = df.format(date);
+				attaceMent.setFileUpdateTime(fDate);
+				attaceMent.setBgq(fDate.substring(0, 4));
+				fileSeriveimpl.saveFileInformation(attaceMent);
+				System.out.println("fileFileName: " + fileFileName);
+				System.out.println("file: " + file.getName());
+				System.out.println("file: " + file.getPath());
+				byte[] buffer = new byte[500];
+				int length = 0;
+				while(-1 != (length = is.read(buffer, 0, buffer.length)))
+				{
+					os.write(buffer);
+				}
+				
+				os.close();
+				is.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return SUCCESS;
+	}
+	public File getFile() {
+		return file;
+	}
+	public void setFile(File file) {
+		this.file = file;
+	}
+	public FileInfo getAttaceMent() {
+		return attaceMent;
+	}
+	public void setAttaceMent(FileInfo attaceMent) {
+		this.attaceMent = attaceMent;
+	}
+	public String getFileFileName() {
+		return fileFileName;
+	}
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
 	}
 	public String finsubPartyUnit(){
 		bjdwList = dictionaryItemService.findDicItemsByParent(sshy, null);
@@ -331,6 +411,5 @@ public class BlxxAction extends ReturnMessageAction{
 	public void setIscoreunit(String iscoreunit) {
 		this.iscoreunit = iscoreunit;
 	}
-	
 
 }

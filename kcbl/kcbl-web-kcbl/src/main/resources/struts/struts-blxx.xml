@@ -112,5 +112,8 @@
 		<action name="toContentDescr" class="blxxAction" method="toContentDescr">
 			<result name="success">/WEB-INF/view/kcbl/add-result-descr.jsp</result>
 		</action>
+		<action name="saveblxx" class="blxxAction" method="saveblxx">
+			<result name="success">/WEB-INF/view/kcbl/check-bilu-before.jsp</result>
+		</action>
 	</package>
 </struts>

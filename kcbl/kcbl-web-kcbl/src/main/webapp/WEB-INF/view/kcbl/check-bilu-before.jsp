@@ -30,7 +30,7 @@
 </header>
 
 <div class="mui-bar app-bottom-caozuo">
-    <a href="#">保存笔录</a>
+    <a href="#"onclick="document.getElementById('formId').submit();">保存笔录</a>
 </div>
 
 
@@ -38,7 +38,7 @@
 
 
     <section class="app-padded">
-        <form action="">
+        <form id="formId" action="<%=context%>/blxx/saveblxx.action"" method="post" enctype="multipart/form-data">
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row calendar">
                     <label><span class="list-icon time-icon"></span>开始时间</label>
@@ -82,7 +82,7 @@
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row app-navigate-right">
-                    <label><span class="list-icon unit-icon2"></span>当事单位</label>
+                    <label><span class="list-icon unit-icon2"></span>被检查人单位</label>
                     <a href="<%=context%>/blxx/toPartyUnit.action">
                         <input type="text" value="重点基础设施" id="currentUnitname" readonly>
                         <span class="mui-icon mui-icon-forward arr-right"></span>
@@ -104,7 +104,7 @@
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon form-icon1"></span>事由和目的</label>
-                    <input type="text" class="mui-input-clear" id="reasonAndPurpose" value="">
+                    <input type="text" class="mui-input-clear" id="reasonAndPurpose" value="指导和监督单位执行《企业事业单位内部治安保卫条例》" readonly>
                 </div>
             </div>
 
@@ -127,8 +127,9 @@
                 <div class="mui-input-top">
                     <div class="left"><span class="list-icon fujian-icon"></span>附件</div>
                     <div class="right-icon">
-                        <button type="button" class="upload-fujian"></button>
+                      <input type="file" name="file"  />
                     </div>
+                     
                 </div>
             </div>
 
@@ -136,7 +137,7 @@
                 <div class="mui-input-top">
                     <div class="left"><span class="list-icon sign-icon"></span>签名</div>
                     <div class="right-icon">
-                        <button type="button" class="upload-sign"></button>
+                        <button type="button" class="upload-sign" ></button>
                     </div>
                 </div>
             </div>

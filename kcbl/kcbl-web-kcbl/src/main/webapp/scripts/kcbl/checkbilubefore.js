@@ -12,7 +12,6 @@ function initData(){
 	$("#unitName").val(getCookie("unitName"));
 	$("#checkManName").val(getCookie("checkManName"));
 	$("#partyName").val(getCookie("partyName"));
-	$("#reasonAndPurpose").val(getCookie("reasonAndPurpose"));
 	$("#currentUnitname").val(getCookie("currentUnitname"));
 	
 }
