@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.taiji.persistence.dao.Dao;
 import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryItem;
 import com.taiji.pubsec.kcbl.model.BeCheckedUnit;
-import com.taiji.pubsec.kcbl.model.CheckDetailResult;
 import com.taiji.pubsec.kcbl.service.BeCheckUnitService;
 
 @Service("beCheckUnitServiceImpl")

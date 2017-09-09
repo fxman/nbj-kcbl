@@ -71,7 +71,7 @@
 		<action name="findPartyUnitByName" class="blxxAction" method="findPartyUnitByName">
 			<result name="success" type="json">
 			 <param name="ignoreHierarchy" >false</param>
-			 <param name = "includeProperties">unit.*,sshy.*</param> 
+			 <param name = "includeProperties">unit.*</param> 
 			</result>
 		</action>
 		<!-- 初始化加载当事单位 -->

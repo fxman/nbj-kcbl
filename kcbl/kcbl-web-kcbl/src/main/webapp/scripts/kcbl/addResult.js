@@ -5,12 +5,14 @@
 		document.getElementById("checkResult").addEventListener("toggle",function(event){
 			if(event.detail.isActive){
 				checkResult='存在安全隐患';
-				
+				this.parentNode.parentNode.firstChild.innerHTML=checkResult;
 			}else{
 				checkResult='不存在安全隐患';
+				this.parentNode.parentNode.firstChild.innerHTML=checkResult;
 			}
 			setCookie("isSafety",checkResult);
 			this.parentNode.parentNode.firstChild.innerText=checkResult;
+			
 		});
 		$("#contentDescrWrite").blur(function(){
 			setCookie('',$(this).val());

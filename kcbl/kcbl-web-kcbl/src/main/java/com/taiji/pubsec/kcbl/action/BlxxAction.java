@@ -119,7 +119,6 @@ public class BlxxAction extends ReturnMessageAction{
 			}
 			blxxList.add(blxxBean);
 		}
-		
 		return SUCCESS;
 	}
 	public String findBlxxDetail(){
@@ -231,8 +230,7 @@ public class BlxxAction extends ReturnMessageAction{
 		
 	}
 	public String findPartyUnitByName(){
-		unit=dictionaryItemService.findById(checkUnit);
-		sshy=unit.getParentItem().getName();
+		unit=bjcwService.findBeCheckedUnitserviceByName(partyUnit);
 		return SUCCESS;
 	}
 	public String finsubPartyUnit(){
@@ -253,6 +251,7 @@ public class BlxxAction extends ReturnMessageAction{
 		checkManList=personReplenService.findCheckManbyUnitIds(ids);
 		return SUCCESS;
 	}
+	
 	public String findCheckManByName(){
 		checkManList=personService.findPersonsByUnitAndPersonName(unitId, checkManName);
 		return SUCCESS;
@@ -285,9 +284,6 @@ public class BlxxAction extends ReturnMessageAction{
 		return SUCCESS;
 	}
 	public String toAddResult(){
-		return SUCCESS;
-	}
-	public String toCheckContent(){
 		return SUCCESS;
 	}
 	public String toCheckAccor(){

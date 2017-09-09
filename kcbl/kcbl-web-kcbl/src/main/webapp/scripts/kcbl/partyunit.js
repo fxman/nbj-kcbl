@@ -5,22 +5,6 @@ var flagcode = true;
 	$(document).ready(function() {
 		initSshy();
 		});
-		$("#search").click(function(){
-			var partyUnit=$(this).siblings("input").val();
-			$.ajax({
-				url:context + "/blxx/findPartyUnitByName.action",
-				data:{'unit':partyUnit},
-				type:'POST',
-				dataType:'json',
-				success:function(data){
-					var unit=data.unit;
-				    var str='<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right">'+data.unit.parentItem.name+'</a><ul class="mui-table-view mui-table-view-chevron"><li class="mui-table-view-cell" id="'+data.unit.id+'" onclick="changeActive(this.id)"><a class="mui-navigate-right">'+data.unit.name+'</a></li></ul></li>';
-				    $("#ulUnitList").html(str);
-				},
-				error:function(){
-					
-				}
-			});
 	});
 	$("#search").click(function(){
 		var partyUnit=$(this).siblings("input").val();
@@ -39,7 +23,6 @@ var flagcode = true;
 				
 			}
 		});
-	});
 })(jQuery);
 function changeActive(id) {
 	$(".mui-table-view-cell").each(function(){
