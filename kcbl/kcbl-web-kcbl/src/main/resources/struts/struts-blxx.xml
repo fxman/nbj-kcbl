@@ -32,18 +32,25 @@
 			 <param name = "includeProperties">bjdwList.*</param> 
 			</result>
 		</action>
-		<!-- 初始化加载检查内容 -->
+		<!-- 初始化加载检查依据 -->
 		<action name="initCheckContent" class="blxxAction" method="initCheckContent">
 			<result name="success" type="json">
 			<param name="ignoreHierarchy" >false</param>
 			 <param name = "includeProperties">checkContentList.*</param> 
 			</result>
 		</action>
-		<!-- 初始化加载检查内容子项 -->
+		<!-- 初始化加载检查依据子项 -->
 		<action name="initSubContent" class="blxxAction" method="getSubContent">
 			<result name="success" type="json">
 			<param name="ignoreHierarchy" >false</param>
 			 <param name = "includeProperties">subContentList.*</param> 
+			</result>
+		</action>
+		<!-- 通过检查依据查找检查内容 -->
+		<action name="findCheckContentByAccor" class="blxxAction" method="findCheckContentByAccor">
+			<result name="success" type="json">
+			<param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">accor.*</param> 
 			</result>
 		</action>
 		<!-- 初始化加载检查人 -->
@@ -64,7 +71,7 @@
 		<action name="findPartyUnitByName" class="blxxAction" method="findPartyUnitByName">
 			<result name="success" type="json">
 			 <param name="ignoreHierarchy" >false</param>
-			 <param name = "includeProperties">unit.*,sshy.*</param> 
+			 <param name = "includeProperties">unit.*</param> 
 			</result>
 		</action>
 		<!-- 初始化加载当事单位 -->
@@ -118,8 +125,8 @@
 		<action name="toAddResult" class="blxxAction" method="toAddResult">
 			<result name="success">/WEB-INF/view/kcbl/addResult.jsp</result>
 		</action>
-		<!-- 访问检查内容页面 -->
-		<action name="toCheckContent" class="blxxAction" method="toCheckContent">
+		<!-- 访问检查依据页面 -->
+		<action name="toCheckAccor" class="blxxAction" method="toCheckAccor">
 			<result name="success">/WEB-INF/view/kcbl/checkContent.jsp</result>
 		</action>
 		<!-- 访问添加结果内容描述页面 -->

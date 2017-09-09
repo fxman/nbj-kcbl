@@ -27,9 +27,6 @@ var flagcode=true;
 })(jQuery);
 function changeActive(id){
 
-	$(".mui-table-view-cell").each(function(){
-	      $(this).removeClass("app-active");
-	  });
 	$("#"+id).addClass("app-active");
 
 }
@@ -40,9 +37,26 @@ function sureSelectUnit(){
 	});
 }
 function selectUnit(){
-	var unitId = $(".app-active").attr("unitId");
-	var unitName=$(".app-active").children("a").html();
+	var selectUnits=$(".app-active");
+	var unitIds='';
+	for(var i=0;i<selectUnits.length;i++){
+		var id=$(selectUnits[i]).attr("unitId");
+		if(i!=0){
+			unitIds+=","+id
+		}else{
+			unitIds+=id;
+		}
+	}
+	var unitNames="";
+	for(var i=0;i<selectUnits.length;i++){
+		var unitName=$(selectUnits[i]).children("a").html();
+		if(i!=0){
+			unitNames+=","+unitName;
+	    }else{
+	    	unitNames+=unitName;
+		}
+	}
 	//alert(unitId);
-	setCookie("unitId",unitId);
-	setCookie("unitName",unitName);
+	setCookie("unitId",unitIds);
+	setCookie("unitName",unitNames);
 }

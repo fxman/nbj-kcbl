@@ -43,14 +43,19 @@
         <form action="">
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row app-navigate-right">
-                    <label>检查内容</label>
-                    <a href="<%=context%>/blxx/toCheckContent.action">
-                        <input type="text" value="" id="contentName" readonly>
+                    <label>检查依据</label>
+                    <a href="<%=context%>/blxx/toCheckAccor.action">
+                        <input type="text" value="" id="checkAccor" readonly>
                         <span class="mui-icon mui-icon-forward arr-right"></span>
                     </a>
                 </div>
             </div>
-
+            <div class="mui-input-group marb-12">
+                <div class="mui-input-row app-navigate-right">
+                    <label>检查内容</label>
+                        <input type="text" value="" id="contentName" readonly>
+                </div>
+            </div>
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label>检查程序</label>
@@ -102,7 +107,7 @@
                     </div>
                 </div>
                 <div class="mui-col-xs-12">
-                    <textarea name="" id="" cols="30" rows="6"></textarea>
+                    <textarea name="" id="contentDescrWrite" cols="30" rows="6"></textarea>
                 </div>
             </div>          
         

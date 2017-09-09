@@ -30,6 +30,7 @@ import com.taiji.pubsec.kcbl.service.BlglService;
 import com.taiji.pubsec.kcbl.util.ReturnMessageAction;
 import com.taiji.pubsec.kcbl.util.bean.PersonBean;
 
+@SuppressWarnings("serial")
 @Controller("blxxAction")
 @Scope("prototype")
 public class BlxxAction extends ReturnMessageAction{
@@ -71,6 +72,14 @@ public class BlxxAction extends ReturnMessageAction{
 	private BlxxDetailBean blBean;
 	private List<CheckDetailResult> checkContentDescrList;
 	private DictionaryItem unit;
+	private String partyUnit;
+	private DictionaryItem accor;
+	private String checkAccorId;
+	private String unitIds;
+	
+	
+	
+	
 	
 	
 	
@@ -131,9 +140,13 @@ public class BlxxAction extends ReturnMessageAction{
 		
 		return SUCCESS;
 	}
+	public String findCheckContentByAccor(){
+		accor=dictionaryItemService.findById(checkAccorId);
+		return SUCCESS;
+		
+	}
 	public String findPartyUnitByName(){
-		unit=dictionaryItemService.findById(checkUnit);
-		sshy=unit.getParentItem().getName();
+		unit=bjcwService.findBeCheckedUnitserviceByName(partyUnit);
 		return SUCCESS;
 	}
 	public String finsubPartyUnit(){
@@ -150,9 +163,11 @@ public class BlxxAction extends ReturnMessageAction{
 		
 	}
 	public String initCheckMan(){
-		checkManList=personService.findPersonsByUnitAndPersonName(unitId, "");
+		String[] ids=unitIds.split(",");
+		checkManList=blglServiceImpl.findCheckManbyUnitIds(ids);
 		return SUCCESS;
 	}
+	
 	public String findCheckManByName(){
 		checkManList=personService.findPersonsByUnitAndPersonName(unitId, checkManName);
 		return SUCCESS;
@@ -187,7 +202,7 @@ public class BlxxAction extends ReturnMessageAction{
 	public String toAddResult(){
 		return SUCCESS;
 	}
-	public String toCheckContent(){
+	public String toCheckAccor(){
 		return SUCCESS;
 	}
 	public String toblDetail(){
@@ -198,6 +213,30 @@ public class BlxxAction extends ReturnMessageAction{
 	}
 	
 	/*get&set方法*/
+	public String getUnitIds() {
+		return unitIds;
+	}
+	public void setUnitIds(String unitIds) {
+		this.unitIds = unitIds;
+	}
+	public String getCheckAccorId() {
+		return checkAccorId;
+	}
+	public void setCheckAccorId(String checkAccorId) {
+		this.checkAccorId = checkAccorId;
+	}
+	public DictionaryItem getAccor() {
+		return accor;
+	}
+	public void setAccor(DictionaryItem accor) {
+		this.accor = accor;
+	}
+	public String getPartyUnit() {
+		return partyUnit;
+	}
+	public void setPartyUnit(String partyUnit) {
+		this.partyUnit = partyUnit;
+	}
 	public DictionaryItem getUnit() {
 		return unit;
 	}

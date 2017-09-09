@@ -6,7 +6,9 @@ var flagcode=true;
 		var unitId=getCookie("unitId");
 		$.ajax({
 			url:context+"/blxx/initCheckMan.action",
-			data:{'unitId':unitId},
+			traditional: "true",
+			async:false,
+			data:{'unitIds':unitId},
 			type:'POST',
 			dataType:'json',
 			success : function(data){

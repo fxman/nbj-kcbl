@@ -21,6 +21,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryItem;
 import com.taiji.pubsec.kcbl.model.BlxxModel;
 import com.taiji.pubsec.kcbl.model.CheckDetailResult;
 import com.taiji.pubsec.kcbl.service.BlglService;

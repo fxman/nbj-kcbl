@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.taiji.persistence.dao.Dao;
+import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryItem;
 import com.taiji.pubsec.kcbl.model.BeCheckedUnit;
 import com.taiji.pubsec.kcbl.service.BeCheckUnitService;
 
@@ -28,6 +29,13 @@ public class BeCheckUnitServiceImpl implements BeCheckUnitService{
 	public List<BeCheckedUnit> findBecheckedUnitServiceBySshy(String sshy) {
 		String str="from BeCheckedUnit bjdw where  bjdw.belongIndustry=?";
 		return  this.dao.findAllByParams(BeCheckedUnit.class, str, new Object[]{sshy});
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public DictionaryItem findBeCheckedUnitserviceByName(String unitName) {
+		String sql = "from DictionaryItem unit where unit.name=?";
+		return (DictionaryItem) this.dao.findByParams(DictionaryItem.class, sql, new Object[]{unitName});
 	}
 
    
