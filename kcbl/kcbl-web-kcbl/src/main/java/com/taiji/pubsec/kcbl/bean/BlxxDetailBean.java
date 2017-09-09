@@ -2,6 +2,12 @@ package com.taiji.pubsec.kcbl.bean;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.taiji.pubsec.kcbl.model.CheckDetailResult;
+
 public class BlxxDetailBean implements Serializable {
 	private String checkMan;
 	private String partyMan;
@@ -13,6 +19,12 @@ public class BlxxDetailBean implements Serializable {
 	private String witness;
 	private String checkUnit;
 	private String detailAddress;
+	private String issafety; //是否存在安全隐患
+	private String checkprocess;//过程
+	private String checkstyle;//检查方式
+	private String checkmethod;//检查方法
+	private String checkBasis; //检查依据
+	private String  checkResult;//检查结果的内容描述
 	
 	public String getPocessAndResult() {
 		return pocessAndResult;
@@ -74,5 +86,41 @@ public class BlxxDetailBean implements Serializable {
 	}
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+	public String getIssafety() {
+		return issafety;
+	}
+	public void setIssafety(String issafety) {
+		this.issafety = issafety;
+	}
+	public String getCheckprocess() {
+		return checkprocess;
+	}
+	public void setCheckprocess(String checkprocess) {
+		this.checkprocess = checkprocess;
+	}
+	public String getCheckstyle() {
+		return checkstyle;
+	}
+	public void setCheckstyle(String checkstyle) {
+		this.checkstyle = checkstyle;
+	}
+	public String getCheckmethod() {
+		return checkmethod;
+	}
+	public void setCheckmethod(String checkmethod) {
+		this.checkmethod = checkmethod;
+	}
+	public String getCheckBasis() {
+		return checkBasis;
+	}
+	public void setCheckBasis(String checkBasis) {
+		this.checkBasis = checkBasis;
+	}
+	public String getCheckResult() {
+		return checkResult;
+	}
+	public void setCheckResult(String checkResult) {
+		this.checkResult = checkResult;
 	}
 }

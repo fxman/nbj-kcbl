@@ -27,6 +27,8 @@ public class FileInfo {
 	private String resourceId;
 	//报告期
 	private String bgq;
+	//资源类型
+	private String resourceType;
 	
 	@Id
 	@GenericGenerator(name="system-uuid", strategy = "uuid2")
@@ -85,5 +87,11 @@ public class FileInfo {
 	}
 	public void setBgq(String bgq) {
 		this.bgq = bgq;
+	}
+	public String getResourceType() {
+		return resourceType;
+	}
+	public void setResourceType(String resourceType) {
+		this.resourceType = resourceType;
 	}
 }

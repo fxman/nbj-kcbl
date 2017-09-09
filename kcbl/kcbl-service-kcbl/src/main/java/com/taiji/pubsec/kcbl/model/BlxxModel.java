@@ -74,10 +74,17 @@ public class BlxxModel implements Serializable{
    
    @Column(name="checkmethod",length=20)
    private String checkmethod;//检查方法
-   
+   @Column(name="checkBasis")//检查依据
+   private String checkBasis;
    @OneToOne
-   @JoinColumn(name = "checkdetailresultID")
-   private CheckDetailResult checkResult;//检查结果细节
+   @JoinColumn(name = "checkdetailresultId")
+   private CheckDetailResult checkResult;//检查结果的内容描述
+   
+   @Column(length=20)
+   private String status;// 检查状态  暂存 完成
+   
+   @Column(name="blh",length=20)
+   private String blCode;
    
 public String getId() {
 	return id;
@@ -177,6 +184,22 @@ public CheckDetailResult getCheckResult() {
 public void setCheckResult(CheckDetailResult checkResult) {
 	this.checkResult = checkResult;
 }
-
-   
+public String getStatus() {
+	return status;
+}
+public void setStatus(String status) {
+	this.status = status;
+}
+public String getBlCode() {
+	return blCode;
+}
+public void setBlCode(String blCode) {
+	this.blCode = blCode;
+}
+public String getCheckBasis() {
+	return checkBasis;
+}
+public void setCheckBasis(String checkBasis) {
+	this.checkBasis = checkBasis;
+}
 }

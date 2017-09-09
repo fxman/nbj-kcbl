@@ -1,12 +1,19 @@
 (function($){
 	$(document).ready(function(){
 		initData();
-		$(".mui-switch").click(function(){
-			if($(this).hasClass(".mui-active")){
-				setCookie("checkResult","是存在安全隐患");
+		var checkResult='';
+		document.getElementById("checkResult").addEventListener("toggle",function(event){
+			if(event.detail.isActive){
+				checkResult='存在安全隐患';
+				
 			}else{
-				setCookie("checkResult","不存在安全隐患");
+				checkResult='不存在安全隐患';
 			}
+			setCookie("isSafety",checkResult);
+			this.parentNode.parentNode.firstChild.innerText=checkResult;
+		});
+		$("#contentDescrWrite").blur(function(){
+			setCookie('',$(this).val());
 		});
 		$("#sureCheckWay").click(function(){
 			var selectArray=$("#checkWayUl input:checked");
@@ -36,17 +43,26 @@
 			setCookie("checkMethod",str);
 			window.location.href="/kcbl-web-kcbl/blxx/toAddResult.action";
 		});
+		$("#sure").click(function(){
+			var checkOrder = getCookie("checkManName")+"在"+getCookie("partyName")+"陪同下";
+			setCookie("checkOrder",checkOrder);
+			var checkProcessAndResult = '根据《企业事业单位内部治安保卫条例》第16条第二项、'+getCookie("content")+'之规定，'+checkOrder+'对该'+getCookie("checkContent")+'进行'+getCookie("checkWay")+'。';
+            setCookie("checkProcessAndResult",checkProcessAndResult);
+		});
 	});
 	
 })(jQuery);
 function initData(){
-	$("#contentName").val(getCookie("content"));
+	$("#checkAccor").val(getCookie("content"));
 	var checkOrder=getCookie("checkManName")+"在"+getCookie("partyName")+"陪同下";
+	if(getCookie("content")!=""||getCookie("content")!=null){
+		var checkContent = getCookie("checkContent");
+		$("#contentName").val(getCookie("checkContent"));
+	}
 	$("#checkOrder").val(checkOrder);
 	$("#checkWay").val(getCookie("checkWay"));
 	$("#checkMethod").val(getCookie("checkMethod"));
-	$("#checkResult").text(getCookie("checkResult"));
-	if(getCookie("checkContentDescr")!=""){
-	  $("#contentDescr").text(getCookie("checkContentDescr"));
-	}
+	if(getCookie("checkContentDescr")!=""||getCookie("checkContentDescr")!=null){
+	 $("#contentDescr").text(getCookie("checkContentDescr"));
+    }
 }

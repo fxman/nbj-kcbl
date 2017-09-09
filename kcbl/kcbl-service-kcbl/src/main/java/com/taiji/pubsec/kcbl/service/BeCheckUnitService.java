@@ -4,6 +4,7 @@ package com.taiji.pubsec.kcbl.service;
 
 import java.util.List;
 
+import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryItem;
 import com.taiji.pubsec.kcbl.model.BeCheckedUnit;
 
 public  interface  BeCheckUnitService {
@@ -19,5 +20,17 @@ public  interface  BeCheckUnitService {
 	 * @return
 	 */
 	List<BeCheckedUnit> findBecheckedUnitServiceBySshy(String sshy);
+	/**
+	 * 根据单位名称查找被检查单位
+	 * @param name
+	 * @return
+	 */
+	BeCheckedUnit findBeCheckedUnitByName(String name);
+	/**
+	 * 根据单位名称查询检查单位
+	 * @param unitName
+	 * @return
+	 */
+	DictionaryItem findBeCheckedUnitserviceByName(String unitName);
 	
 }

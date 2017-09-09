@@ -15,4 +15,14 @@ public class Constant {
 		public static final String DIPLOMA = "xl";
 		// 人员名称
 		public static final String PERSON_NAME = "虚拟人员";
+		
+		//笔录状态
+		public static final String BLSTATUS_ZANCUN = "暂存";
+		
+		public static final String BLSTATUS_BAOCUN = "保存";
+		
+		public static final String BLSTATUS_QY = "启用";
+		
+		public static final String BLSTATUS_TY = "停用";
+		
 }

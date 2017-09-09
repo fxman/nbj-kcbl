@@ -13,7 +13,7 @@
 			</result>
 		</action>
 		<!-- 通过条件查询笔录 -->
-		<action name="queryBlxxbyCondition" class="blxxAction" method="generateBlListByCondition">
+		<action name="queryBlxxbyCondition" class="blxxAction" method="queryBlxxbyCondition">
 			<result name="success" type="json">
 			<param name="ignoreHierarchy" >false</param>
 			 <param name = "includeProperties">blxxList.*</param> 
@@ -32,18 +32,25 @@
 			 <param name = "includeProperties">bjdwList.*</param> 
 			</result>
 		</action>
-		<!-- 初始化加载检查内容 -->
+		<!-- 初始化加载检查依据 -->
 		<action name="initCheckContent" class="blxxAction" method="initCheckContent">
 			<result name="success" type="json">
 			<param name="ignoreHierarchy" >false</param>
 			 <param name = "includeProperties">checkContentList.*</param> 
 			</result>
 		</action>
-		<!-- 初始化加载检查内容子项 -->
+		<!-- 初始化加载检查依据子项 -->
 		<action name="initSubContent" class="blxxAction" method="getSubContent">
 			<result name="success" type="json">
 			<param name="ignoreHierarchy" >false</param>
 			 <param name = "includeProperties">subContentList.*</param> 
+			</result>
+		</action>
+		<!-- 通过检查依据查找检查内容 -->
+		<action name="findCheckContentByAccor" class="blxxAction" method="findCheckContentByAccor">
+			<result name="success" type="json">
+			<param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">accor.*</param> 
 			</result>
 		</action>
 		<!-- 初始化加载检查人 -->
@@ -51,6 +58,20 @@
 			<result name="success" type="json">
 			 <param name="ignoreHierarchy" >false</param>
 			 <param name = "includeProperties">checkManList.*</param> 
+			</result>
+		</action>
+		<!-- 通过姓名查找检查人 -->
+		<action name="findCheckManByName" class="blxxAction" method="findCheckManByName">
+			<result name="success" type="json">
+			 <param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">checkManList.*</param> 
+			</result>
+		</action>
+		<!-- 通过单位名称查找单位 -->
+		<action name="findPartyUnitByName" class="blxxAction" method="findPartyUnitByName">
+			<result name="success" type="json">
+			 <param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">unit.*,sshy.*</param> 
 			</result>
 		</action>
 		<!-- 初始化加载当事单位 -->
@@ -104,16 +125,30 @@
 		<action name="toAddResult" class="blxxAction" method="toAddResult">
 			<result name="success">/WEB-INF/view/kcbl/addResult.jsp</result>
 		</action>
-		<!-- 访问检查内容页面 -->
-		<action name="toCheckContent" class="blxxAction" method="toCheckContent">
+		<!-- 访问检查依据页面 -->
+		<action name="toCheckAccor" class="blxxAction" method="toCheckAccor">
 			<result name="success">/WEB-INF/view/kcbl/checkContent.jsp</result>
 		</action>
 		<!-- 访问添加结果内容描述页面 -->
 		<action name="toContentDescr" class="blxxAction" method="toContentDescr">
 			<result name="success">/WEB-INF/view/kcbl/add-result-descr.jsp</result>
 		</action>
+		<!-- 保存笔录 -->
 		<action name="saveblxx" class="blxxAction" method="saveblxx">
 			<result name="success">/WEB-INF/view/kcbl/check-bilu-before.jsp</result>
+		</action>
+		<!-- 暂存笔录 -->
+		<action name="tempSaveBlxx" class="blxxAction" method="saveTempBlxx">
+			<result name="success">/WEB-INF/view/kcbl/check-bilu-before.jsp</result>
+		</action>
+		<!-- 打印笔录 -->
+	   <action name="printBlxx" class="printAction" method="printBlxx">
+		<result name="success" type="stream">
+            <param name="contentType">${docType}</param>
+            <param name="contentDisposition">attachment;filename="${docName}"</param>
+            <param name="inputName">docFile</param>
+            <param name="contentLength">${contLength}</param>
+          </result>
 		</action>
 	</package>
 </struts>

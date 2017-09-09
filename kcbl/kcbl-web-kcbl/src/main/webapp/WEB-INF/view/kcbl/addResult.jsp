@@ -31,7 +31,7 @@
 </header>
 
 <div class="mui-bar app-bottom-caozuo">
-    <a href="#">确定</a>
+    <a href="<%=context%>/blxx/toblCheck.action" id="sure">确定</a>
 </div>
 
 
@@ -43,14 +43,19 @@
         <form action="">
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row app-navigate-right">
-                    <label>检查内容</label>
-                    <a href="<%=context%>/blxx/toCheckContent.action">
-                        <input type="text" value="" id="contentName" readonly>
+                    <label>检查依据</label>
+                    <a href="<%=context%>/blxx/toCheckAccor.action">
+                        <input type="text" value="" id="checkAccor" readonly>
                         <span class="mui-icon mui-icon-forward arr-right"></span>
                     </a>
                 </div>
             </div>
-
+            <div class="mui-input-group marb-12">
+                <div class="mui-input-row app-navigate-right">
+                    <label>检查内容</label>
+                        <input type="text" value="" id="contentName" readonly>
+                </div>
+            </div>
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label>检查程序</label>
@@ -82,9 +87,9 @@
                 <div class="mui-input-top">
                     <div class="left">检查结果</div>
                     <div class="right" style="line-height: 40px;">
-                        <div class="mui-inline fc-888" id="checkResult">是否发现安全隐患 </div>
+                        <div class="mui-inline fc-888" >是否发现安全隐患 </div>
                         <div class="mui-inline">
-                            <div class="mui-switch mui-switch-blue mui-switch-mini mui-active" style="margin-top: 5px;">
+                            <div id="checkResult" class="mui-switch mui-switch-blue mui-switch-mini mui-active" style="margin-top: 5px;">
                               <div class="mui-switch-handle"></div>
                             </div>
                         </div>
@@ -102,7 +107,7 @@
                     </div>
                 </div>
                 <div class="mui-col-xs-12">
-                    <textarea name="" id="" cols="30" rows="6"></textarea>
+                    <textarea name="" id="contentDescrWrite" cols="30" rows="6"></textarea>
                 </div>
             </div>          
         

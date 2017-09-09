@@ -30,7 +30,7 @@
 </header>
 
 <div class="mui-bar app-bottom-caozuo">
-    <a href="#"onclick="document.getElementById('formId').submit();">保存笔录</a>
+    <a href="#" id="saveBl">保存笔录</a>
 </div>
 
 
@@ -38,19 +38,19 @@
 
 
     <section class="app-padded">
-        <form id="formId" action="<%=context%>/blxx/saveblxx.action"" method="post" enctype="multipart/form-data">
+        <form id="formId" action="" method="post" enctype="multipart/form-data">
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row calendar">
                     <label><span class="list-icon time-icon"></span>开始时间</label>
                     <a href="#" class="dtpicker" id="startDtpicker">
-                        <input id="startTime" type="text" value="" readonly>
+                        <input id="startTime" type="text" value="" name="blxxDetailBean.startTime" readonly>
                         <div class="right-icon"><span class="mui-time-form-icon"></span></div>
                     </a>
                 </div>
                 <div class="mui-input-row calendar">
                     <label><span class="list-icon time-icon"></span>结束时间</label>
                     <a href="#" class="dtpicker" id="endDtpicker">
-                        <input id="endTime" type="text" value="" readonly>
+                        <input id="endTime" type="text" value="" name="blxxDetailBean.endTime" readonly>
                         <div class="right-icon"><span class="mui-time-form-icon"></span></div>
                     </a>
                 </div>
@@ -59,7 +59,7 @@
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon location-icon"></span>地点</label>
-                    <input type="text" value="" id="address">
+                    <input type="text" value="" id="address" name="blxxDetailBean.detailAddress">
                 </div>
             </div>
 
@@ -67,14 +67,14 @@
                 <div class="mui-input-row app-navigate-right">
                     <label><span class="list-icon unit-icon1"></span>检查人单位</label>
                     <a href="<%=context%>/blxx/toCheckManUnit.action">
-                        <input type="text" value="" id="unitName" readonly>
+                        <input type="text" value="" id="unitName" name="blxxDetailBean.checkUnit" readonly>
                         <span class="mui-icon mui-icon-forward arr-right"></span>
                     </a>
                 </div>
                 <div class="mui-input-row app-navigate-right">
                     <label><span class="list-icon man-icon1"></span>检查人姓名</label>
                     <a href="<%=context%>/blxx/toCheckMan.action">
-                        <input type="text" value="" id="checkManName" readonly>
+                        <input type="text" value="" id="checkManName" name="blxxDetailBean.checkMan" readonly>
                         <span class="mui-icon mui-icon-forward arr-right"></span>
                     </a>
                 </div>
@@ -84,50 +84,54 @@
                 <div class="mui-input-row app-navigate-right">
                     <label><span class="list-icon unit-icon2"></span>被检查人单位</label>
                     <a href="<%=context%>/blxx/toPartyUnit.action">
-                        <input type="text" value="重点基础设施" id="currentUnitname" readonly>
+                        <input type="text" value="重点基础设施" id="currentUnitname" name = "blxxDetailBean.beCheckedUnit" readonly>
                         <span class="mui-icon mui-icon-forward arr-right"></span>
                     </a>
                 </div>
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon2"></span>当事人</label>
-                    <input type="text" class="mui-input-clear" id="partyName" value="">
+                    <input type="text" class="mui-input-clear" id="partyName" value="" name = "blxxDetailBean.partyMan" placeholder="请填写姓名、性别以及身份证号码">
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon3"></span>见证人</label>
-                    <input type="text" class="mui-input-clear" id ="witness" value="无" readonly>
+                    <input type="text" class="mui-input-clear" id ="witness" value="无" name="blxxDetailBean.witness" readonly>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon form-icon1"></span>事由和目的</label>
-                    <input type="text" class="mui-input-clear" id="reasonAndPurpose" value="指导和监督单位执行《企业事业单位内部治安保卫条例》" readonly>
+                    <input type="text" class="mui-input-clear" id="reasonAndPurpose" name="blxxDetailBean.reasonsAndPurpose"
+                    value="指导和监督单位执行《企业事业单位内部治安保卫条例》" readonly>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12 app-padded1">
                 <div class="mui-input-top">
                     <div class="left"><span class="list-icon res-icon"></span>过程和结果</div>
-                    <div class="right-icon">
+                    <div class="right-icon" >
                         <a href="<%=context%>/blxx/toAddResult.action" class="add-result"></a>
                         <a class="edit-bilu" style="margin-left: 10px"></a>
                     </div>
                 </div>
             </div>
+	              <textarea cols="50" rows="10" id="checkProcessAndResult" name="blxxDetailBean.pocessAndResult"></textarea>
 
             <div class="mui-input-row marb-12 app-padded1 btn-row">
-                <button type="button" class="mui-btn mui-btn-success"><span class="printer-icon"></span>打印</button>
-                <button type="button" class="mui-btn mui-btn-success"><span class="save-icon"></span>暂存</button>
+                <button type="button" class="mui-btn mui-btn-success" id="printBl" onclick="document.getElementById('formId').submit();"><span class="printer-icon"></span>打印</button>
+                <button type="button" class="mui-btn mui-btn-success" id="tempSave"><span class="save-icon"></span>暂存</button>
             </div>
 
             <div class="mui-input-group marb-12 app-padded1">
                 <div class="mui-input-top">
-                    <div class="left"><span class="list-icon fujian-icon"></span>附件</div>
-                    <div class="right-icon">
-                      <input type="file" name="file"  />
+                    <div class="left"><span class="list-icon fujian-icon"></span>附件 <p id="attachment"></p></div>
+                    <div class="right-icon" >
+                       <input type="text" id="txt_id" style="position: absolute; right: 0px; top: 0px;"/>
+                       <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;"></button>
+                       <input type="file" name="file" multiple="multiple" style="opacity: 0;z-index: 1" onchange="findId('txt_id').value=this.value"  />
                     </div>
                      
                 </div>
@@ -137,12 +141,16 @@
                 <div class="mui-input-top">
                     <div class="left"><span class="list-icon sign-icon"></span>签名</div>
                     <div class="right-icon">
-                        <button type="button" class="upload-sign" ></button>
+                      <input type="text" id="txt_id1" style="position: absolute; right: 0px; top: 0px;"/>
+                       <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;"></button>
+                       <input type="file" name="file" multiple="multiple" style="opacity: 0;z-index: 1" onchange="findId('txt_id1').value=this.value"  />
                     </div>
                 </div>
             </div>
-
-
+            <input type="text" id="checkWay" name="blxxDetailBean.checkstyle" style="display:none"/>
+            <input type="text" id="checkMethod" name="blxxDetailBean.checkmethod"style="display:none"/> 
+            <input type="text" id="checkBasis" name="blxxDetailBean.checkBasis" style="display:none"/> 
+            <input type="text" id="isSafety" name="blxxDetailBean.issafety" style="display:none"/>
         </form>
     </section>
 
@@ -174,7 +182,7 @@
 			mui('body').on('hidden', '.mui-popover', function(e) {
 				//console.log('hidden', e.detail.id);//detail为当前popover元素
 			});
-		</script>
+</script>
 
 
 <!---年份选择器---->

@@ -7,22 +7,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.annotations.Source;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryItem;
-import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryType;
 import com.taiji.pubsec.businesscomponent.dictionary.service.IDictionaryItemService;
 import com.taiji.pubsec.businesscomponent.dictionary.service.IDictionaryTypeService;
 import com.taiji.pubsec.businesscomponent.organization.model.Person;
@@ -37,10 +34,13 @@ import com.taiji.pubsec.kcbl.model.CheckDetailResult;
 import com.taiji.pubsec.kcbl.model.FileInfo;
 import com.taiji.pubsec.kcbl.service.BeCheckUnitService;
 import com.taiji.pubsec.kcbl.service.BlglService;
+import com.taiji.pubsec.kcbl.service.CheckDetailResultService;
 import com.taiji.pubsec.kcbl.service.FileService;
+import com.taiji.pubsec.kcbl.service.PersonReplenService;
+import com.taiji.pubsec.kcbl.util.Constant;
 import com.taiji.pubsec.kcbl.util.ReturnMessageAction;
-import com.taiji.pubsec.kcbl.util.bean.PersonBean;
 
+@SuppressWarnings("serial")
 @Controller("blxxAction")
 @Scope("prototype")
 public class BlxxAction extends ReturnMessageAction{
@@ -57,9 +57,17 @@ public class BlxxAction extends ReturnMessageAction{
 	private IDictionaryTypeService dictionaryTypeService;
 	@Resource
 	private IDictionaryItemService dictionaryItemService;
-	
 	@Resource 
     private FileService fileSeriveimpl;
+	@Resource 
+	private BeCheckUnitService becheckUnitService;
+	@Resource
+	private PersonReplenService personReplenService;
+	 
+	@Resource
+	private CheckDetailResultService checkDetailResultService;
+	
+	private BlxxDetailBean blxxDetailBean;
 	
 	private BlListBean blxxBean;
 	private String checkUnit;
@@ -67,6 +75,7 @@ public class BlxxAction extends ReturnMessageAction{
 	private String iscoreunit;
 	private String startTime;
 	private String endTime;
+	private String checkManName;
 	private List<BlListBean> blxxList;
 	private List<Unit> unitList;
 	private String unitId;
@@ -83,16 +92,15 @@ public class BlxxAction extends ReturnMessageAction{
 	private BlxxModel blxx;
 	private BlxxDetailBean blBean;
 	private List<CheckDetailResult> checkContentDescrList;
-	
-	 private File file;
-	    
-	 private FileInfo attaceMent;
+	private DictionaryItem unit;
+	private String partyUnit;
+	private DictionaryItem accor;
+	private String checkAccorId;
+	private String unitIds;
+	private File file;
+	private FileInfo attaceMent;
 	    //提交过来的file的名字
-	 private String fileFileName;
-	
-	
-	
-	
+	private String fileFileName;
 	public String findAllBlxxList(){
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY年MM月DD日 HH时mm分");
          blxxModelList=blglServiceImpl.findAllBlxxList();
@@ -131,7 +139,7 @@ public class BlxxAction extends ReturnMessageAction{
         
 		return SUCCESS;
 	}
-	public String generateBlListByCondition(){
+	public String queryBlxxbyCondition(){
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY年MM月DD日 HH时mm分");
 		List<BlxxModel> blxxlist = blglServiceImpl.findBlxxList(checkUnit, iscoreunit, belongIndustry, startTime, endTime);
 		for(BlxxModel blxx:blxxlist){
@@ -189,23 +197,43 @@ public class BlxxAction extends ReturnMessageAction{
 			}
 		return SUCCESS;
 	}
-	public File getFile() {
-		return file;
+	
+	/**
+	 * 暂存笔录
+	 * @return
+	 * @throws ParseException 
+	 */
+	public String saveTempBlxx() throws ParseException{
+		BlxxModel  blModel = new BlxxModel();
+		SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		BeCheckedUnit  beCheckedUnit = becheckUnitService
+				.findBeCheckedUnitByName(blxxDetailBean.getBeCheckedUnit());
+		blModel.setBecheckedunit(beCheckedUnit);
+		blModel.setStarttime(sdf.parse(blxxDetailBean.getStartTime()));
+		blModel.setEndtime(sdf.parse(blxxDetailBean.getStartTime()));
+		blModel.setDetailaddress(blxxDetailBean.getDetailAddress());
+		blModel.setCheckpersoncode(blxxDetailBean.getCheckMan());
+		blModel.setCheckunitcode(blxxDetailBean.getCheckUnit());
+		blModel.setPartyname(blxxDetailBean.getPartyMan());
+		blModel.setReasonsandpurpose(blxxDetailBean.getReasonsAndPurpose());
+		blModel.setIssafety(blxxDetailBean.getIssafety());
+		blModel.setCheckstyle(blxxDetailBean.getCheckstyle());
+		blModel.setCheckprocess(blxxDetailBean.getCheckprocess());
+		blModel.setCheckBasis(blxxDetailBean.getCheckBasis());
+		blModel.setCheckcontents(blxxDetailBean.getPocessAndResult());
+		blModel.setStatus(Constant.BLSTATUS_ZANCUN);
+		blglServiceImpl.saveBlxx(blModel);
+		return SUCCESS;
 	}
-	public void setFile(File file) {
-		this.file = file;
+	public String findCheckContentByAccor(){
+		accor=dictionaryItemService.findById(checkAccorId);
+		return SUCCESS;
+		
 	}
-	public FileInfo getAttaceMent() {
-		return attaceMent;
-	}
-	public void setAttaceMent(FileInfo attaceMent) {
-		this.attaceMent = attaceMent;
-	}
-	public String getFileFileName() {
-		return fileFileName;
-	}
-	public void setFileFileName(String fileFileName) {
-		this.fileFileName = fileFileName;
+	public String findPartyUnitByName(){
+		unit=dictionaryItemService.findById(checkUnit);
+		sshy=unit.getParentItem().getName();
+		return SUCCESS;
 	}
 	public String finsubPartyUnit(){
 		bjdwList = dictionaryItemService.findDicItemsByParent(sshy, null);
@@ -221,7 +249,12 @@ public class BlxxAction extends ReturnMessageAction{
 		
 	}
 	public String initCheckMan(){
-		checkManList=personService.findPersonsByUnitAndPersonName(unitId, "");
+		String[] ids=unitIds.split(",");
+		checkManList=personReplenService.findCheckManbyUnitIds(ids);
+		return SUCCESS;
+	}
+	public String findCheckManByName(){
+		checkManList=personService.findPersonsByUnitAndPersonName(unitId, checkManName);
 		return SUCCESS;
 	}
 	public String initCheckContent(){
@@ -233,7 +266,7 @@ public class BlxxAction extends ReturnMessageAction{
 		return SUCCESS;
 	}
 	public String initCheckDescr(){
-		checkContentDescrList=blglServiceImpl.findBlxxContentDescr();
+		checkContentDescrList=checkDetailResultService.findBlxxContentDescr();
 		return SUCCESS;
 	}
 	public String toPartyUnit(){
@@ -257,6 +290,9 @@ public class BlxxAction extends ReturnMessageAction{
 	public String toCheckContent(){
 		return SUCCESS;
 	}
+	public String toCheckAccor(){
+		return SUCCESS;
+	}
 	public String toblDetail(){
 		return SUCCESS;
 	}
@@ -265,6 +301,42 @@ public class BlxxAction extends ReturnMessageAction{
 	}
 	
 	/*get&set方法*/
+	public String getUnitIds() {
+		return unitIds;
+	}
+	public void setUnitIds(String unitIds) {
+		this.unitIds = unitIds;
+	}
+	public String getCheckAccorId() {
+		return checkAccorId;
+	}
+	public void setCheckAccorId(String checkAccorId) {
+		this.checkAccorId = checkAccorId;
+	}
+	public DictionaryItem getAccor() {
+		return accor;
+	}
+	public void setAccor(DictionaryItem accor) {
+		this.accor = accor;
+	}
+	public String getPartyUnit() {
+		return partyUnit;
+	}
+	public void setPartyUnit(String partyUnit) {
+		this.partyUnit = partyUnit;
+	}
+	public DictionaryItem getUnit() {
+		return unit;
+	}
+	public void setUnit(DictionaryItem unit) {
+		this.unit = unit;
+	}
+	public String getCheckManName() {
+		return checkManName;
+	}
+	public void setCheckManName(String checkManName) {
+		this.checkManName = checkManName;
+	}
 	public List<CheckDetailResult> getCheckContentDescrList() {
 		return checkContentDescrList;
 	}
@@ -410,6 +482,30 @@ public class BlxxAction extends ReturnMessageAction{
 	
 	public void setIscoreunit(String iscoreunit) {
 		this.iscoreunit = iscoreunit;
+	}
+	public BlxxDetailBean getBlxxDetailBean() {
+		return blxxDetailBean;
+	}
+	public void setBlxxDetailBean(BlxxDetailBean blxxDetailBean) {
+		this.blxxDetailBean = blxxDetailBean;
+	}
+	public File getFile() {
+		return file;
+	}
+	public void setFile(File file) {
+		this.file = file;
+	}
+	public FileInfo getAttaceMent() {
+		return attaceMent;
+	}
+	public void setAttaceMent(FileInfo attaceMent) {
+		this.attaceMent = attaceMent;
+	}
+	public String getFileFileName() {
+		return fileFileName;
+	}
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
 	}
 
 }

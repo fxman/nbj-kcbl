@@ -37,7 +37,7 @@ function getSubItem(id){
 				var dataList=data.subContentList;
 				var str ='';
 				for(var i=0;i<dataList.length;i++){
-					str +='<li class="mui-table-view-cell" id="'+dataList[i].id+'"  onclick="changeActive(this.id)"><a class="mui-navigate-right">'+dataList[i].name+'</a>'
+					str +='<li class="mui-table-view-cell" id="'+dataList[i].id+'"  description="'+dataList[i].description+'" onclick="changeActive(this.id)"><a class="mui-navigate-right">'+dataList[i].name+'</a>'
 		                +'</li>';
 				}
 				$("#"+id).siblings("ul").html(str);
@@ -55,17 +55,22 @@ function changeActive(id){
 function sureSelectContent(){
 	$("#sure").click(function(){
 		var selectArray=$(".app-active");
+		var checkAccor="";
 		var str = "";
 		for(var i=0;i<selectArray.length;i++){
 			var contentName=$(selectArray[i]).children("a").text();
+			var checkContent=$(selectArray[i]).attr("description");
 			var parentName=$(selectArray[i]).parents("li").children("a").text();
 			var content=parentName+"第"+contentName+"项";
 			if(i!=0){
 				str+=","+content;
+				checkAccor+=","+checkContent;
 			}else{
 			    str+=content;
+			    checkAccor+=checkContent;
 			}
 		}
+		setCookie("checkContent",checkAccor);
 		setCookie("content",str);
 		window.location.href="/kcbl-web-kcbl/blxx/toAddResult.action";
 	});

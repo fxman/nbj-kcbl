@@ -14,6 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.taiji.persistence.dao.Dao;
+import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryItem;
+import com.taiji.pubsec.businesscomponent.organization.model.Person;
 import com.taiji.pubsec.kcbl.model.BlxxModel;
 import com.taiji.pubsec.kcbl.model.CheckDetailResult;
 import com.taiji.pubsec.kcbl.service.BlglService;
@@ -21,11 +23,9 @@ import com.taiji.pubsec.kcbl.service.BlglService;
 
 @Service("BlglServiceImpl")
 public class BlglServiceImpl implements BlglService {
-	@SuppressWarnings("rawtypes")
 	@Resource
-	private Dao dao;
+	private Dao<BlxxModel,String> dao;
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<BlxxModel> findBlxxList(String unitName, String sfhxdw,
 			String sshy, String startTime, String endTime) {
@@ -73,10 +73,9 @@ public class BlglServiceImpl implements BlglService {
 		return (BlxxModel) this.dao.findByParams(BlxxModel.class, sql,new Object[]{id});
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<CheckDetailResult> findBlxxContentDescr() {
-		return this.dao.findAll(CheckDetailResult.class);
+	public String saveBlxx(BlxxModel BlxxModel) {
+		this.dao.save(BlxxModel);
+		return BlxxModel.getId();
 	}
-
 }

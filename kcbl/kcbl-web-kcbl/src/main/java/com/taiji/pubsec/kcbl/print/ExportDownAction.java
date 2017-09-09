@@ -1,4 +1,4 @@
-package com.taiji.pubsec.kcbl.xtgl.print;
+package com.taiji.pubsec.kcbl.print;
 
 
 import java.io.InputStream;
