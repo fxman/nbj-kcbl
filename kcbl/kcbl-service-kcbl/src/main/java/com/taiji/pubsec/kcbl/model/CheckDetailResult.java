@@ -31,6 +31,9 @@ public class CheckDetailResult implements Serializable {
 	
 	@Column(name="content")
 	private String content;//内容
+	
+	@Column(name="issafety")
+	private String issafety;//是否存在安全隐患 1 是  0 否
 
 	public String getId() {
 		return id;

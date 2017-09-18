@@ -3,7 +3,6 @@
 		initData();
 		putDataCookie();
 	});
-	
 })(jQuery);
 function initData(){
 	$("#endTime").val(getCookie("endTime"));
@@ -29,8 +28,15 @@ function initData(){
     }
     $("#checkWay").val(getCookie("checkWay"));
     $("#checkMethod").val(getCookie("checkMethod"));
-    $("#checkMethod").val(getCookie("checkBasis"));
-    $("#isSafety").val(getCookie("isSafety"));
+    $("#checkBasis").val(getCookie("checkBasis"));
+    if(getCookie("isSafety") != null){
+    	$("#isSafety").val("1");
+    }else{
+    	$("#isSafety").val("0");
+    }
+    $("#checkBasis").val(getCookie("checkBasis"));
+    $("#contentDescr").val(getCookie("contentDescr"))
+    
 }
 function putDataCookie(){
 	$("#address").blur(function(){

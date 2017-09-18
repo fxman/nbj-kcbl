@@ -1,5 +1,6 @@
 package com.taiji.pubsec.kcbl.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -25,9 +26,15 @@ public class BeCheckUnitServiceImpl implements BeCheckUnitService{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BeCheckedUnit> findBecheckedUnitServiceBySshy(String sshy) {
-		String str="from BeCheckedUnit bjdw where  bjdw.belongIndustry=?";
-		return  this.dao.findAllByParams(BeCheckedUnit.class, str, new Object[]{sshy});
+	public List<BeCheckedUnit> findBecheckedUnitServiceBySshy(String sshy,String partyUnit) {
+		String str="from BeCheckedUnit bjdw where  bjdw.belongIndustry=? ";
+		List<Object> params = new ArrayList<Object>();
+		params.add(sshy);
+		if (partyUnit != null){
+			str += " and bjdw.bdcdwmc like ?";
+			params.add("%" + partyUnit + "%");
+		}
+		return  this.dao.findAllByParams(BeCheckedUnit.class,str ,params.toArray());
 	}
 	@Override
 	public BeCheckedUnit findBeCheckedUnitByName(String name){
@@ -40,5 +47,17 @@ public class BeCheckUnitServiceImpl implements BeCheckUnitService{
 	public DictionaryItem findBeCheckedUnitserviceByName(String unitName) {
 		String sql = "from DictionaryItem unit where unit.name=?";
 		return (DictionaryItem) this.dao.findByParams(DictionaryItem.class, sql, new Object[]{unitName});
+	}
+
+	@Override
+	public List<BeCheckedUnit> findAllSshy() {
+		String sql = "from BeCheckedUnit ncdw  where 1=? GROUP BY  ncdw.belongIndustry";
+		return   this.dao.findAllByParams(BeCheckedUnit.class, sql, new Object[]{1});
+	}
+
+	@Override
+	public List<BeCheckedUnit> findAllByConditons(String name) {
+		String sql = "from BeCheckedUnit ncdw  where bdcdwmc like ?";
+		return   this.dao.findAllByParams(BeCheckedUnit.class, sql, new Object[]{"%" + name + "%"});
 	}
 }

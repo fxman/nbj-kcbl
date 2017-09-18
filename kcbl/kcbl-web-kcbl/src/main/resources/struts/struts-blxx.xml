@@ -29,7 +29,7 @@
 		<action name="finsubPartyUnit" class="blxxAction" method="finsubPartyUnit">
 			<result name="success" type="json">
 			<param name="ignoreHierarchy" >false</param>
-			 <param name = "includeProperties">bjdwList.*</param> 
+			 <param name = "includeProperties">beCheckLits.*</param> 
 			</result>
 		</action>
 		<!-- 初始化加载检查依据 -->
@@ -71,14 +71,14 @@
 		<action name="findPartyUnitByName" class="blxxAction" method="findPartyUnitByName">
 			<result name="success" type="json">
 			 <param name="ignoreHierarchy" >false</param>
-			 <param name = "includeProperties">unit.*</param> 
+			 <param name = "includeProperties">beCheckLits.*</param> 
 			</result>
 		</action>
 		<!-- 初始化加载当事单位 -->
 		<action name="initPartyUnit" class="blxxAction" method="initPartyUnit">
 			<result name="success" type="json">
 			 <param name="ignoreHierarchy" >false</param>
-			 <param name = "includeProperties">bjdwList.*</param> 
+			 <param name = "includeProperties">beCheckLits.*</param> 
 			</result>
 		</action>
 		<!-- 访问笔录信息详情页 -->
@@ -135,7 +135,7 @@
 		</action>
 		<!-- 保存笔录 -->
 		<action name="saveblxx" class="blxxAction" method="saveblxx">
-			<result name="success">/WEB-INF/view/kcbl/check-bilu-before.jsp</result>
+			<result name="success">/WEB-INF/view/kcbl/kcbllist.jsp</result>
 		</action>
 		<!-- 暂存笔录 -->
 		<action name="tempSaveBlxx" class="blxxAction" method="saveTempBlxx">
@@ -150,5 +150,13 @@
             <param name="contentLength">${contLength}</param>
           </result>
 		</action>
+		<action name="fileDownload" class="blxxAction">  
+           <result name="success" type="stream">  
+               <param name="contentType">text/plain</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
+               <param name="inputName">downloadFile</param>  
+               <param name="bufferSize">2048</param>  
+           </result>  
+       </action>  
 	</package>
 </struts>

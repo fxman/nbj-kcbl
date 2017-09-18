@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#1d8dfb">
-<title>笔录勘察系统</title>
+<title>内保检查系统</title>
 <!--APP框架mui.css-->
 <link href="<%=context%>/common/library/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="<%=context%>/common/library/MUI/css/mui.min.css" rel="stylesheet" />
@@ -28,29 +28,15 @@
 
 <header class="mui-bar mui-bar-nav app-bar-search">
     <div class="mui-row">
-        <h1 class="mui-title">内保局笔录系统</h1>
+        <h1 class="mui-title">内保检查系统</h1>
         <a href="<%=context%>/blxx/toblCheck.action" class="mui-pull-right new-bilu">创建笔录</a>
     </div>
     <div class="bar-search">
-         <input type="search" id="bdcdwmc" placeholder="请输入名称...">
+         <input type="search" id="blh" placeholder="请输入笔录号...">
          <button type="button" id="searchblxx"></button>
     </div>
 </header>
-
-<div class="mui-bar app-bottom-caozuo">
-    <div class="mui-pull-left">
-        <a href="#">取消</a>
-    </div>
-    <div class="mui-pull-right">
-        <a href="#">确定</a>
-    </div>
-</div>
-
-
-
 <div class="mui-content">
-
-
     <section class="">
         <form action="">
             <div class="mui-input-group">
@@ -77,7 +63,7 @@
                 </div>
                 <div class="mui-input-row app-navigate-right">
                     <label>是否核心单位</label>
-                    <div id="coreunit" class="mui-switch mui-switch-blue mui-switch-mini mui-active" style="margin-top: 5px; margin-right: 15px;">
+                    <div id="coreunit" class="mui-switch mui-switch-blue mui-switch-mini " style="margin-top: 5px; margin-right: 15px;">
                       <div class="mui-switch-handle"></div>
                     </div>
                 </div>
@@ -88,62 +74,12 @@
         <p class="mui-row app-padded2">
                          搜索到 <span class="fc-333" id="listLength"></span> 条笔录信息
         </p>
-
-        
         <div class="mui-row app-list" id="blxxList">
-            
         </div>
 
     </section>
-
-    <!-- 行业类型弹出内容 -->
-    <!-- <div id="hangyeType" class="mui-popover mui-popover-action mui-popover-bottom">
-        <div class="mui-row mui-popover-caozuo">
-            <div class="pull-left">
-                <a href="#">取消</a>
-            </div>
-            <div class="pull-right">
-                <a href="#">确定</a>
-            </div>
-        </div>
-        <ul class="mui-table-view">
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    大型工矿企业
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    国防企业
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    国家机关
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    城建商贸
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    重点基础设施
-                </div>
-            </li>
-            <li class="mui-table-view-cell">
-                <div class="mui-row app-padded2">
-                    金融单位
-                </div>
-            </li>
-        </ul>
-      
-    </div>
- -->
 <!-- 时间控件元素 -->
     <div id='result' class="ui-alert"></div>
-            
 </div>
 
 
@@ -198,7 +134,6 @@
                * rs.h 时，用法同年
                * rs.i 分（minutes 的第二个字母），用法同年
                */
-              result.innerText = '选择结果: ' + rs.text;
               document.getElementById("startTime").value=rs.text;
               setCookie("startTime",rs.text);
               /* 
@@ -237,7 +172,6 @@
                  * rs.h 时，用法同年
                  * rs.i 分（minutes 的第二个字母），用法同年
                  */
-                result.innerText = '选择结果: ' + rs.text;
                 document.getElementById("endTime").value=rs.text;
                 setCookie("endTime",rs.text);
                 /* 
@@ -274,7 +208,7 @@
                 text: '大型工矿企业'
             }, {
                 value: 'gfqy',
-                text: '国防企业'
+                text: '国防工业'
             }, {
                 value: 'gjjg',
                 text: '国家机关'
@@ -301,6 +235,8 @@
     })(mui, document);
 </script>
 <!-- 选择器 -->
+
+
 
 </body>
 <script src="<%=context%>/scripts/kcbl/kcbllist.js"></script>

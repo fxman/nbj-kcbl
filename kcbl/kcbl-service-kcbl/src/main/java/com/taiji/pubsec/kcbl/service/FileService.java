@@ -9,4 +9,12 @@ public interface FileService {
      */
 	public void saveFileInformation(FileInfo attachment);
 	
+	/**
+     * 根据文件ID查找文件
+     * @return
+     */
+	public FileInfo findFileById(String id);
+	
+	public FileInfo findFileByResourceId(String id,String resourceType);
+	
 }

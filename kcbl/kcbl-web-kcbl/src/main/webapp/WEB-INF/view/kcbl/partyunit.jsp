@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#1d8dfb">
-<title>笔录勘察系统</title>
+<title>内保检查系统</title>
 <!--APP框架mui.css-->
 <link href="<%=context%>/common/library/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="<%=context%>/common/library/MUI/css/mui.min.css" rel="stylesheet" />
@@ -25,10 +25,10 @@
 </head>
 <body>
 <header class="mui-bar mui-bar-nav app-bar-search">
-	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    <h1 class="mui-title">当事单位</h1>
+	<a class="mui-icon mui-icon-left-nav mui-pull-left" href="<%=context%>/blxx/toblCheck.action"></a>
+    <h1 class="mui-title">被检查单位</h1>
     <div class="bar-search">
-         <input type="search" placeholder="请输入名称..." value="">
+         <input type="search" placeholder="请输入名称..." id="partyName" value="">
          <button type="button" id="search"></button>
     </div>
 </header>

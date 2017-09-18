@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-<title>笔录勘察系统</title>
+<title>内保检查系统</title>
 <link href="<%=context%>/common/library/MUI/css/mui.css" rel="stylesheet" />
 <link href="<%=context%>/custom/utilBasic/css/reset.css" rel="stylesheet" />
 <link href="<%=context%>/custom/util/css/login.css" rel="stylesheet" />
@@ -12,7 +12,7 @@
 <div class="mui-content app-login">
 	<div class="login-top" id="loginTop">
 		<div class="app-logo"></div>
-		<div class="app-login-title">笔录勘察系统</div>
+		<div class="app-login-title">内保检查系统</div>
 	</div>
 	<form id='login-form' class="mui-input-group">
 		<div class="mui-input-row account">

@@ -25,7 +25,7 @@
 </head> 
 <body>
 <header class="mui-bar mui-bar-nav">
-			<a href="javascript:history.back();" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="<%=context%>/blxx/toblList.action"></a>
             <h1 class="mui-title">检查笔录</h1>
 </header>
 
@@ -114,16 +114,16 @@
                     <div class="left"><span class="list-icon res-icon"></span>过程和结果</div>
                     <div class="right-icon" >
                         <a href="<%=context%>/blxx/toAddResult.action" class="add-result"></a>
-                        <a class="edit-bilu" style="margin-left: 10px"></a>
-                    </div>
+<%--                         <a href="<%=context%>/blxx/toAddResult.action" class="edit-bilu" style="margin-left: 10px"></a>
+ --%>                    </div>
                 </div>
             </div>
 	              <textarea cols="50" rows="10" id="checkProcessAndResult" name="blxxDetailBean.pocessAndResult"></textarea>
 
-            <div class="mui-input-row marb-12 app-padded1 btn-row">
+            <div class="mui-input-row marb-12 app-padded1 btn-row" style="float:center" >
                 <button type="button" class="mui-btn mui-btn-success" id="printBl" onclick="document.getElementById('formId').submit();"><span class="printer-icon"></span>打印</button>
-                <button type="button" class="mui-btn mui-btn-success" id="tempSave"><span class="save-icon"></span>暂存</button>
-            </div>
+<!--                 <button type="button" class="mui-btn mui-btn-success" id="tempSave"><span class="save-icon"></span>暂存</button>
+ -->            </div>
 
             <div class="mui-input-group marb-12 app-padded1">
                 <div class="mui-input-top">
@@ -143,7 +143,7 @@
                     <div class="right-icon">
                       <input type="text" id="txt_id1" style="position: absolute; right: 0px; top: 0px;"/>
                        <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;"></button>
-                       <input type="file" name="file" multiple="multiple" style="opacity: 0;z-index: 1" onchange="findId('txt_id1').value=this.value"  />
+                       <input type="file" name="fileSign" multiple="multiple" style="opacity: 0;z-index: 1" onchange="findId('txt_id1').value=this.value"  />
                     </div>
                 </div>
             </div>
@@ -151,6 +151,7 @@
             <input type="text" id="checkMethod" name="blxxDetailBean.checkmethod"style="display:none"/> 
             <input type="text" id="checkBasis" name="blxxDetailBean.checkBasis" style="display:none"/> 
             <input type="text" id="isSafety" name="blxxDetailBean.issafety" style="display:none"/>
+            <input type="text" id="contentDescr" name="blxxDetailBean.checkResult" style="display:none"/>
         </form>
     </section>
 

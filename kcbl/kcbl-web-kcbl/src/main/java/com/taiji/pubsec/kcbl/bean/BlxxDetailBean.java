@@ -24,8 +24,12 @@ public class BlxxDetailBean implements Serializable {
 	private String checkstyle;//检查方式
 	private String checkmethod;//检查方法
 	private String checkBasis; //检查依据
-	private String  checkResult;//检查结果的内容描述
-	
+	private String checkResult;//检查结果的内容描述
+	private String blcode;
+	private String isCoreUnit;//是否核心单位
+	private String blxxId;
+	private String signPictureUrl;
+	private String belongUnit;
 	public String getPocessAndResult() {
 		return pocessAndResult;
 	}
@@ -122,5 +126,35 @@ public class BlxxDetailBean implements Serializable {
 	}
 	public void setCheckResult(String checkResult) {
 		this.checkResult = checkResult;
+	}
+	public String getBlcode() {
+		return blcode;
+	}
+	public void setBlcode(String blcode) {
+		this.blcode = blcode;
+	}
+	public String getBlxxId() {
+		return blxxId;
+	}
+	public void setBlxxId(String blxxId) {
+		this.blxxId = blxxId;
+	}
+	public String getSignPictureUrl() {
+		return signPictureUrl;
+	}
+	public void setSignPictureUrl(String signPictureUrl) {
+		this.signPictureUrl = signPictureUrl;
+	}
+	public String getIsCoreUnit() {
+		return isCoreUnit;
+	}
+	public void setIsCoreUnit(String isCoreUnit) {
+		this.isCoreUnit = isCoreUnit;
+	}
+	public String getBelongUnit() {
+		return belongUnit;
+	}
+	public void setBelongUnit(String belongUnit) {
+		this.belongUnit = belongUnit;
 	}
 }

@@ -1,11 +1,10 @@
 var flagname = true;
 var flagcode = true;
-(function($) {
+(function($){
 	"use strict";
 	$(document).ready(function() {
 		initSshy();
 		});
-	});
 	$("#search").click(function(){
 		var partyUnit=$(this).siblings("input").val();
 		$.ajax({
@@ -14,15 +13,22 @@ var flagcode = true;
 			type:'POST',
 			dataType:'json',
 			success:function(data){
-				var unit=data.unit;
-				var str='<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right">'+data.unit.parentItem.name+'</a><ul class="mui-table-view mui-table-view-chevron"><li class="mui-table-view-cell" id="'+data.unit.id+'" onclick="changeActive(this.id)"><a class="mui-navigate-right">'+data.unit.name+'</a></li></ul></li>';
-				$("#ulUnitList").html(str);
+				var str = "";
+				var dataList = data.beCheckLits;
+				for (var i = 0; i < dataList.length; i++) {
+					str += '<li class="mui-table-view-cell" id ="'
+							+ dataList[i].id
+							+ '"  onclick="changeActive(this.id)"><a class="mui-navigate-right" href="#">'
+							+ dataList[i].bdcdwmc + '</a></li>';
+				}
+				$("#ul" + id).html(str);
 				
 			},
 			error:function(){
 				
 			}
 		});
+	})
 })(jQuery);
 function changeActive(id) {
 	$(".mui-table-view-cell").each(function(){
@@ -47,15 +53,14 @@ function initSshy() {
 				type : 'POST',
 				dataType : 'json',
 				success : function(data) {
-					var dataList = data.bjdwList;
+					var dataList = data.beCheckLits;
 					var str = "";
 					for (var i = 0; i < dataList.length; i++) {
-						if (dataList[i].parentItem == null)
 							str += '<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#" '
 									+ 'id="'
 									+ dataList[i].id
-									+ '"  onclick =findSubItems(this.id)>'
-									+ dataList[i].name
+									+ '" name='+dataList[i].belongIndustry+' onclick =findSubItems(this.id,this.name)>'
+									+ dataList[i].belongIndustry
 									+ '</a>'
 									+ '<ul class="mui-table-view mui-table-view-chevron" id= "ul'
 									+ dataList[i].id + '"></ul></li>';
@@ -67,24 +72,26 @@ function initSshy() {
 				}
 			});
 }
-function findSubItems(id) {
+function findSubItems(id,belongIndustry) {
 	var sshy = $(this).children("a").html();
+	var partyUnit=$("#partyName").val();
 	$
 			.ajax({
 				url : context + "/blxx/finsubPartyUnit.action",
 				data : {
-					'sshy' : id
+					'sshy' : belongIndustry,
+					'partyUnit':partyUnit
 				},
 				type : 'POST',
 				dataType : 'json',
 				success : function(data) {
 					var str = "";
-					var dataList = data.bjdwList;
+					var dataList = data.beCheckLits;
 					for (var i = 0; i < dataList.length; i++) {
 						str += '<li class="mui-table-view-cell" id ="'
-								+ dataList[i].code
+								+ dataList[i].id
 								+ '"  onclick="changeActive(this.id)"><a class="mui-navigate-right" href="#">'
-								+ dataList[i].name + '</a></li>';
+								+ dataList[i].bdcdwmc + '</a></li>';
 					}
 					$("#ul" + id).html(str);
 				},

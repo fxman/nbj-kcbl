@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#1d8dfb">
-<title>笔录勘察系统</title>
+<title>內保检查系統</title>
 <!--APP框架mui.css-->
 <link href="<%=context%>/common/library/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="<%=context%>/common/library/MUI/css/mui.min.css" rel="stylesheet" />
@@ -19,29 +19,18 @@
 <link href="<%=context%>/custom/utilBasic/css/reset.css" rel="stylesheet" />
 <link href="<%=context%>/custom/utilBasic/css/utilBasic.css" rel="stylesheet" />
 <link href="<%=context%>/custom/util/css/util.css" rel="stylesheet" />
-<!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
 </head>
 <body>
 <header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="<%=context%>/blxx/toblList.action"></a>
             <h1 class="mui-title">检查笔录</h1>
 </header>
 
-<div class="mui-bar app-bottom-caozuo">
-    <a href="#">确定</a>
-</div>
-
-
-
 <div class="mui-content">
-
-
     <section class="app-padded">
         <form action="">
             <div class="mui-row app-padded1 marb-12">
-                <p class="fc-aaa">笔录号：<span class="fc-333">NBJ201707090000000001</span></p>
+                <p class="fc-aaa">笔录号：<span class="fc-333" id="blh"></span></p>
             </div>
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
@@ -68,13 +57,13 @@
                 </div>
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon1"></span>检查人</label>
-                    <p id="checkMan">范鑫</p>
+                    <p id="checkMan"></p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
-                    <label><span class="list-icon unit-icon2"></span>当事单位</label>
+                    <label><span class="list-icon unit-icon2"></span>被检查单位</label>
                     <p id="beCheckedUnit"></p>
                 </div>
                 <div class="mui-input-row">
@@ -86,14 +75,15 @@
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon3"></span>见证人</label>
-                    <p id="witness">陈敏</p>
+                    <p id="witness"></p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon form-icon1"></span>事由和目的</label>
-                    <p id="reasonsAndPurpose"></p>
+                    <input type="text" class="mui-input-clear" 
+                    value="指导和监督单位执行《企业事业单位内部治安保卫条例》" readonly>
                 </div>
             </div>
 
@@ -101,12 +91,8 @@
                 <div class="mui-input-top">
                     <div class="left"><span class="list-icon res-icon"></span>过程和结果</div>
                 </div>
-
-                <div class="mui-input-group app-padded2">
-                    <p class="fc-333" id="pocessAndResult"></p>
-                </div>
             </div>
-
+             <textarea cols="50" rows="10" id="checkProcessAndResult" readonly></textarea>
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon3"></span>检查人</label>
@@ -117,28 +103,23 @@
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon3"></span>当事人</label>
-                    <p id="partyName1"></p>
+                    <p id="partyName1">wu</p>
                 </div>
             </div>
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row" style="height: 45px;">
                     <label><span class="list-icon man-icon3"></span>纸质正面照</label>
-                    <p>
-                        <img src="<%=context%>/images/img/small-01.png" alt="">
-                        <img src="<%=context%>/images/img/small-03.png" alt="">
+                    <p id="signPicture">
                     </p>
                 </div>
             </div>
-
-
+           <div class="mui-input-group marb-12" >
+               <div class="mui-input-row" id="downLoadFile" style="padding-left:20px; padding-top:5px;font-size: 16px">
+               </div>
+           </div>
         </form>
     </section>
-
-
-
-
-
 <div id='result' class="ui-alert"></div>              
 </div>
 

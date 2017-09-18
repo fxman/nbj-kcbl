@@ -11,7 +11,7 @@
 				var str='';
 				for(var i=0;i<dataList.length;i++){
 					var checkContentDescr=dataList[i].content;
-					str +='<li class="mui-table-view-cell"><div class="mui-input-row mui-radio mui-left"><label>'+checkContentDescr+'</label><input name="miaoshu" type="radio"></div></li>';
+					str +='<li class="mui-table-view-cell"><div class="mui-input-row mui-radio mui-left"><label >'+checkContentDescr+'</label><input name="miaoshu" value = "'+dataList[i].id+'" type="radio"></div></li>';
 				}
 				
 			    $("#checkDescrUl").append(str);
@@ -27,7 +27,9 @@
 function sureSelectCheckContentDescr(){
 	$("#sure").click(function(){
 		var checkContentDescr=$(":checked").siblings("label").text();
+		var checkContentId=$(":checked").siblings("input").val();
 		setCookie("checkContentDescr",checkContentDescr);
+		setCookie("checkContentId",checkContentId);
 		window.location.href="/kcbl-web-kcbl/blxx/toAddResult.action";
 	});
 }

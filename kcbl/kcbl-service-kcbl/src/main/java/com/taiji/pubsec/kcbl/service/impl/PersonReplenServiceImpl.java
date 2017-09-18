@@ -1,6 +1,8 @@
 package com.taiji.pubsec.kcbl.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,8 +18,10 @@ public class PersonReplenServiceImpl implements PersonReplenService{
 	private Dao<Person,String> dao;
 
 	@Override
-	public List<Person> findCheckManbyUnitIds(String[] unitIds) {
-		String sql="from Person where id in (?)";
-		return this.dao.findAllByParams(Person.class, sql, new Object[]{unitIds});
+	public List<Person> findCheckManbyUnitIds(List<String> unitIds) {
+		String sql="from Person where organization.id in (:unitIds)";
+		Map<String ,Object> hasMap =  new HashMap<String ,Object>(0);
+		hasMap.put("unitIds", unitIds);
+		return this.dao.findAllByParams(Person.class, sql, hasMap);
 	}
 }

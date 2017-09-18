@@ -15,11 +15,11 @@ public  interface  BeCheckUnitService {
 	 */
 	BeCheckedUnit findBeCheckedUnitServiceById(String id);
 	/**
-	 * 根据所属行业查询被检查单位
+	 * 根据所属行业,及输入条件查询被检查单位
 	 * @param sshy
 	 * @return
 	 */
-	List<BeCheckedUnit> findBecheckedUnitServiceBySshy(String sshy);
+	List<BeCheckedUnit> findBecheckedUnitServiceBySshy(String sshy,String partyUnit);
 	/**
 	 * 根据单位名称查找被检查单位
 	 * @param name
@@ -33,4 +33,13 @@ public  interface  BeCheckUnitService {
 	 */
 	DictionaryItem findBeCheckedUnitserviceByName(String unitName);
 	
+	/**
+	 * 查询所属行业
+	 */
+	List<BeCheckedUnit> findAllSshy();
+	 /**
+	  * 根据输入名称查单位
+	  * @return
+	  */
+	List<BeCheckedUnit> findAllByConditons(String name);
 }

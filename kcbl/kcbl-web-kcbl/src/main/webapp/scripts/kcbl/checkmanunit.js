@@ -23,6 +23,7 @@ var flagcode=true;
 		    }
 		});
 		sureSelectUnit();
+		cancel();
 	});
 })(jQuery);
 function changeActive(id){
@@ -60,3 +61,13 @@ function selectUnit(){
 	setCookie("unitId",unitIds);
 	setCookie("unitName",unitNames);
 }
+function cancel(){
+	$("#cancel").click(function(){
+		$(".app-active").each(function(){
+			  $(this).removeClass("app-active")
+		});	
+	});
+	
+	
+}
+

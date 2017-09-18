@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#1d8dfb">
-<title>笔录勘察系统</title>
+<title>内保检查系统</title>
 <!--APP框架mui.css-->
 <link href="<%=context%>/common/library/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="<%=context%>/common/library/MUI/css/mui.min.css" rel="stylesheet" />
@@ -25,13 +25,13 @@
 </head>
 <body>
 <header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="<%=context%>/blxx/toblCheck.action"></a>
             <h1 class="mui-title">检查人单位</h1>
 </header>
 
 <div class="mui-bar app-bottom-caozuo">
         <div class="mui-pull-left">
-            <a href="#">取消</a>
+            <a href="#" id="cancel">取消</a>
         </div>
         <div class="mui-pull-right">
             <a href="#" id="sure">确定</a>
@@ -43,13 +43,6 @@
     <ul id="unitlist"class="mui-table-view mui-table-view-chevron app-table-view">
     </ul>
 </div>
-
-
-
-
-
-
-
 
 <script src="<%=context%>/common/library/MUI/js/mui.min.js"></script>
 <script src="<%=context%>/scripts/common/cookiecommon.js"></script>
@@ -122,8 +115,6 @@
             obj.className = obj.className.replace(reg, '');  
         }  
     }
-
-
 </script>
 <script src="<%=context%>/scripts/kcbl/checkmanunit.js"></script>
 </body>

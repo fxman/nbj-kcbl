@@ -9,5 +9,5 @@ import com.taiji.pubsec.businesscomponent.organization.model.Person;
  *
  */
 public interface PersonReplenService  {
-	List<Person> findCheckManbyUnitIds(String[] unitIds);
+	List<Person> findCheckManbyUnitIds(List<String> unitIds);
 }

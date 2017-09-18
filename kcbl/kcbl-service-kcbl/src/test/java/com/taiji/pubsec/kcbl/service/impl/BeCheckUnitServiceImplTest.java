@@ -46,8 +46,8 @@ public class BeCheckUnitServiceImplTest {
     
 	@Test
 	public void testFindBeCheckedUnitServiceBySshy() {
-		List<BeCheckedUnit> list = beCheckUnitServiceImpl.findBecheckedUnitServiceBySshy("大型工矿企业");
-	    System.out.println(list.get(0).getBelongpolicy());
+//		List<BeCheckedUnit> list = beCheckUnitServiceImpl.findBecheckedUnitServiceBySshy("大型工矿企业");
+//	    System.out.println(list.get(0).getBelongpolicy());
 	}
 	@Test
 	public void test2(){

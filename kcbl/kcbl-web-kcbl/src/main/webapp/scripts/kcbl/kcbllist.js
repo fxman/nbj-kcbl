@@ -1,6 +1,7 @@
 (function($){
 	"use strict";
 	$(document).ready(function(){
+		clearAllCookie();
 		$.ajax({
 			url:context+"/blxx/queryAllBlxx.action",
 			type:'post',
@@ -11,8 +12,6 @@
 				var str='';
 				$("#listLength").html(dataList.length);
 				for(var i=0;i<dataList.length;i++){
-					
-					
 					str+='<a href="'+context+'/blxx/toblDetail.action" id="'+dataList[i].blxxId+'" onclick="setId(this.id)">'
 						+'<div class="mui-input-group marb-12 list">'
 						+'<div class="mui-row list-row">'
@@ -40,43 +39,43 @@
 						+'<span class="mui-icon mui-icon-forward arr-right"></span>'
 						+'</div>'
 						+'</a>'
-					
-				
 				}
 				$("#blxxList").append(str);
-				
-			
 			},
 			error:function(){
 				alert('查询检查人失败');
 			}
 		});
-		var hy=$("#hangyeType").val();
-		var bdcdwmc=$("#bdcdwmc").val();
-		var startTime=$("#startTime").val();
-		var endTime=$("#endTime").val();
-		var iscoreunit='';
-		document.getElementById("coreunit").addEventListener("toggle",function(event){
-			if(event.detail.isActive){
-				iscoreunit='是';
-			}else{
-				iscoreunit='否';
-			}
-		});
+		
 		$("#searchblxx").click(function(){
+			var blh=$("#blh").val();
+			var industtryType = $("#hangyeType").val();
+			var startTime = $("#startTime").val();
+			var endTime = $("#endTime").val();
+			var iscoreunit = "";
+			mui('#coreunit').each(function() {//循环所有toggle
+			    if(this.classList.contains('mui-active') ){
+						iscoreunit='是';
+					}else{
+						iscoreunit='否';
+			    }
+			});
 			$.ajax({
 				url:context+"/blxx/queryBlxxbyCondition.action",
-				data:{'hy':belongIndustry,'bdcdwmc':checkUnit,'startTime':startTime,'endTime':endTime,'iscoreunit':iscoreunit},
+				data:{
+					'blBean.blcode':blh,
+					'blBean.belongUnit':industtryType,
+					'blBean.startTime':startTime,
+					'blBean.endTime':endTime,
+					'blBean.isCoreUnit':iscoreunit
+				},
 				type:'post',
 				dataType:'json',
 				success:function(data){
 					var dataList=data.blxxList;
-					
 					var str='';
 					$("#listLength").html(dataList.length);
 					for(var i=0;i<dataList.length;i++){
-						
-						
 						str+='<a href="'+context+'/blxx/toblDetail.action" id="'+dataList[i].blxxId+'" onclick="setId(this.id)">'
 							+'<div class="mui-input-group marb-12 list">'
 							+'<div class="mui-row list-row">'
@@ -104,12 +103,9 @@
 							+'<span class="mui-icon mui-icon-forward arr-right"></span>'
 							+'</div>'
 							+'</a>'
-						
-					
 					}
-					$("#blxxList").append(str);
-					
-				
+					$("#blxxList").html(str);
+					reset();
 				},
 				error:function(){
 					alert('查询检查人失败');
@@ -127,10 +123,16 @@ function sureSelectUnit(){
 function selectUnit(){
 	var unitId = $(".app-active").attr("unitId");
 	var unitName=$(".app-active").children("a").html();
-	//alert(unitId);
 	setCookie("unitId",unitId);
 	setCookie("unitName",unitName);
 }
 function setId(id){
 	setCookie("blxxId",id);
+}
+
+function reset(){
+	delCookie("startTime");
+	delCookie("endTime");
+	$("#hangyeType").val("");
+	$("#blh").val("");
 }
