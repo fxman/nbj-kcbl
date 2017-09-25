@@ -2,18 +2,15 @@ package com.taiji.pubsec.kcbl.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -83,7 +80,7 @@ public class BlxxModel implements Serializable{
    @Column(length=20)
    private String status;// 检查状态  暂存 完成
    
-   @Column(name="blh",length=20)
+   @Column(name="blh",length=40)
    private String blCode;
    
 public String getId() {

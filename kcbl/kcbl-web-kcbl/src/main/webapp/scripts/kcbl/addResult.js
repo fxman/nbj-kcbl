@@ -4,10 +4,10 @@
 		var checkResult='';
 		document.getElementById("checkResult").addEventListener("toggle",function(event){
 			if(event.detail.isActive){
-				checkResult='存在安全隐患';
+				checkResult='1'; //存在安全隐患
 				this.parentNode.parentNode.firstChild.innerHTML=checkResult;
 			}else{
-				checkResult='不存在安全隐患';
+				checkResult='0'//'不存在安全隐患';
 				this.parentNode.parentNode.firstChild.innerHTML=checkResult;
 			}
 			setCookie("isSafety",checkResult);
@@ -74,13 +74,14 @@
 			    +"经询问，"+arr[0]+"称"
 			    +$("#contentDescrWrite").val();
             setCookie("checkProcessAndResult",checkProcessAndResult);
-            setCookie("contentDescrWrite",contentDescrWrite);
+			setCookie('contentDescr',$("#contentDescrWrite").val());
 		});
 	});
 	
 })(jQuery);
 function initData(){
 	$("#checkAccor").val(getCookie("content"));
+	setCookie("isSafety","1");
 	//取检查人
 	var checkman = getCookie("checkManName");
 	var  checkManArr = checkman.split(',');

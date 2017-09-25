@@ -34,6 +34,9 @@ public class CheckDetailResult implements Serializable {
 	
 	@Column(name="issafety")
 	private String issafety;//是否存在安全隐患 1 是  0 否
+	
+	@Column(name="yhm")
+	private String userName;
 
 	public String getId() {
 		return id;
@@ -65,6 +68,22 @@ public class CheckDetailResult implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getIssafety() {
+		return issafety;
+	}
+
+	public void setIssafety(String issafety) {
+		this.issafety = issafety;
 	}
 	
 

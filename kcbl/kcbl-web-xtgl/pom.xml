@@ -62,48 +62,6 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- 打印组件↓ -->
-		<dependency>
-			<groupId>com.taiji.pubsec.common</groupId>
-			<artifactId>doc-msoffice-impl-service</artifactId>
-			<version>0.2.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>3.10-FINAL</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-excelant</artifactId>
-			<version>3.10-FINAL</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>3.10-FINAL</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml-schemas</artifactId>
-			<version>3.10-FINAL</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>ooxml-schemas</artifactId>
-			<version>1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-scratchpad</artifactId>
-			<version>3.10-FINAL</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.xmlbeans</groupId>
-			<artifactId>xmlbeans</artifactId>
-			<version>2.6.0</version>
-		</dependency>
-		<!-- 打印组件↑ -->
 		<!-- office -->
 		<dependency>
 		<groupId>com.taiji.pubsec.basiscomponents</groupId>

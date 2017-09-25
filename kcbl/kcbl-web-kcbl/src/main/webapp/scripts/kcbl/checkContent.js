@@ -15,7 +15,15 @@ var flagcode=true;
 				var dataList=data.checkContentList;
 				var str='';
 				for(var i=0;i<dataList.length;i++){
-					str +='<li class="mui-table-view-cell mui-collapse"  ><a class="mui-navigate-right" href="#" id="'+dataList[i].code+'" onclick="getSubItem(this.id)">'+dataList[i].name+'</a><ul class="mui-table-view mui-table-view-chevron"></ul></li>';
+					str +='<li class="mui-table-view-cell mui-collapse"  ><a class="mui-navigate-right" href="#" id="'+dataList[i].code+'">'
+					+dataList[i].parentName+'</a><ul class="mui-table-view mui-table-view-chevron">';
+					var dicLists = dataList[i].dicItems;
+					var str1="";
+					for(var j=0;j<dicLists.length;j++){
+						str1 +='<li class="mui-table-view-cell" id="'+dicLists[j].id+'"  description="'+dicLists[j].description+'" onclick="changeActive(this.id)"><a class="mui-navigate-right">'+dicLists[j].name+'</a>'
+			                +'</li>';
+					}
+					str += str1+'</ul></li>';
 				}
 			    $("#content1Ul").append(str);
 			    
@@ -27,26 +35,6 @@ var flagcode=true;
 		sureSelectContent();
 	});
 })(jQuery);
-function getSubItem(id){
-		$.ajax({
-			url:context+"/blxx/initSubContent.action",
-			data:{'parentItemCode':id,'state':"1"},
-			type:'POST',
-			dataType:'json',
-			success:function(data){
-				var dataList=data.subContentList;
-				var str ='';
-				for(var i=0;i<dataList.length;i++){
-					str +='<li class="mui-table-view-cell" id="'+dataList[i].id+'"  description="'+dataList[i].description+'" onclick="changeActive(this.id)"><a class="mui-navigate-right">'+dataList[i].name+'</a>'
-		                +'</li>';
-				}
-				$("#"+id).siblings("ul").html(str);
-			},
-			error:function(){
-				alert("加载内容子项失败");
-			}
-		  });
-}
 function changeActive(id){
 	
 	$("#"+id).addClass("app-active");

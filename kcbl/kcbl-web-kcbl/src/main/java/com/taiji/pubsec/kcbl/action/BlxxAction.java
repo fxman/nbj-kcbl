@@ -1,6 +1,7 @@
 package com.taiji.pubsec.kcbl.action;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,39 +9,56 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryItem;
 import com.taiji.pubsec.businesscomponent.dictionary.service.IDictionaryItemService;
 import com.taiji.pubsec.businesscomponent.dictionary.service.IDictionaryTypeService;
+import com.taiji.pubsec.businesscomponent.organization.model.Account;
 import com.taiji.pubsec.businesscomponent.organization.model.Person;
 import com.taiji.pubsec.businesscomponent.organization.model.Unit;
+import com.taiji.pubsec.businesscomponent.organization.service.AccountServiceImpl;
 import com.taiji.pubsec.businesscomponent.organization.service.IPersonService;
 import com.taiji.pubsec.businesscomponent.organization.service.IUnitService;
+import com.taiji.pubsec.common.tool.base64.Base64CryptFmtUtil;
 import com.taiji.pubsec.common.tools.doc.core.model.ReportConfig;
+import com.taiji.pubsec.common.tools.doc.msoffice.impl.poi.pojo.ImagePojo;
+import com.taiji.pubsec.common.tools.doc.msoffice.impl.poi.pojo.ImageType;
 import com.taiji.pubsec.common.tools.doc.msoffice.impl.poicr.builder.PoiCrReportBuilder;
 import com.taiji.pubsec.common.tools.doc.msoffice.impl.poicr.reporter.PoiCrReport;
+import com.taiji.pubsec.kcbl.bean.BeCheckUnitBean;
+import com.taiji.pubsec.kcbl.bean.BelongIndustryBean;
 import com.taiji.pubsec.kcbl.bean.BlListBean;
 import com.taiji.pubsec.kcbl.bean.BlxxDetailBean;
+import com.taiji.pubsec.kcbl.bean.CheckContentBean;
 import com.taiji.pubsec.kcbl.generatenum.service.IGenerateNumService;
 import com.taiji.pubsec.kcbl.model.BeCheckedUnit;
+import com.taiji.pubsec.kcbl.model.BelongIndustry;
 import com.taiji.pubsec.kcbl.model.BlxxModel;
 import com.taiji.pubsec.kcbl.model.CheckDetailResult;
 import com.taiji.pubsec.kcbl.model.FileInfo;
+import com.taiji.pubsec.kcbl.service.AccountTempService;
 import com.taiji.pubsec.kcbl.service.BeCheckUnitService;
+import com.taiji.pubsec.kcbl.service.BelongIndustyService;
 import com.taiji.pubsec.kcbl.service.BlglService;
 import com.taiji.pubsec.kcbl.service.CheckDetailResultService;
 import com.taiji.pubsec.kcbl.service.FileService;
@@ -79,6 +97,10 @@ public class BlxxAction extends ReturnMessageAction{
 	private UnitReplenService unitReplenService;
 	@Resource
 	private FileService fileService;
+	@Resource
+	private BelongIndustyService belongIndustyService;
+	@Resource 
+	private  AccountTempService accountTempService;
 	private BlxxDetailBean blxxDetailBean;
 	private BlListBean blxxBean;
 	private String checkUnit;
@@ -95,7 +117,7 @@ public class BlxxAction extends ReturnMessageAction{
 	private String sshy;
 	private String dicTypeCode;
 	private String state;
-	private List<DictionaryItem> checkContentList;
+	private List<CheckContentBean> checkContentList;
 	private List<DictionaryItem> subContentList;
 	private String parentItemCode; 
 	private List<BlxxModel> blxxModelList;
@@ -117,9 +139,28 @@ public class BlxxAction extends ReturnMessageAction{
 	private String fileSignFileName;
 	private String fileId;
 	private List<BeCheckedUnit> beCheckLits;
+	private List<BelongIndustryBean> belongIndustryListBean;
+	private String account;
+	private String password;
+	public String login(){
+		try{
+			Account acc = accountTempService.findByNameAndPassword(account, password);
+			if(acc != null){
+				Map<String,Object> accountMap = ActionContext.getContext().getSession();
+				accountMap.put("userName", acc.getAccountName());
+				accountMap.put("personName", acc.getPerson().getName());
+				return SUCCESS;
+			}else{
+				return ERROR;
+			}
+		}catch(Exception e){
+			return ERROR;
+		}
+	}
 	public String findAllBlxxList(){
+		Map<String,Object> accountMap = ActionContext.getContext().getSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分");
-         blxxModelList=blglServiceImpl.findAllBlxxList();
+         blxxModelList=blglServiceImpl.findAllBlxxList(accountMap.get("personName").toString());
          blxxList=new ArrayList<BlListBean>();
 		for(BlxxModel blxx:blxxModelList){
 			blxxBean=new BlListBean();
@@ -162,7 +203,9 @@ public class BlxxAction extends ReturnMessageAction{
 	}
 	public String queryBlxxbyCondition(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月DD日 HH时mm分");
-		List<BlxxModel> blxxModelList = blglServiceImpl.findBlxxList(blBean.getBlcode(), 
+		Map<String,Object> accountMap = ActionContext.getContext().getSession();
+		List<BlxxModel> blxxModelList = blglServiceImpl.findBlxxList(accountMap.get("personName").toString(),
+				blBean.getBlcode(), 
 				blBean.getIsCoreUnit(), blBean.getBelongUnit(),
 				blBean.getStartTime(), blBean.getEndTime());
 		blxxList = new ArrayList<BlListBean>();
@@ -178,6 +221,7 @@ public class BlxxAction extends ReturnMessageAction{
 		return SUCCESS;
 	}
 	public String saveblxx() throws IOException, ParseException{
+		Map<String,Object> accountMap = ActionContext.getContext().getSession();
 		 SimpleDateFormat sdfNew = new SimpleDateFormat("yyyyMMdd");
 		 String[]  checkUnits = blxxDetailBean.getCheckUnit().split(",");
 		 Unit  di = unitReplenService.findUnitbyName(checkUnits[0]);
@@ -186,35 +230,48 @@ public class BlxxAction extends ReturnMessageAction{
 		 String numStr = String.format("%05d",Integer.parseInt(num)+1);
 		 String blh = di.getRemark()+sdfNew.format(new Date()) + numStr;
 		 String blid =  this.saveBlMethod(Constant.BLSTATUS_BAOCUN,blh);
+		 CheckDetailResult cdr = new CheckDetailResult();
+		 cdr.setContent(blxxDetailBean.getCheckResult());
+		 cdr.setUserName(accountMap.get("userName").toString());
+		 cdr.setUpdatetime(new Date());
+		 cdr.setIssafety(blxxDetailBean.getIssafety());
+		 this.checkDetailResultService.saveOrUpdateCheckDetailResult(cdr);
 		 //保存附件 附件的类型为2 签名的类型为1  生成的文档类型为0
+		 InputStream isf = null;
 		 if(file != null ){
-			 InputStream isf = new FileInputStream(file);
+			 isf = new FileInputStream(file);
 			 int  index = fileFileName.indexOf(".");
-			 this.uploadDoc(isf, blh+"f"+fileFileName.substring(index,fileFileName.length()),blid,"2");
 		 }
 		//保存签名
+		 InputStream iss = null;
+		 String suffix = "";
 		 if(fileSign != null){
-			 InputStream iss = new FileInputStream(fileSign);
+			 iss = new FileInputStream(fileSign);
 			 int  index = fileSignFileName.indexOf(".");
-			 this.uploadDoc(iss, blh+"s"+fileSignFileName.substring(index,fileSignFileName.length()),blid,"1");
+			 suffix = fileSignFileName.substring(index,fileSignFileName.length());
+			//生成笔录
+			 InputStream isbl = this.generateBl();
+			 this.uploadDoc(isf, blh+"f"+fileFileName.substring(index,fileFileName.length()),blid,"2");
+			 this.uploadDoc(iss, blh+"s"+suffix,blid,"1");
+			 this.uploadDoc(isbl, blh+".docx" ,blid,"0");
 		 } 
-		 //生成笔录
-		 InputStream isbl = this.generateBl();
-		 this.uploadDoc(isbl, blh+".docx" ,blid,"0");
 		 return SUCCESS;
 	}
 	
 	//返回一个输入流，作为一个客户端来说是一个输入流，但对于服务器端是一个 输出流  
-    public InputStream getDownloadFile() throws Exception   {
+    public InputStream getDownloadFile() throws IOException   {
+    	InputStream inputStream = null;
+    	ServletOutputStream servletOutputStream = null;
+    	try {
         FileInfo  fileInfo = fileService.findFileByResourceId(blxxId, "0");//表示下载笔录文档
     	HttpServletResponse response= ServletActionContext.getResponse();
-    	ServletOutputStream servletOutputStream = null;
-    	InputStream inputStream = null;
     	String filePath = fileInfo.getFilePath() + File.separatorChar + fileInfo.getSaveName();
     	File file = new File(filePath);
     	response.reset();
-		response.setHeader("Content-Disposition", "attachment;filename="
-				+ URLEncoder.encode(fileInfo.getSaveName(), "UTF-8"));
+		
+			response.setHeader("Content-Disposition", "attachment;filename="
+					+ URLEncoder.encode(fileInfo.getSaveName(), "UTF-8"));
+		
 		response.setHeader("Content-Length", String.valueOf(file.length()));
 		response.setContentType("application/octet-stream");
 		inputStream = new BufferedInputStream(new FileInputStream(file));
@@ -225,7 +282,17 @@ public class BlxxAction extends ReturnMessageAction{
 			servletOutputStream.write(buffer, 0, byteRead);
 		}
 		fileName = fileInfo.getSaveName();
-		return inputStream;
+    	} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}finally{
+			if(inputStream != null ){
+				inputStream.close();
+			}
+			if(servletOutputStream != null){
+				servletOutputStream.close();
+			}
+		}
+		return null;
     }
 	/**
 	 * 暂存笔录
@@ -250,7 +317,22 @@ public class BlxxAction extends ReturnMessageAction{
 		return SUCCESS;
 	}
 	public String initPartyUnit(){
-		beCheckLits = becheckUnitService.findAllSshy();
+		List<BelongIndustry> lis  = belongIndustyService.findAll();
+		belongIndustryListBean = new ArrayList<BelongIndustryBean>();
+		for(BelongIndustry bi : lis){
+			BelongIndustryBean bib = new BelongIndustryBean();
+			List<BeCheckUnitBean> bcubList = new ArrayList<BeCheckUnitBean>();
+			bib.setId(bi.getId());
+			bib.setName(bi.getName());
+			for(BeCheckedUnit bcu : bi.getUnits()){
+				BeCheckUnitBean   bcub = new BeCheckUnitBean();
+				bcub.setId(bcu.getId());
+				bcub.setBdcdwmc(bcu.getBdcdwmc());
+				bcubList.add(bcub);
+			}
+			bib.setBeCheckUnits(bcubList);
+			belongIndustryListBean.add(bib);
+		}
 		return SUCCESS;
 	}
 	public String initUnit(){
@@ -269,7 +351,17 @@ public class BlxxAction extends ReturnMessageAction{
 		return SUCCESS;
 	}
 	public String initCheckContent(){
-		checkContentList = dictionaryItemService.findDicItemsByTypeCode(dicTypeCode, state);
+		checkContentList =  new ArrayList<CheckContentBean>();
+		 List<DictionaryItem> items = dictionaryItemService.findDicItemsByTypeCode(dicTypeCode, state);
+	       for(DictionaryItem item : items){
+	    	   CheckContentBean ccb = new CheckContentBean();
+	    	   ccb.setParentId(item.getId());
+	    	   ccb.setParentName(item.getName());
+	    	   ccb.setCode(item.getCode());
+	    	   subContentList = dictionaryItemService.findDicItemsByParentCode(item.getCode(), "1");
+	    	   ccb.setDicItems(subContentList);
+	    	   checkContentList.add(ccb);
+	       }
 		return SUCCESS;
 	}
 	public String getSubContent(){
@@ -277,7 +369,10 @@ public class BlxxAction extends ReturnMessageAction{
 		return SUCCESS;
 	}
 	public String initCheckDescr(){
-		checkContentDescrList=checkDetailResultService.findBlxxContentDescr();
+		Map<String,Object> accountMap = ActionContext.getContext().getSession();
+		String userName = accountMap.get("userName").toString();
+		checkContentDescrList=checkDetailResultService.findBlxxContentDescr(
+				userName ,this.blBean.getIssafety());
 		return SUCCESS;
 	}
 	public String toPartyUnit(){
@@ -383,12 +478,17 @@ public class BlxxAction extends ReturnMessageAction{
 	 * 生成笔录
 	 * @return
 	 * @throws ParseException 
+	 * @throws IOException 
 	 */
 	private InputStream generateBl() throws ParseException{
 		SimpleDateFormat sdf =  new SimpleDateFormat("yyyy年MM月dd日 HH时mm分");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat sdfend =  new SimpleDateFormat("yyyy年MM月dd日");
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("n1", sdf.parse(blxxDetailBean.getStartTime()));
-		map.put("n2", sdf.parse(blxxDetailBean.getEndTime()));
+		Date startDate = df.parse(blxxDetailBean.getStartTime());
+		map.put("n1", sdf.format(startDate));
+		Date endDate = df.parse(blxxDetailBean.getEndTime());
+		map.put("n2", sdf.format(endDate));
 		map.put("n3", blxxDetailBean.getDetailAddress());
 		String checkMans = blxxDetailBean.getCheckMan();
 		String[] checkMan = checkMans.split(",");
@@ -398,17 +498,17 @@ public class BlxxAction extends ReturnMessageAction{
 			checkManstr += " " + arr[0];
 		}
 		map.put("n4",checkMans);
-		map.put("n5", blxxDetailBean.getCheckUnit());
+		//map.put("n5", blxxDetailBean.getCheckUnit());
 		map.put("n6", blxxDetailBean.getBeCheckedUnit());
 		map.put("n7", blxxDetailBean.getPartyMan());
 		map.put("n8", blxxDetailBean.getPocessAndResult());
 		map.put("n9", checkManstr);
-		map.put("n10", sdf.format(new Date()).toString());
+		map.put("n10", sdfend.format(new Date()).toString());
 		if(null != blxxDetailBean.getPartyMan() &&  !blxxDetailBean.getPartyMan().isEmpty()){
 			String[] a = blxxDetailBean.getPartyMan().split("\\s+");//匹配空格
 			map.put("n11", a[0]);
 		}
-		map.put("n12",sdf.format(new Date()).toString());
+		map.put("n12",sdfend.format(new Date()).toString());
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		map1.put("a1", map);
 		System.out.println(this.getRequest().getSession().getServletContext()
@@ -424,6 +524,15 @@ public class BlxxAction extends ReturnMessageAction{
 		poiCrReportBuilder.build(report);
 		InputStream is = report.generateReportInputStream();
 		return is;
+	}
+	private static byte[] toByteArray(InputStream input) throws IOException {
+	    ByteArrayOutputStream output = new ByteArrayOutputStream();
+	    byte[] buffer = new byte[4096];
+	    int n = 0;
+	    while (-1 != (n = input.read(buffer))) {
+	        output.write(buffer, 0, n);
+	    }
+	    return output.toByteArray();
 	}
 	/*get&set方法*/
 	public String getUnitIds() {
@@ -511,12 +620,6 @@ public class BlxxAction extends ReturnMessageAction{
 	}
 	public void setState(String state) {
 		this.state = state;
-	}
-	public List<DictionaryItem> getCheckContentList() {
-		return checkContentList;
-	}
-	public void setCheckContentList(List<DictionaryItem> checkContentList) {
-		this.checkContentList = checkContentList;
 	}
 	public String getDicTypeCode() {
 		return dicTypeCode;
@@ -661,6 +764,31 @@ public class BlxxAction extends ReturnMessageAction{
 	}
 	public void setBeCheckLits(List<BeCheckedUnit> beCheckLits) {
 		this.beCheckLits = beCheckLits;
+	}
+	public List<BelongIndustryBean> getBelongIndustryListBean() {
+		return belongIndustryListBean;
+	}
+	public void setBelongIndustryListBean(
+			List<BelongIndustryBean> belongIndustryListBean) {
+		this.belongIndustryListBean = belongIndustryListBean;
+	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public List<CheckContentBean> getCheckContentList() {
+		return checkContentList;
+	}
+	public void setCheckContentList(List<CheckContentBean> checkContentList) {
+		this.checkContentList = checkContentList;
 	}
 
 }

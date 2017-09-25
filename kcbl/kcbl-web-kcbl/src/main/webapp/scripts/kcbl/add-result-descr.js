@@ -4,6 +4,9 @@
 		var unitId=getCookie("unitId");
 		$.ajax({
 			url:context+"/blxx/initCheckDescr.action",
+			data:{
+				"blBean.issafety" :getCookie("isSafety")
+			},
 			type:'POST',
 			dataType:'json',
 			success : function(data){

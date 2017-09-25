@@ -2,6 +2,7 @@ package com.taiji.pubsec.kcbl.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +22,16 @@ public class BlglServiceImpl implements BlglService {
 	private Dao<BlxxModel, String> dao;
 
 	@Override
-	public List<BlxxModel> findBlxxList(String blh, String sfhxdw, String sshy,
+	public List<BlxxModel> findBlxxList(String userName , String blh, String sfhxdw, String sshy,
 			String startTime, String endTime) {
 		StringBuilder xql = new StringBuilder(
 				"select blxx FROM BlxxModel blxx , BeCheckedUnit bcu  WHERE blxx.becheckedunit = bcu.id ");
 		Map<String, Object> xqlMap = new HashMap<String, Object>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		if(userName != null ){
+			xql .append( " and blxx.checkpersoncode like :userName ");
+			xqlMap.put("userName", "%" +userName+ "%");
+		}
 		if (StringUtils.isNotEmpty(blh)) {
 			xql.append(" and blxx.blCode like :blh ");
 			xqlMap.put("blh", "%" + blh + "%");
@@ -36,7 +41,7 @@ public class BlglServiceImpl implements BlglService {
 			xqlMap.put("sfhxdw", sfhxdw);
 		}
 		if (StringUtils.isNotEmpty(sshy)) {
-			xql.append("and bcu.belongIndustry = :sshy ");
+			xql.append("and bcu.belongIndustry.name = :sshy ");
 			xqlMap.put("sshy", sshy);
 		}
 		
@@ -58,10 +63,16 @@ public class BlglServiceImpl implements BlglService {
 	}
 
 	@Override
-	public List<BlxxModel> findAllBlxxList() {
+	public List<BlxxModel> findAllBlxxList(String userName) {
 		String sql = "from BlxxModel blxx where blCode is not null and 1=?";
+		List<Object> params =new ArrayList<Object>();
+		params.add(1);
+		if(userName != null ){
+			sql += " and checkpersoncode like ? ";
+			params.add("%" + userName + "%");
+		}
 		return this.dao.findAllByParams(BlxxModel.class, sql,
-				new Object[] { 1 });
+				params.toArray());
 	}
 
 	@Override

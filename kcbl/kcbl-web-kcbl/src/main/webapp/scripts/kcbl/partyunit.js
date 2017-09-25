@@ -44,6 +44,12 @@ function selectCheckMan() {
 	var currentUnitname = $(".app-active").children("a").text();
 	setCookie("currentUnitname", currentUnitname);
 }
+function cancel(){
+	$(".mui-table-view-cell").each(function(){
+	      $(this).removeClass("app-active");
+	  });
+	window.location.href = "/kcbl-web-kcbl/blxx/toblCheck.action";
+}
 function initSshy() {
 	$.ajax({
 				url : context + "/blxx/initPartyUnit.action",
@@ -53,17 +59,23 @@ function initSshy() {
 				type : 'POST',
 				dataType : 'json',
 				success : function(data) {
-					var dataList = data.beCheckLits;
+					var dataList = data.belongIndustryListBean;
 					var str = "";
 					for (var i = 0; i < dataList.length; i++) {
 							str += '<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#" '
 									+ 'id="'
 									+ dataList[i].id
-									+ '" name='+dataList[i].belongIndustry+' onclick =findSubItems(this.id,this.name)>'
-									+ dataList[i].belongIndustry
-									+ '</a>'
-									+ '<ul class="mui-table-view mui-table-view-chevron" id= "ul'
-									+ dataList[i].id + '"></ul></li>';
+									+ '" name='+dataList[i].name+'>'
+									+ dataList[i].name
+									+ '</a> <ul class="mui-table-view mui-table-view-chevron" >';
+							var str1 = "";
+							for(var j = 0; j < dataList[i].beCheckUnits.length; j++){
+								var dataCheckUnit = dataList[i].beCheckUnits[j];
+								str1 += '<li class="mui-table-view-cell" id ="'+ dataCheckUnit.id+'" '
+								        +'onclick="changeActive(this.id)"><a class="mui-navigate-right" href="javascript:void(0)">'
+									    + dataCheckUnit.bdcdwmc + '</a></li>';
+							}
+							str +=	str1 + '</ul></li>'
 					}
 					$("#ulUnitList").html(str);
 				},
@@ -72,28 +84,4 @@ function initSshy() {
 				}
 			});
 }
-function findSubItems(id,belongIndustry) {
-	var sshy = $(this).children("a").html();
-	var partyUnit=$("#partyName").val();
-	$
-			.ajax({
-				url : context + "/blxx/finsubPartyUnit.action",
-				data : {
-					'sshy' : belongIndustry,
-					'partyUnit':partyUnit
-				},
-				type : 'POST',
-				dataType : 'json',
-				success : function(data) {
-					var str = "";
-					var dataList = data.beCheckLits;
-					for (var i = 0; i < dataList.length; i++) {
-						str += '<li class="mui-table-view-cell" id ="'
-								+ dataList[i].id
-								+ '"  onclick="changeActive(this.id)"><a class="mui-navigate-right" href="#">'
-								+ dataList[i].bdcdwmc + '</a></li>';
-					}
-					$("#ul" + id).html(str);
-				},
-			});
-}
+

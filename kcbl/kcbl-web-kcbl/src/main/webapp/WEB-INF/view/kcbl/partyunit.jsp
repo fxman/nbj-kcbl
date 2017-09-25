@@ -35,7 +35,7 @@
 
 <div class="mui-bar app-bottom-caozuo">
         <div class="mui-pull-left">
-            <a href="#">取消</a>
+            <a href="#" onclick="cancel()">取消</a>
         </div>
         <div class="mui-pull-right">
             <a href="#" onclick="sureSelectCheckMan()">确定</a>
@@ -45,14 +45,9 @@
 
 
 <div class="mui-content">
-
     <p class="app-padded2">单位类型</p>
-
     <ul class="mui-table-view mui-table-view-chevron app-table-view" id="ulUnitList">
     </ul>
-
-
-           
 </div>
 
 

@@ -74,6 +74,7 @@
 				success:function(data){
 					var dataList=data.blxxList;
 					var str='';
+					delCookie('hangyeType')
 					$("#listLength").html(dataList.length);
 					for(var i=0;i<dataList.length;i++){
 						str+='<a href="'+context+'/blxx/toblDetail.action" id="'+dataList[i].blxxId+'" onclick="setId(this.id)">'

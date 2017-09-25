@@ -17,8 +17,14 @@ public class CheckDetailResultServiceImpl implements CheckDetailResultService {
 	private Dao<CheckDetailResult,String> dao;
 	
 	@Override
-	public List<CheckDetailResult> findBlxxContentDescr() {
-		return this.dao.findAll(CheckDetailResult.class);
+	public List<CheckDetailResult> findBlxxContentDescr(String userName,String issafety) {
+		String sql = "from CheckDetailResult where userName = ? and issafety=?  order by updatetime desc  limit 0 , 10 ";
+		return this.dao.findAllByParams(CheckDetailResult.class, sql, new Object[]{userName, issafety});
+	}
+	@Override
+	public String saveOrUpdateCheckDetailResult(CheckDetailResult cdr) {
+		this.dao.save(cdr);
+		return cdr.getId();
 	}
 
 }

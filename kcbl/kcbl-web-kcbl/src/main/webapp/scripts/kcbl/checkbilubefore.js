@@ -54,8 +54,16 @@ function putDataCookie(){
  * 打印
  */
 $(document).on('click','#printBl',function(){
-	$("#formId").attr("action",'/kcbl-web-kcbl/blxx/printBlxx.action');
-	document.getElementById('formId').submit();
+	 var options = {   
+	            type: 'POST',  
+	            url: '/kcbl-web-kcbl/blxx/printBlxx.action',  
+	            success:showResponse,    
+	            dataType: 'json',  
+	            error : function(xhr, status, err) {              
+	                alert("操作失败");  
+	            }  
+	        };   
+	      $("#formId").ajaxSubmit(options);   
 });
 /**
  * 暂存
@@ -75,3 +83,16 @@ $(document).on('click','#saveBl',function(){
 function findId(id){
 	return document.getElementById(id);
 };
+
+function showResponse(responseText, statusText, xhr, $form){      
+    if(statusText == "success"){  
+      window.location.href="/kcbl-web-kcbl/blxx/export.action?fileName="+responseText.fileName;
+    } else {  
+        alert(responseText.msg);  
+    }     
+}  
+function fileSelected(){
+	var oFile = document.getElementById('image_file').files[0];
+	document.getElementById('showImage').value= oFile.name;
+	
+}

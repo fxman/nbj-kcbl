@@ -5,6 +5,10 @@
 		<action name="toblList" class="blxxAction" method="toBlList">
 			<result name="success">/WEB-INF/view/kcbl/kcbllist.jsp</result>
 		</action>
+		<action name="login" class="blxxAction" method="login">
+			<result name="success">/WEB-INF/view/kcbl/kcbllist.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action>
 		<!-- 查询所有笔录 -->
 		<action name="queryAllBlxx" class="blxxAction" method="findAllBlxxList">
 			<result name="success" type="json">
@@ -78,7 +82,7 @@
 		<action name="initPartyUnit" class="blxxAction" method="initPartyUnit">
 			<result name="success" type="json">
 			 <param name="ignoreHierarchy" >false</param>
-			 <param name = "includeProperties">beCheckLits.*</param> 
+			 <param name = "includeProperties">belongIndustryListBean.*</param> 
 			</result>
 		</action>
 		<!-- 访问笔录信息详情页 -->
@@ -142,15 +146,18 @@
 			<result name="success">/WEB-INF/view/kcbl/check-bilu-before.jsp</result>
 		</action>
 		<!-- 打印笔录 -->
-	   <action name="printBlxx" class="printAction" method="printBlxx">
-		<result name="success" type="stream">
-            <param name="contentType">${docType}</param>
-            <param name="contentDisposition">attachment;filename="${docName}"</param>
-            <param name="inputName">docFile</param>
-            <param name="contentLength">${contLength}</param>
-          </result>
+	   <action name="printBlxx" class="printAction"  method="printBlxx">
+		    <result name="success" type="json"></result>   
 		</action>
-		<action name="fileDownload" class="blxxAction">  
+		<action name="export" class="printAction" method="fetchLoadFile">
+          <result name="success" type="stream">
+            <param name="contentType">text/plain</param>
+            <param name="contentDisposition">attachment;fileName="${fileName}"</param>
+            <param name="inputName">loadFile</param>
+            <param name="bufferSize">2048</param>
+          </result>
+        </action>  
+		<action name="fileDownload" class="blxxAction" >  
            <result name="success" type="stream">  
                <param name="contentType">text/plain</param>  
                <param name="contentDisposition">attachment;fileName="${fileName}"</param>  

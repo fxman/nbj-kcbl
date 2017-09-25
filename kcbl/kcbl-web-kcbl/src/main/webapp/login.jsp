@@ -14,13 +14,13 @@
 		<div class="app-logo"></div>
 		<div class="app-login-title">内保检查系统</div>
 	</div>
-	<form id='login-form' class="mui-input-group">
+	<form id='login-form' class="mui-input-group" action="/kcbl-web-kcbl/blxx/login.action">
 		<div class="mui-input-row account">
-			<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入用户名">
+			<input id='account' type="text" name='account' class="mui-input-clear mui-input" placeholder="请输入用户名">
 		</div>
 		<!-- mui-input-password类型控制密码框后的小眼睛显示 -->
 		<div class="mui-input-row password">
-			<input id='password' type="password" class="mui-input-password" placeholder="请输入密码">
+			<input id='password' type="password" name='password' class="mui-input-password" placeholder="请输入密码">
 		</div>
 	</form>
 
@@ -43,7 +43,7 @@
 		}
 	})
 	function goToSearchResult(){
-		window.location.href="/kcbl-web-kcbl/blxx/toblList.action";
+		document.getElementById('login-form').submit();
 	}
 </script>
 </html>

@@ -40,17 +40,17 @@ public class BlglServiceImplTest {
 	
 	@Test
 	public void testfindBlxxList() throws ParseException {
-		SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-		String ksTime = "";
-		String jsTime = "";
-		List<BlxxModel>  list = BlglServiceImpl.findBlxxList("","","", ksTime, jsTime);
-			BlxxModel blxx = (BlxxModel)list.get(0);
-			System.out.println(blxx.getPartyname());
+//		SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+//		String ksTime = "";
+//		String jsTime = "";
+//		List<BlxxModel>  list = BlglServiceImpl.findBlxxList("","","", ksTime, jsTime);
+//			BlxxModel blxx = (BlxxModel)list.get(0);
+//			System.out.println(blxx.getPartyname());
 	}
 	@Test
 	public void test1(){
-		List<BlxxModel> list=BlglServiceImpl.findAllBlxxList();
-		System.out.println(list.get(0).getPartyname());
+		//List<BlxxModel> list=BlglServiceImpl.findAllBlxxList();
+		//System.out.println(list.get(0).getPartyname());
 	}
 	@Test
 	public void test2(){

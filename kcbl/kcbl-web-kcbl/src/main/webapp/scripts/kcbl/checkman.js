@@ -50,7 +50,12 @@ var flagcode=true;
 	});
 })(jQuery);
 function changeActive(id){
-	$("#"+id).addClass("app-active");
+	 if($("#"+id).hasClass("app-active")){
+	    	$("#"+id).removeClass("app-active");
+	    }else{
+	    	$("#"+id).addClass("app-active");
+	    }
+		
 }
 function sureSelectCheckMan(){
 	$("#sure").click(function(){
@@ -64,7 +69,7 @@ function selectCheckMan(){
 	var checkManNames=$(".app-active div");
 	var checkManName = "";
 	if(checkManNames.length < 2){
-		mui.alert("检查人至少选择两个");
+		alert("检查人至少选择两个");
 		return false;
 	}
 	for(var i=0;i<checkManNames.length;i++){

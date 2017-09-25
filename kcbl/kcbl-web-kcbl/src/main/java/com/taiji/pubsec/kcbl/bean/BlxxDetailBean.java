@@ -1,13 +1,6 @@
 package com.taiji.pubsec.kcbl.bean;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
-import com.taiji.pubsec.kcbl.model.CheckDetailResult;
-
 public class BlxxDetailBean implements Serializable {
 	private String checkMan;
 	private String partyMan;

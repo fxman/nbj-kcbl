@@ -24,6 +24,7 @@
 <![endif]-->
 </head> 
 <body>
+
 <header class="mui-bar mui-bar-nav">
 			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="<%=context%>/blxx/toblList.action"></a>
             <h1 class="mui-title">检查笔录</h1>
@@ -82,7 +83,7 @@
 
             <div class="mui-input-group marb-12">
                 <div class="mui-input-row app-navigate-right">
-                    <label><span class="list-icon unit-icon2"></span>被检查人单位</label>
+                    <label><span class="list-icon unit-icon2"></span>被检查单位</label>
                     <a href="<%=context%>/blxx/toPartyUnit.action">
                         <input type="text" value="重点基础设施" id="currentUnitname" name = "blxxDetailBean.beCheckedUnit" readonly>
                         <span class="mui-icon mui-icon-forward arr-right"></span>
@@ -90,7 +91,7 @@
                 </div>
                 <div class="mui-input-row">
                     <label><span class="list-icon man-icon2"></span>当事人</label>
-                    <input type="text" class="mui-input-clear" id="partyName" value="" name = "blxxDetailBean.partyMan" placeholder="请填写姓名、性别以及身份证号码">
+                    <input type="text" class="mui-input-clear" id="partyName" value="" name = "blxxDetailBean.partyMan" placeholder="请填写姓名、性别以及身份证号码  必须以空格分开">
                 </div>
             </div>
 
@@ -121,29 +122,28 @@
 	              <textarea cols="50" rows="10" id="checkProcessAndResult" name="blxxDetailBean.pocessAndResult"></textarea>
 
             <div class="mui-input-row marb-12 app-padded1 btn-row" style="float:center" >
-                <button type="button" class="mui-btn mui-btn-success" id="printBl" onclick="document.getElementById('formId').submit();"><span class="printer-icon"></span>打印</button>
-<!--                 <button type="button" class="mui-btn mui-btn-success" id="tempSave"><span class="save-icon"></span>暂存</button>
- -->            </div>
+                <button type="button" class="mui-btn mui-btn-success" id="printBl"><span class="printer-icon"></span>浏览</button>
+            </div>
 
             <div class="mui-input-group marb-12 app-padded1">
-                <div class="mui-input-top">
+               <div class="mui-input-top">
                     <div class="left"><span class="list-icon fujian-icon"></span>附件 <p id="attachment"></p></div>
                     <div class="right-icon" >
                        <input type="text" id="txt_id" style="position: absolute; right: 0px; top: 0px;"/>
                        <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;"></button>
                        <input type="file" name="file" multiple="multiple" style="opacity: 0;z-index: 1" onchange="findId('txt_id').value=this.value"  />
                     </div>
-                     
                 </div>
+                  
             </div>
 
             <div class="mui-input-group marb-12 app-padded1">
                 <div class="mui-input-top">
                     <div class="left"><span class="list-icon sign-icon"></span>签名</div>
                     <div class="right-icon">
-                      <input type="text" id="txt_id1" style="position: absolute; right: 0px; top: 0px;"/>
+                        <input type="text" id="txt_id1" style="position: absolute; right: 0px; top: 0px;"/>
                        <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;"></button>
-                       <input type="file" name="fileSign" multiple="multiple" style="opacity: 0;z-index: 1" onchange="findId('txt_id1').value=this.value"  />
+                       <input type="file" name="fileSign" style="opacity: 0;z-index: 1" onchange="findId('txt_id1').value=this.value"  />
                     </div>
                 </div>
             </div>
@@ -171,6 +171,8 @@
 
 <script src="<%=context%>/common/library/MUI/js/mui.min.js"></script>
 <script src="<%=context%>/scripts/common/cookiecommon.js"></script>
+<script src="<%=context%>/scripts/common/jquery.form.js"></script>
+<script src="<%=context%>/scripts/common/UploadFile.js"></script>
 <!--弹出菜单-->
 <script>
 			mui.init({
@@ -254,7 +256,6 @@
                  * rs.h 时，用法同年
                  * rs.i 分（minutes 的第二个字母），用法同年
                  */
-                result.innerText = '选择结果: ' + rs.text;
                 document.getElementById("endTime").value=rs.text;
                 setCookie("endTime",rs.text);
                 /* 

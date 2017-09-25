@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,8 +41,9 @@ public class BeCheckedUnit implements Serializable{
 	@Column(name="detailaddress", length=100)
 	private String detailAddress; //详细地址
 	
-	@Column(name="belongindustry", length=100)
-	private String belongIndustry; //所属行业
+	@ManyToOne
+	@JoinColumn(name="sshyid")
+	private BelongIndustry belongIndustry; //所属行业
 	
 	@Column(name="location", length=60)
 	private String location;  //所在区县
@@ -86,13 +89,6 @@ public class BeCheckedUnit implements Serializable{
 		this.detailAddress = detailAddress;
 	}
 
-	public String getBelongIndustry() {
-		return belongIndustry;
-	}
-
-	public void setBelongIndustry(String belongIndustry) {
-		this.belongIndustry = belongIndustry;
-	}
 
 	public String getLocation() {
 		return location;
@@ -125,5 +121,13 @@ public class BeCheckedUnit implements Serializable{
 
 	public void setChargeSecurity(String chargeSecurity) {
 		this.chargeSecurity = chargeSecurity;
+	}
+
+	public BelongIndustry getBelongIndustry() {
+		return belongIndustry;
+	}
+
+	public void setBelongIndustry(BelongIndustry belongIndustry) {
+		this.belongIndustry = belongIndustry;
 	}
 }

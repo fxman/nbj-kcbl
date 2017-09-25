@@ -204,24 +204,34 @@
             //普通示例
             var userPicker = new $.PopPicker();
             userPicker.setData([{
-                value: 'dxgkqy',
+                value: '4',
                 text: '大型工矿企业'
             }, {
-                value: 'gfqy',
+                value: '3',
                 text: '国防工业'
             }, {
-                value: 'gjjg',
+                value: '6',
                 text: '国家机关'
             }, {
-                value: 'cjsm',
+                value: '1',
                 text: '城建商贸'
             }, {
-                value: 'zdjcss',
+                value: '2',
                 text: '重点基础设施'
             }, {
-                value: 'jrdw',
-                text: '金融单位'
-            }]);
+                value: '5',
+                text: '金融业'
+            }, {
+                value: '7',
+                text: '医疗机构'
+            }, {
+                value: '8',
+                text: '文化产业'
+            }, {
+                value: '9',
+                text: '高等教育'
+            }
+            ]);
             var showUserPickerButton = doc.getElementById('hangyeType');
             showUserPickerButton.addEventListener('tap', function(event) {
                 userPicker.show(function(items) {
@@ -235,8 +245,6 @@
     })(mui, document);
 </script>
 <!-- 选择器 -->
-
-
 
 </body>
 <script src="<%=context%>/scripts/kcbl/kcbllist.js"></script>

@@ -27,8 +27,12 @@ var flagcode=true;
 	});
 })(jQuery);
 function changeActive(id){
-
-	$("#"+id).addClass("app-active");
+    if($("#"+id).hasClass("app-active")){
+    	$("#"+id).removeClass("app-active");
+    }else{
+    	$("#"+id).addClass("app-active");
+    }
+	
 
 }
 function sureSelectUnit(){

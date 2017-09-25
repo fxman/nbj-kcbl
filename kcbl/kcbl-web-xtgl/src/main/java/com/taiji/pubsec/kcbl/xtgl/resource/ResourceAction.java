@@ -26,7 +26,6 @@ import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryItem;
 import com.taiji.pubsec.businesscomponent.dictionary.model.DictionaryType;
 import com.taiji.pubsec.businesscomponent.dictionary.service.IDictionaryItemService;
 import com.taiji.pubsec.businesscomponent.dictionary.service.IDictionaryTypeService;
-import com.taiji.pubsec.common.tools.doc.msoffice.impl.poicr.builder.PoiCrReportBuilder;
 
 
 /**
@@ -48,8 +47,6 @@ public class ResourceAction extends PageCommonSysManageAction {
 	private IDictionaryTypeService dictionaryTypeService;
 	@Resource
 	private IDictionaryItemService dictionaryItemService;
-	@Resource
-	private PoiCrReportBuilder poiCrReportBuilder;
 	private List<ResourceBean> resourceBeanList;
 	private List<DictionaryItem> dictionaryItemList;
 	private List<String> types;
