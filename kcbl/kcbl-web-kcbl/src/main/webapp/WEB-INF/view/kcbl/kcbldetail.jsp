@@ -120,7 +120,7 @@
            </div>
         </form>
     </section>
-<div id='result' class="ui-alert"></div>              
+<div id='result' class="mui-alert"></div>              
 </div>
 
 

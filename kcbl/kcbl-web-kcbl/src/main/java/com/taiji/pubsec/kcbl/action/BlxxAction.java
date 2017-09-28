@@ -142,20 +142,23 @@ public class BlxxAction extends ReturnMessageAction{
 	private List<BelongIndustryBean> belongIndustryListBean;
 	private String account;
 	private String password;
+	private String flag;
+	
 	public String login(){
+		flag="true";
 		try{
 			Account acc = accountTempService.findByNameAndPassword(account, password);
 			if(acc != null){
 				Map<String,Object> accountMap = ActionContext.getContext().getSession();
 				accountMap.put("userName", acc.getAccountName());
 				accountMap.put("personName", acc.getPerson().getName());
-				return SUCCESS;
 			}else{
-				return ERROR;
+				flag="false";
 			}
 		}catch(Exception e){
-			return ERROR;
+			flag="false";
 		}
+		return SUCCESS;
 	}
 	public String findAllBlxxList(){
 		Map<String,Object> accountMap = ActionContext.getContext().getSession();
@@ -241,6 +244,7 @@ public class BlxxAction extends ReturnMessageAction{
 		 if(file != null ){
 			 isf = new FileInputStream(file);
 			 int  index = fileFileName.indexOf(".");
+			 this.uploadDoc(isf, blh+"f"+fileFileName.substring(index,fileFileName.length()),blid,"2");
 		 }
 		//保存签名
 		 InputStream iss = null;
@@ -251,7 +255,6 @@ public class BlxxAction extends ReturnMessageAction{
 			 suffix = fileSignFileName.substring(index,fileSignFileName.length());
 			//生成笔录
 			 InputStream isbl = this.generateBl();
-			 this.uploadDoc(isf, blh+"f"+fileFileName.substring(index,fileFileName.length()),blid,"2");
 			 this.uploadDoc(iss, blh+"s"+suffix,blid,"1");
 			 this.uploadDoc(isbl, blh+".docx" ,blid,"0");
 		 } 
@@ -450,12 +453,12 @@ public class BlxxAction extends ReturnMessageAction{
 	 */
 	private String saveBlMethod(String status,String blNum) throws ParseException{
 		BlxxModel  blModel = new BlxxModel();
-		SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		BeCheckedUnit  beCheckedUnit = becheckUnitService
 				.findBeCheckedUnitByName(blxxDetailBean.getBeCheckedUnit());
 		blModel.setBecheckedunit(beCheckedUnit);
 		blModel.setStarttime(sdf.parse(blxxDetailBean.getStartTime()));
-		blModel.setEndtime(sdf.parse(blxxDetailBean.getStartTime()));
+		blModel.setEndtime(sdf.parse(blxxDetailBean.getEndTime()));
 		blModel.setDetailaddress(blxxDetailBean.getDetailAddress());
 		blModel.setCheckpersoncode(blxxDetailBean.getCheckMan());
 		blModel.setCheckunitcode(blxxDetailBean.getCheckUnit());
@@ -502,13 +505,13 @@ public class BlxxAction extends ReturnMessageAction{
 		map.put("n6", blxxDetailBean.getBeCheckedUnit());
 		map.put("n7", blxxDetailBean.getPartyMan());
 		map.put("n8", blxxDetailBean.getPocessAndResult());
-		map.put("n9", checkManstr);
-		map.put("n10", sdfend.format(new Date()).toString());
+		//map.put("n9", checkManstr);
+		//map.put("n10", sdfend.format(new Date()).toString());
 		if(null != blxxDetailBean.getPartyMan() &&  !blxxDetailBean.getPartyMan().isEmpty()){
 			String[] a = blxxDetailBean.getPartyMan().split("\\s+");//匹配空格
-			map.put("n11", a[0]);
+			//map.put("n11", a[0]);
 		}
-		map.put("n12",sdfend.format(new Date()).toString());
+		//map.put("n12",sdfend.format(new Date()).toString());
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		map1.put("a1", map);
 		System.out.println(this.getRequest().getSession().getServletContext()
@@ -535,6 +538,12 @@ public class BlxxAction extends ReturnMessageAction{
 	    return output.toByteArray();
 	}
 	/*get&set方法*/
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 	public String getUnitIds() {
 		return unitIds;
 	}

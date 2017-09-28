@@ -27,11 +27,11 @@ public class BlxxModel implements Serializable{
    @GenericGenerator(name="uuid",strategy="uuid2")
    private String id;//id
    
-   @Temporal(TemporalType.DATE)
+   @Temporal(TemporalType.TIMESTAMP)
    @Column(name="starttime")
    private Date starttime;//开始时间
    
-   @Temporal(TemporalType.DATE)
+   @Temporal(TemporalType.TIMESTAMP)
    @Column(name="endtime")
    private Date endtime;//结束时间
    

@@ -2,6 +2,34 @@
 <%@include file="/WEB-INF/base/javaPart.jsp"%>    
 <html>
 <head>
+<style>
+      .entry{
+          -webkit-padding-start: 30px;
+      }
+      .entry li {
+          line-height: 29px;
+          margin-left: -10px;
+      }
+      .entry li div{
+          margin-right: 10px;
+          padding-left: 8px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          background: #222222;
+          color: white;
+          word-break: break-all;
+          -ms-word-wrap: break-word;
+          word-wrap: break-word;
+          line-height: 15px;
+          font-size: 10pt;
+      }
+      .entry li button{
+          margin-top: 5px;
+          width: 60px;
+          height: 35px;
+          color: #111111;
+      }
+  </style>
 <%@include file="/WEB-INF/base/basePart.jsp"%>
 <%@include file="/WEB-INF/base/skin/utilPart.jsp"%>
 <script>
@@ -56,6 +84,37 @@ $(document).ready(function() {
 <li class="line"></li>
 <li><a href="html/bilu/check-fangshi.html" target="_blank">添加结果---检查方式</a></li>
 <li><a href="html/bilu/check-fangfa.html" target="_blank">添加结果---检查方法</a></li>
+<li>
+        气泡提示<br/>
+        代码：<br/>
+        <div>
+            HostApp.toast('我是气泡');
+        </div>
+        <button onclick="HostApp.toast('我是气泡');">测试</button>
+    </li>
+    
+    <br>
+    
+    <li>
+        重载方法测试-执行字符串定义<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert(
+            HostApp.overloadMethod('12adadad')
+            );
+        </div>
+        <button onclick="HostApp.alert(HostApp.overloadMethod('12adadad'));">测试</button>
+    </li>
+    
+    <br>
+    <li>
+        确认框弹出<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert('我是确认框');
+        </div>
+        <button onclick="HostApp.alert('我是确认框');">测试</button>
+    </li>
 </ul>
 </div>
 </div>

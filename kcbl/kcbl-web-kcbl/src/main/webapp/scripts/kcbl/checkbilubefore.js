@@ -51,19 +51,74 @@ function putDataCookie(){
 	
 }
 /**
+ * 
+ */
+$(document).on('click','#toAddResult',function(){
+	
+	if($("#partyName").val()!=""){
+		window.location.href='/kcbl-web-kcbl/blxx/toAddResult.action';
+	}else{
+		HostApp.alert('请先填写当事人');
+	}
+});
+/**
  * 打印
  */
 $(document).on('click','#printBl',function(){
-	 var options = {   
-	            type: 'POST',  
-	            url: '/kcbl-web-kcbl/blxx/printBlxx.action',  
-	            success:showResponse,    
-	            dataType: 'json',  
-	            error : function(xhr, status, err) {              
-	                alert("操作失败");  
-	            }  
-	        };   
-	      $("#formId").ajaxSubmit(options);   
+	var flag=true;
+	if($("#startTime").val()==null||$("#startTime").val()==""){
+		flag=false;
+		HostApp.alert('开始时间不能为空');
+		return;
+	}
+	if($("#endTime").val()==null||$("#endTime").val()==""){
+		flag=false;
+		HostApp.alert('结束时间不能为空');
+		return;
+	}
+	if($("#address").val()==null||$("#address").val()==""){
+		flag=false;
+		HostApp.alert('地址不能为空');
+		return;
+	}
+	if($("#unitName").val()==null||$("#unitName").val()==""){
+		flag=false;
+		HostApp.alert('单位名称不能为空');
+		return;
+	}
+	if($("#checkManName").val()==null||$("#checkManName").val()==""){
+		flag=false;
+		HostApp.alert('检查人姓名不能为空');
+		return;
+	}
+	if($("#currentUnitname").val()==null||$("#currentUnitname").val()==""){
+		flag=false;
+		HostApp.alert('当事单位不能为空');
+		return;
+	}
+	if($("#partyName").val()==null||$("#partyName").val()==""){
+		flag=false;
+		HostApp.alert('当事人不能为空');
+		return;
+	}
+	if($("#checkProcessAndResult").val()==null||$("#checkProcessAndResult").val()==""){
+		flag=false;
+		HostApp.alert('过程和结果不能为空');
+		return;
+	}
+	 if(flag){
+		 var options = {   
+		            type: 'POST',  
+		            url: '/kcbl-web-kcbl/blxx/printBlxx.action',  
+		            success:showResponse,    
+		            dataType: 'json',  
+		            error : function(xhr, status, err) {              
+		                alert("操作失败");  
+		            }  
+		        };
+		 $("#formId").ajaxSubmit(options);   
+	 }
+	    
 });
 /**
  * 暂存
@@ -76,8 +131,13 @@ $(document).on('click',"#tempSave",function(){
  *保存
  */
 $(document).on('click','#saveBl',function(){
-	$("#formId").attr("action",'/kcbl-web-kcbl/blxx/saveblxx.action');
-	document.getElementById('formId').submit();
+	    if($("#txt_id1").val()!=""){
+	    	$("#formId").attr("action",'/kcbl-web-kcbl/blxx/saveblxx.action');
+	    	document.getElementById('formId').submit();
+	    }else{
+	    	HostApp.toast('请上传签名照');
+	    }
+
 });
 
 function findId(id){

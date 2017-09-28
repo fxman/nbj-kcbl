@@ -25,11 +25,12 @@
 	</form>
 
 	<div class="mui-row login-btn">
-		<button id='login' class="mui-btn mui-btn-block mui-btn-primary" onclick="goToSearchResult()">登录</button>		
+		<button id='login' class="mui-btn mui-btn-block mui-btn-primary" >登录</button>		
 	</div>
 </div>
 </body>
-<script src="<%=context%>/common/library/jquery/jquery-1.8.3.min.js"></script>	
+<script src="<%=context%>/common/library/jquery/jquery-1.8.3.min.js"></script>
+<script src="<%=context%>/scripts/common/jquery.form.js"></script>	
 <script src="<%=context%>/common/library/MUI/js/mui.min.js"></script>
 <script>
 	var winH = $(window).height();
@@ -42,8 +43,7 @@
 			loginTop.css('display', 'block')
 		}
 	})
-	function goToSearchResult(){
-		document.getElementById('login-form').submit();
-	}
+	
 </script>
+<script src="<%=context%>/scripts/common/login.js"></script>
 </html>

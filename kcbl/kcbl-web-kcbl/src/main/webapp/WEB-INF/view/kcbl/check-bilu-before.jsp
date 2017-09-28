@@ -13,6 +13,7 @@
 <!--APP框架mui.css-->
 <link href="<%=context%>/common/library/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="<%=context%>/common/library/MUI/css/mui.min.css" rel="stylesheet" />
+<link href="<%=context%>/common/library/MUI/css/app.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="<%=context%>/common/library/MUI/css/mui.picker.min.css" /><!--日期时间CSS控件-->
 
 <!--App自定义的css-->
@@ -22,7 +23,8 @@
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-</head> 
+</head>
+< 
 <body>
 
 <header class="mui-bar mui-bar-nav">
@@ -85,7 +87,7 @@
                 <div class="mui-input-row app-navigate-right">
                     <label><span class="list-icon unit-icon2"></span>被检查单位</label>
                     <a href="<%=context%>/blxx/toPartyUnit.action">
-                        <input type="text" value="重点基础设施" id="currentUnitname" name = "blxxDetailBean.beCheckedUnit" readonly>
+                        <input type="text" value="" id="currentUnitname" name = "blxxDetailBean.beCheckedUnit" readonly>
                         <span class="mui-icon mui-icon-forward arr-right"></span>
                     </a>
                 </div>
@@ -114,7 +116,7 @@
                 <div class="mui-input-top">
                     <div class="left"><span class="list-icon res-icon"></span>过程和结果</div>
                     <div class="right-icon" >
-                        <a href="<%=context%>/blxx/toAddResult.action" class="add-result"></a>
+                        <a href="#" id="toAddResult" class="add-result"></a>
 <%--                         <a href="<%=context%>/blxx/toAddResult.action" class="edit-bilu" style="margin-left: 10px"></a>
  --%>                    </div>
                 </div>
@@ -154,7 +156,7 @@
             <input type="text" id="contentDescr" name="blxxDetailBean.checkResult" style="display:none"/>
         </form>
     </section>
-
+        
 
 
 
@@ -186,8 +188,6 @@
 				//console.log('hidden', e.detail.id);//detail为当前popover元素
 			});
 </script>
-
-
 <!---年份选择器---->
 <script src="<%=context%>/common/library/MUI/js/mui.picker.min.js"></script>
 

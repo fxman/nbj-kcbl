@@ -6,8 +6,10 @@
 			<result name="success">/WEB-INF/view/kcbl/kcbllist.jsp</result>
 		</action>
 		<action name="login" class="blxxAction" method="login">
-			<result name="success">/WEB-INF/view/kcbl/kcbllist.jsp</result>
-			<result name="error">/login.jsp</result>
+			<result name="success" type="json">
+			   <param name="ignoreHierarchy" >false</param>
+			 <param name = "includeProperties">flag</param>
+			</result>
 		</action>
 		<!-- 查询所有笔录 -->
 		<action name="queryAllBlxx" class="blxxAction" method="findAllBlxxList">
