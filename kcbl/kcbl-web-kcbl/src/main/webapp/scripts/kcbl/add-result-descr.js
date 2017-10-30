@@ -2,10 +2,11 @@
 	"use strict";
 	$(document).ready(function(){
 		var unitId=getCookie("unitId");
+		var isSafety=getCookie("isSafety");
 		$.ajax({
 			url:context+"/blxx/initCheckDescr.action",
 			data:{
-				"blBean.issafety" :getCookie("isSafety")
+				"blBean.issafety" :isSafety
 			},
 			type:'POST',
 			dataType:'json',

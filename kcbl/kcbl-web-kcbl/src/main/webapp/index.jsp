@@ -2,6 +2,7 @@
 <%@include file="/WEB-INF/base/javaPart.jsp"%>    
 <html>
 <head>
+<script src="file:///android_asset/zepto.js" type="text/javascript"></script>
 <style>
       .entry{
           -webkit-padding-start: 30px;
@@ -114,6 +115,24 @@ $(document).ready(function() {
             HostApp.alert('我是确认框');
         </div>
         <button onclick="HostApp.alert('我是确认框');">测试</button>
+    </li>
+    <li>
+                   调用签名测试<br/>
+        代码：<br/>
+        <div>
+            签名文件路径赋值到上传控件
+        </div>
+        <input id="signfile" type="file" >
+        <button onclick="HostApp.setOpenFileChooserMode('sign');document.getElementById('signfile').click();">测试</button>
+    </li>
+    <li>
+                  调用相机测试<br/>
+        代码：<br/>
+        <div>
+            拍照文件路径赋值到上传控件
+        </div>
+        <input id="photofile" type="file" >
+        <button onclick="HostApp.setOpenFileChooserMode('photo');document.getElementById('photofile').click();">测试</button>
     </li>
 </ul>
 </div>

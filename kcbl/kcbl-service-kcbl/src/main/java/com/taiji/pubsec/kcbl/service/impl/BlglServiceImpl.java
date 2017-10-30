@@ -23,7 +23,7 @@ public class BlglServiceImpl implements BlglService {
 
 	@Override
 	public List<BlxxModel> findBlxxList(String userName , String blh, String sfhxdw, String sshy,
-			String startTime, String endTime) {
+			String startTime, String endTime,String issafety) {
 		StringBuilder xql = new StringBuilder(
 				"select blxx FROM BlxxModel blxx , BeCheckedUnit bcu  WHERE blxx.becheckedunit = bcu.id ");
 		Map<String, Object> xqlMap = new HashMap<String, Object>();
@@ -39,6 +39,10 @@ public class BlglServiceImpl implements BlglService {
 		if (StringUtils.isNotEmpty(sfhxdw)) {
 			xql.append("and bcu.isCoreUnit = :sfhxdw ");
 			xqlMap.put("sfhxdw", sfhxdw);
+		}
+		if (StringUtils.isNotEmpty(issafety)) {
+			xql.append("and blxx.issafety = :issafety ");
+			xqlMap.put("issafety", issafety);
 		}
 		if (StringUtils.isNotEmpty(sshy)) {
 			xql.append("and bcu.belongIndustry.name = :sshy ");

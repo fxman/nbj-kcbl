@@ -29,10 +29,10 @@ function initData(){
     $("#checkWay").val(getCookie("checkWay"));
     $("#checkMethod").val(getCookie("checkMethod"));
     $("#checkBasis").val(getCookie("checkBasis"));
-    if(getCookie("isSafety") != null){
-    	$("#isSafety").val("1");
+    if(getCookie("isSafety")=="1"){
+    	$("#isSafety").val("是");
     }else{
-    	$("#isSafety").val("0");
+    	$("#isSafety").val("否");
     }
     $("#checkBasis").val(getCookie("checkBasis"));
     $("#contentDescr").val(getCookie("contentDescr"))

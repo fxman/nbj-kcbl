@@ -143,6 +143,9 @@ public class BlxxAction extends ReturnMessageAction{
 	private String account;
 	private String password;
 	private String flag;
+	private String rsType;
+	
+	
 	
 	public String login(){
 		flag="true";
@@ -205,15 +208,16 @@ public class BlxxAction extends ReturnMessageAction{
 		return SUCCESS;
 	}
 	public String queryBlxxbyCondition(){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月DD日 HH时mm分");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分");
 		Map<String,Object> accountMap = ActionContext.getContext().getSession();
 		List<BlxxModel> blxxModelList = blglServiceImpl.findBlxxList(accountMap.get("personName").toString(),
 				blBean.getBlcode(), 
 				blBean.getIsCoreUnit(), blBean.getBelongUnit(),
-				blBean.getStartTime(), blBean.getEndTime());
+				blBean.getStartTime(), blBean.getEndTime(),blBean.getIssafety());
 		blxxList = new ArrayList<BlListBean>();
 		for(BlxxModel blxx:blxxModelList){
 			blxxBean=new BlListBean();
+			blxxBean.setBlxxId(blxx.getId());
 			blxxBean.setBeCheckedUnit(blxx.getBecheckedunit().getBdcdwmc());
 			blxxBean.setCheckMan(blxx.getCheckpersoncode());
 			blxxBean.setPartyMan(blxx.getPartyname());
@@ -237,7 +241,11 @@ public class BlxxAction extends ReturnMessageAction{
 		 cdr.setContent(blxxDetailBean.getCheckResult());
 		 cdr.setUserName(accountMap.get("userName").toString());
 		 cdr.setUpdatetime(new Date());
-		 cdr.setIssafety(blxxDetailBean.getIssafety());
+		 if(blxxDetailBean.getIssafety().equals("是")){
+			 cdr.setIssafety("1");//存在安全隐患，存为1
+		 }else{
+			 cdr.setIssafety("0");//未存在安全隐患，存为0
+		 }
 		 this.checkDetailResultService.saveOrUpdateCheckDetailResult(cdr);
 		 //保存附件 附件的类型为2 签名的类型为1  生成的文档类型为0
 		 InputStream isf = null;
@@ -266,7 +274,7 @@ public class BlxxAction extends ReturnMessageAction{
     	InputStream inputStream = null;
     	ServletOutputStream servletOutputStream = null;
     	try {
-        FileInfo  fileInfo = fileService.findFileByResourceId(blxxId, "0");//表示下载笔录文档
+        FileInfo  fileInfo = fileService.findFileByResourceId(blxxId, rsType);//表示下载笔录文档
     	HttpServletResponse response= ServletActionContext.getResponse();
     	String filePath = fileInfo.getFilePath() + File.separatorChar + fileInfo.getSaveName();
     	File file = new File(filePath);
@@ -374,8 +382,9 @@ public class BlxxAction extends ReturnMessageAction{
 	public String initCheckDescr(){
 		Map<String,Object> accountMap = ActionContext.getContext().getSession();
 		String userName = accountMap.get("userName").toString();
+		String isSafety = this.blBean.getIssafety();
 		checkContentDescrList=checkDetailResultService.findBlxxContentDescr(
-				userName ,this.blBean.getIssafety());
+				userName ,isSafety);
 		return SUCCESS;
 	}
 	public String toPartyUnit(){
@@ -538,6 +547,12 @@ public class BlxxAction extends ReturnMessageAction{
 	    return output.toByteArray();
 	}
 	/*get&set方法*/
+	public String getRsType() {
+		return rsType;
+	}
+	public void setRsType(String rsType) {
+		this.rsType = rsType;
+	}
 	public String getFlag() {
 		return flag;
 	}

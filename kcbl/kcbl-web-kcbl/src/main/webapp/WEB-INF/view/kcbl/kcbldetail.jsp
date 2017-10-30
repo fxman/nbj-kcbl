@@ -118,6 +118,10 @@
                <div class="mui-input-row" id="downLoadFile" style="padding-left:20px; padding-top:5px;font-size: 16px">
                </div>
            </div>
+           <div class="mui-input-group marb-12" >
+               <div class="mui-input-row" id="downLoadFj" style="padding-left:20px; padding-top:5px;font-size: 16px">
+               </div>
+           </div>
         </form>
     </section>
 <div id='result' class="mui-alert"></div>              

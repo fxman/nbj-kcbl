@@ -67,6 +67,12 @@
                       <div class="mui-switch-handle"></div>
                     </div>
                 </div>
+                <div class="mui-input-row app-navigate-right">
+                    <label>是否存在安全隐患</label>
+                    <div id="issafety" class="mui-switch mui-switch-blue mui-switch-mini " style="margin-top: 5px; margin-right: 15px;">
+                      <div class="mui-switch-handle"></div>
+                    </div>
+                </div>
             </div>
         </form>
 

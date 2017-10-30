@@ -53,11 +53,19 @@
 			var startTime = $("#startTime").val();
 			var endTime = $("#endTime").val();
 			var iscoreunit = "";
+			var issafety = "";
 			mui('#coreunit').each(function() {//循环所有toggle
 			    if(this.classList.contains('mui-active') ){
 						iscoreunit='是';
 					}else{
 						iscoreunit='否';
+			    }
+			});
+			mui('#issafety').each(function() {//循环所有toggle
+			    if(this.classList.contains('mui-active') ){
+			    	    issafety='是';
+					}else{
+						issafety='否';
 			    }
 			});
 			$.ajax({
@@ -67,7 +75,8 @@
 					'blBean.belongUnit':industtryType,
 					'blBean.startTime':startTime,
 					'blBean.endTime':endTime,
-					'blBean.isCoreUnit':iscoreunit
+					'blBean.isCoreUnit':iscoreunit,
+					'blBean.issafety':issafety
 				},
 				type:'post',
 				dataType:'json',

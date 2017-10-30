@@ -12,7 +12,7 @@
 <div class="mui-content app-login">
 	<div class="login-top" id="loginTop">
 		<div class="app-logo"></div>
-		<div class="app-login-title">内保检查系统</div>
+		<div class="app-login-title">内保·移动警务工作平台</div>
 	</div>
 	<form id='login-form' class="mui-input-group" action="/kcbl-web-kcbl/blxx/login.action">
 		<div class="mui-input-row account">

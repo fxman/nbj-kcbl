@@ -21,10 +21,12 @@
 				$("#checkMan1").text(blxx.checkMan);
 				$("#partyName1").text(blxx.partyMan);
 				$("#blh").text(blxx.blcode);
-				var str = '<a href = "/kcbl-web-kcbl/blxx/fileDownload.action?blxxId='+blxx.blxxId+'">笔录文档下载</a>'
+				var str = '<a href = "/kcbl-web-kcbl/blxx/fileDownload.action?blxxId='+blxx.blxxId+'&rsType='+0+'">笔录文档下载</a>'
 				var strPic ='<img src="/kcbl-web-kcbl/images/upload/'+blxx.signPictureUrl+'" alt="">'
 				$("#downLoadFile").html(str);
 				$("#signPicture").html(strPic);
+				var downLoadFj='<a href = "/kcbl-web-kcbl/blxx/accessDownload.action?blxxId='+blxx.blxxId+'&rsType='+2+'">笔录附件下载</a>';
+				$("#downLoadFj").html(downLoadFj);
 			},
 			error:function(){
 				alert('查询检查人失败');

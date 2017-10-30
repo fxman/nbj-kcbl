@@ -67,12 +67,21 @@
 			
 			var checkOrder = names+"在"+arr[0]+"陪同下";
 			setCookie("checkOrder",checkOrder);
-			var checkProcessAndResult = '根据《企业事业单位内部治安保卫条例》第16条第二项、'
-				+getCookie("content")+'之规定，'+checkOrder+'对该'
-				+getCookie("checkContent")+'进行'
-				+getCookie("checkWay")+'。'
-			    +"经询问，"+arr[0]+"称"
-			    +$("#contentDescrWrite").val();
+			if(checkResult=='1'){
+				var checkProcessAndResult = '根据《企业事业单位内部治安保卫条例》第16条第二项、'
+					+getCookie("content")+'之规定，'+checkOrder+'对该'
+					+getCookie("checkContent")+'进行'
+					+getCookie("checkWay")+'。该单位存在安全治安隐患，'
+					+"经询问，"+arr[0]+"称"
+					+$("#contentDescrWrite").val();
+			}else{
+				var checkProcessAndResult = '根据《企业事业单位内部治安保卫条例》第16条第二项、'
+					+getCookie("content")+'之规定，'+checkOrder+'对该'
+					+getCookie("checkContent")+'进行'
+					+getCookie("checkWay")+'。该单位未存在安全治安隐患，'
+					+"经询问，"+arr[0]+"称"
+					+$("#contentDescrWrite").val();
+			}
             setCookie("checkProcessAndResult",checkProcessAndResult);
 			setCookie('contentDescr',$("#contentDescrWrite").val());
 		});

@@ -166,6 +166,14 @@
                <param name="inputName">downloadFile</param>  
                <param name="bufferSize">2048</param>  
            </result>  
+       </action>
+       <action name="accessDownload" class="blxxAction" >  
+           <result name="success" type="stream">  
+               <param name="contentType">text/plain</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
+               <param name="inputName">downloadFile</param>  
+               <param name="bufferSize">2048</param>  
+           </result>  
        </action>  
 	</package>
 </struts>

@@ -132,6 +132,8 @@
                     <div class="left"><span class="list-icon fujian-icon"></span>附件 <p id="attachment"></p></div>
                     <div class="right-icon" >
                        <input type="text" id="txt_id" style="position: absolute; right: 0px; top: 0px;"/>
+                       <!-- <input id="photofile" type="file" >
+         			   <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;" onclick="HostApp.setOpenFileChooserMode('photo');document.getElementById('photofile').click();"></button> -->
                        <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;"></button>
                        <input type="file" name="file" multiple="multiple" style="opacity: 0;z-index: 1" onchange="findId('txt_id').value=this.value"  />
                     </div>
@@ -144,8 +146,10 @@
                     <div class="left"><span class="list-icon sign-icon"></span>签名</div>
                     <div class="right-icon">
                         <input type="text" id="txt_id1" style="position: absolute; right: 0px; top: 0px;"/>
-                       <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;"></button>
-                       <input type="file" name="fileSign" style="opacity: 0;z-index: 1" onchange="findId('txt_id1').value=this.value"  />
+                        <input id="signfile" type="file" style="opacity: 0;z-index: 1" onchange="findId('txt_id1').value=this.value">
+                        <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;" onclick="HostApp.setOpenFileChooserMode('sign');document.getElementById('signfile').click();"></button>
+                        <!-- <button type="button" class="upload-sign" style="position: absolute; right: 0px; top: 0px;"></button> -->
+                        <!-- <input type="file" name="fileSign" style="opacity: 0;z-index: 1" onchange="findId('txt_id1').value=this.value"  /> -->
                     </div>
                 </div>
             </div>

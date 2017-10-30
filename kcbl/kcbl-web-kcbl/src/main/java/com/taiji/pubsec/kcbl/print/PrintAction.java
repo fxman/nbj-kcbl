@@ -53,6 +53,7 @@ public class PrintAction extends ReturnMessageAction {
 			map.put("n2", sdf.format(endDate));
 			map.put("n3", blxxDetailBean.getDetailAddress());
 			String checkMans = blxxDetailBean.getCheckMan();
+			String checkResult = blxxDetailBean.getIssafety();
 			String[] checkMan = checkMans.split(",");
 			String checkManstr = "";
 			for(int i = 0; i < checkMan.length; i++){
@@ -64,7 +65,7 @@ public class PrintAction extends ReturnMessageAction {
 			map.put("n6", blxxDetailBean.getBeCheckedUnit());
 			map.put("n7",  blxxDetailBean.getPartyMan());
 			map.put("n8", blxxDetailBean.getPocessAndResult());
-			//map.put("n9", checkManstr);
+			map.put("n9", checkResult);
 			//map.put("n10", sdfend.format(new Date()).toString());
 			if(null != blxxDetailBean.getPartyMan() &&  !blxxDetailBean.getPartyMan().isEmpty()){
 				String[] a = blxxDetailBean.getPartyMan().split("\\s+");//匹配空格
